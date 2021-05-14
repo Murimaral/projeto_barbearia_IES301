@@ -1,0 +1,56 @@
+<% if flash[:alert] %>
+    <%= flash[:alert] %>
+<% end %>
+<%= form_for @pet do |form| %>
+    <p>
+      <%= form.label :name , 'Nome' %><br>
+      <%= form.text_field :name %>
+    </p>
+
+    <p>
+      <%= form.label :species , 'Espécie' %><br>
+      <%= form.text_field :species %>
+    </p>
+
+    <p>
+      <%= form.label :sex, 'Sexo' %><br>
+      <%= form.text_field :sex %>
+    </p>
+
+    <p>
+      <%= form.label :breed, 'Raça' %><br>
+      <%= form.text_field :breed %>
+    </p>
+
+    <p>
+      <%= form.label :color, 'Cor' %><br>
+      <%= form.text_field :color %>
+    </p>
+
+    <p>
+      <%= form.label :image, 'Enviar foto'%>
+      <%= form.file_field :image %>
+    </p>
+
+    <p>
+      <%= form.label :details, 'Detalhes' %><br>
+      <%= form.text_area :details %>
+    </p>
+
+    <p>
+      <%= form.label :city, 'Cidade' %><br>
+      <%= form.text_field :city %>
+    </p>
+
+    <p>
+      <%= form.label :state, 'Estado' %><br>
+      <%= form.text_field :state %>
+    </p>
+
+    <p>
+      <%= form.label :status, 'Status' %><br>
+      <%= form.text_field :status %>
+    </p>
+
+    <%= form.submit 'Enviar' %>
+<% end %>
