@@ -1,5 +1,6 @@
 <p>
-    <strong><%= @pet.name %></strong>
+    <strong><%= @pet.name %></strong><br>
+    <%= link_to 'editar', edit_pet_path(@pet) %><br>
     <%= @pet.species %>,
     <%= @pet.sex %>,
     <%= @pet.status %><br>

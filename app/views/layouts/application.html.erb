@@ -11,6 +11,16 @@
   </head>
 
   <body>
+    <p align="center">
+      <%= current_user&.name || 'Visitante' %> |
+      <%= link_to 'Login', new_user_session_path %> |
+      <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+    </p>
+
+    <p align="center">
+      <%= link_to 'New pet', new_pet_path %>
+    </p>
+
     <%= yield %>
   </body>
 </html>
