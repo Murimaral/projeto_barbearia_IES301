@@ -1,0 +1,16 @@
+Style/FrozenStringLiteralComment: 
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+AllCops:
+    NewCops: enable
+    SuggestExtensions: false
+    Exclude:
+      - 'db/**/*'
+      - 'spec/*'
+      - 'node_modules/**/*'
+      - 'config/**/*'
+      - 'bin/**/*'
+      - '*.ru'
+      - 'Gemfile'
+      - 'Rakefile'

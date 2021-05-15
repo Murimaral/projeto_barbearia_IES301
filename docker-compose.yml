@@ -8,3 +8,9 @@ services:
       - 3000:3000
     volumes:
       - .:/opt/app
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
