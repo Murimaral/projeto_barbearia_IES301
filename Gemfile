@@ -9,9 +9,11 @@ gem 'devise'
 gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.0'
-gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
-
+gem 'jquery-rails'
+gem 'materialize-sass'
+gem 'material_icons'
+gem 'faker'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

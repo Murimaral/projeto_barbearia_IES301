@@ -14,6 +14,7 @@ class PetsController < ApplicationController
 
   def create
     @pet = Pet.new(pet_params)
+    @pet.image = params[:image] || generate_avatar
     @pet.user_id = current_user.id
     if @pet.save
       redirect_to @pet
@@ -49,6 +50,10 @@ class PetsController < ApplicationController
 
   def check_ownership
     redirect_to :root unless @author.id == current_user.id
+  end
+
+  def generate_avatar
+    Faker::Avatar.image(slug: params[:name])
   end
 
   def pet_params

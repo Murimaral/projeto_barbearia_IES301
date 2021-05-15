@@ -1,26 +1,95 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>PetFinder</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
   </head>
 
   <body>
-    <p align="center">
-      <%= current_user&.name || 'Visitante' %> |
-      <%= link_to 'Login', new_user_session_path %> |
-      <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
-    </p>
+    <nav class="light-blue lighten-1" role="navigation">
+      <div class="nav-wrapper container">
+        <%= link_to 'PetFinder', root_path, class: 'brand-logo' %>
+        <ul class="right hide-on-med-and-down">
+          <li>Olá, <%= current_user&.name || 'Visitante' %>!</li>
+          <% if !user_signed_in? %>
+            <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+            <li><%= link_to 'Login', new_user_session_path %></li>
+          <% else  %>
+            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+          <% end %>
+        </ul>
 
-    <p align="center">
-      <%= link_to 'New pet', new_pet_path %>
-    </p>
+        <ul id="nav-mobile" class="sidenav">
+          <li><%= link_to 'Login', new_user_session_path %></li>
+          <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+          </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+        <br><br>
+        <h1 class="header center orange-text">PetFinder</h1>
+        <div class="row center">
+          <h5 class="header col s12 light">Feito para ajudar pets e donos a se encontrarem!</h5>
+        </div>
+        <div class="row center">
+          <%= link_to 'Estou procurando meu pet', new_pet_path(status: 'lost'), class: "btn-large orange" %>
+          <%= link_to 'Procuro o dono de um pet', new_pet_path(status: 'found'), class: "btn-large orange" %>
+        </div>
+        <br><br>
 
-    <%= yield %>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="section">
+        <%= yield %>
+      </div>
+      <br><br>
+    </div>
+  
+    <footer class="page-footer orange">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Sobre este site</h5>
+            <p class="grey-text text-lighten-4">
+              Este site trata-se de um projeto realizado pelo grupo ConnectPlus para a disciplina Oficina de Projeto de Empresa 2, ofertada pela Faculdade Impacta de Tecnologia.
+            </p>
+          </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">Settings</h5>
+            <ul>
+              <li><a class="white-text" href="#!">Link 1</a></li>
+              <li><a class="white-text" href="#!">Link 2</a></li>
+              <li><a class="white-text" href="#!">Link 3</a></li>
+              <li><a class="white-text" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">Connect</h5>
+            <ul>
+              <li><a class="white-text" href="#!">Link 1</a></li>
+              <li><a class="white-text" href="#!">Link 2</a></li>
+              <li><a class="white-text" href="#!">Link 3</a></li>
+              <li><a class="white-text" href="#!">Link 4</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

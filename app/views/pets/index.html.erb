@@ -1,8 +1,14 @@
-<% @pets.each do |pet| %>
-  <p>
-    <strong><%= link_to pet.name, pet_path(pet) %></strong><br>
-    <%= pet.species %>,
-    <%= pet.sex %>,
-    <%= pet.status %>
-  </p>
-<% end %>
+<div class="row">
+  <% @pets.each do |pet| %>
+    <div class="col s12 m4 pet-item">
+      <div class="collection card white">
+        <div class="card-content collection-item avatar">
+          <%= image_tag(pet.image, class: 'circle') %>
+          <span class="card-title pink-text text-accent-3"><%= link_to pet.name, pet %></span>
+          <p><i><%= pet.species %></i>, <%= pet.sex %>, <%= pet.breed %></p>
+          <p><b><%= pet.city %></b>, <%= pet.state %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
