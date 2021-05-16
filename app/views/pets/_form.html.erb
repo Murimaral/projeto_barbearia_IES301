@@ -2,19 +2,19 @@
     <%= flash[:alert] %>
 <% end %>
 <%= form_for @pet do |form| %>
-  <p>
-    <%= form.label :name , 'Nome' %><br>
+  <p class="input-field">
+    <%= form.label :name , 'Nome' %>
     <%= form.text_field :name %>
   </p>
 
   <p>
     <strong>Espécie</strong>
     <label for="pet_species_cat">
-      <input name="pet[species]" type="radio" id="pet_species_cat" value="cat" />
+      <input name="pet[species]" type="radio" id="pet_species_cat" value="cat" <%= @pet.species == 'cat' ? 'checked' : '' %> />
       <span>Gato</span>
     </label>
     <label for="pet_species_male">
-      <input name="pet[species]" type="radio" id="pet_species_male" value="dog" />
+      <input name="pet[species]" type="radio" id="pet_species_male" value="dog" <%= @pet.species == 'dog' ? 'checked' : '' %> />
       <span>Cachorro</span>
     </label>
   </p>
@@ -22,11 +22,11 @@
   <p>
     <strong>Sexo</strong>
     <label for="pet_sex_female">
-      <input name="pet[sex]" type="radio" id="pet_sex_female" value="female" />
+      <input name="pet[sex]" type="radio" id="pet_sex_female" value="female" <%= @pet.sex == 'female' ? 'checked' : '' %> />
       <span>Fêmea</span>
     </label>
     <label for="pet_sex_male">
-      <input name="pet[sex]" type="radio" id="pet_sex_male" value="male" />
+      <input name="pet[sex]" type="radio" id="pet_sex_male" value="male" <%= @pet.sex == 'male' ? 'checked' : '' %> />
       <span>Macho</span>
     </label>
   </p>

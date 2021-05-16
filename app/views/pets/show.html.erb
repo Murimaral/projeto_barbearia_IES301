@@ -1,8 +1,20 @@
 <p>
-    <strong><%= @pet.name %></strong><br>
+  <%= image_tag(@pet.image) %><br>
+  <strong><%= @pet.name %></strong><br>
+  <% unless @pet.active? %>
+    Perfil arquivado
+    <br>
+  <% end %>
+  <% if @pet.user == current_user %>
     <%= link_to 'editar', edit_pet_path(@pet) %><br>
-    <%= @pet.species %>,
-    <%= @pet.sex %>,
-    <%= @pet.status %><br>
-    Posted by <%= @author.name %>
-  </p>
+  <% end %>
+  <% if @pet.user == current_user && @pet.found? %>
+    <%= link_to 'já encontrei o dono', pet_confirm_deactivation_path(@pet) %><br>
+  <% elsif @pet.user == current_user && @pet.lost? %>
+    <%= link_to 'já encontrei meu pet', pet_confirm_deactivation_path(@pet) %><br>
+    <% end %>
+  <%= @pet.species %>,
+  <%= @pet.sex %>,
+  <%= @pet.status %><br>
+  Posted by <%= @pet.user.name %>
+</p>

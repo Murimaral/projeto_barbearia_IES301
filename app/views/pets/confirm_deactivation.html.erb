@@ -1,0 +1,9 @@
+<p>
+  <strong>Desativar o anúncio de <%= @pet.name %>?</strong><br>
+  <%= link_to 'Não, voltar para o perfil', @pet %> |
+  <% if @pet.found? %>
+    <%= link_to 'Sim, já encontrei o dono', pet_deactive_path(@pet), method: :post %><br>
+  <% elsif @pet.lost? %>
+    <%= link_to 'Sim, já encontrei meu pet', pet_deactive_path(@pet), method: :post %><br>
+  <% end %>
+</p>
