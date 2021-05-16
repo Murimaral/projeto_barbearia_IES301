@@ -1,4 +1,5 @@
 require "active_support/core_ext/integer/time"
+require 'pry'
 
 Rails.application.configure do
   # In the development environment your application's code is reloaded any time
