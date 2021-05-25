@@ -1,0 +1,119 @@
+
+<form id="search-form">
+<div class="row">
+  <div class="input-field">
+    <input type="text" id="name" name="name">
+    <label for="name" class="active">Nome/título do anúncio</label>
+  </div>
+  <div class="input-field">
+    <input type="text" id="breed" name="breed">
+    <label for="breed" class="active">Raça</label>
+  </div>
+  <div class="input-field">
+    <input type="text" id="color" name="color">
+    <label for="color" class="active">Cor</label>
+  </div>
+  <div class="input-field">
+    <input type="text" id="city" name="city">
+    <label for="city" class="active">Cidade</label>
+  </div>
+  <div class="input-field">
+    <input type="text" id="state" name="state">
+    <label for="state" class="active">Estado</label>
+  </div>
+</div>
+<div class="row">
+  <label>
+    <input name="species" id="dog" value="dog" type="radio" />
+    <span>Dog</span>
+  </label>
+  <label>
+    <input name="species" id="cat" value="cat" type="radio" />
+    <span>Cat</span>
+  </label>
+  <label>
+    <input name="species" id="any" value="" type="radio" checked />
+    <span>Todos</span>
+  </label>
+</div>
+<div class="row">
+  <label>
+    <input name="sex" id="female" value="female" type="radio" checked />
+    <span>Fêmea</span>
+  </label>
+  <label>
+    <input name="sex" id="male" value="male" type="radio" />
+    <span>Macho</span>
+  </label>
+  <label>
+    <input name="sex" id="any" value="" type="radio" checked />
+    <span>Todos</span>
+  </label>
+</div>
+<div class="row">
+  <label>
+    <input name="status" id="found" value="found" type="radio" checked />
+    <span>Encontrado</span>
+  </label>
+  <label>
+    <input name="status" id="lost" value="lost" type="radio" />
+    <span>Perdido</span>
+  </label>
+  <label>
+    <input name="status" id="any" value="" type="radio" checked />
+    <span>Todos</span>
+  </label>
+</div>
+<div class="row">
+  <label>
+    <input name="exact" type="radio" id="true" value="true" checked>
+    <span>Exact match</span>
+  </label>
+  <label>
+    <input name="exact" type="radio" id="false" value="false">
+    <span>Not exact</span>
+  </label>
+</div>
+</form>
+
+<script>
+$(function() {
+  $('input').change(function() { search(); })
+  $('input').keyup(function() { search(); })
+})
+
+function search() {
+  const form = new FormData(document.getElementById('search-form'));
+
+  const myInit = {
+    method: 'POST',
+    body: form
+  }
+
+  fetch('http://localhost:3000/search', myInit)
+    .then(function(response) { return response.json() })
+    .then(function(data) {
+      let searchResults = ''
+      data.forEach(function(pet) {
+        searchResults = searchResults.concat(`
+        <div class="col s12 m4 pet-item">
+        <div class="collection card white">
+          <div class="card-content collection-item avatar">
+            <img class="circle" src="${pet.image}">
+            <span class="card-title pink-text text-accent-3">
+              <a href="/pets/${pet.id}">
+                ${pet.name}
+              </a>
+            </span>
+            <p><i>${pet.species}</i>, ${pet.sex}, ${pet.breed}</p>
+            <p><b>${pet.city}</b>, ${pet.state}</p>
+          </div>
+        </div>
+      </div>
+        `)
+      })
+      document.getElementById('pet-list').innerHTML = searchResults;
+    })
+  event.preventDefault()
+}
+</script>

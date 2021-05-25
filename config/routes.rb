@@ -5,4 +5,5 @@ Rails.application.routes.draw do
     post :deactive
   end
   root to: 'pets#index'
+  post '/search', to: 'pets#search'
 end
