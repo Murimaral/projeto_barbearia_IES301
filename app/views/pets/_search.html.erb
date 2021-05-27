@@ -90,7 +90,7 @@ function search() {
     body: form
   }
 
-  fetch('http://localhost:3000/search', myInit)
+  fetch('/search', myInit)
     .then(function(response) { return response.json() })
     .then(function(data) {
       let searchResults = ''
