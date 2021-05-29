@@ -1,0 +1,32 @@
+<p>
+  <% if @rescue_request.created_by_owner? && @rescue_request.owner_id == current_user.id  %>
+    <% if @rescue_request.lost_pet %>
+      <h2>Pedido de resgate de <%= @rescue_request.lost_pet.name %></h2>
+      <%= link_to image_tag(@rescue_request.lost_pet.image), @rescue_request.lost_pet %>
+      <p>
+        <%= @rescue_request.lost_pet.species %>, <%= @rescue_request.lost_pet.sex %>, <%= @rescue_request.lost_pet.breed %>
+      </p>
+
+      <p>
+        <%= @rescue_request.lost_pet.city %>, <%= @rescue_request.lost_pet.state %>
+      </p>
+
+      <h3>Destinatário do pedido</h3>
+      <p><%= @rescue_request.rescuer.name %></p>
+      <p>Anúncio: 
+        <%= link_to image_tag(@rescue_request.found_pet.image), @rescue_request.found_pet %>
+        <%= link_to @rescue_request.found_pet.name, @rescue_request.found_pet %>
+      </p>
+    <% end %>
+  <% end %>
+
+  <hr>
+  <h2>Mensagem</h2>
+  <p>
+    <%= @rescue_request.message %>
+    <%= image_tag(@rescue_request.image || '') %>
+  </p>
+  <p>
+    Enviado por <%= @rescue_request.owner.name %>, <%= @rescue_request.owner.phone %>
+  </p>
+</p>

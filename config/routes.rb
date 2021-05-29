@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     get :confirm_deactivation
     post :deactive
   end
+  
+  resources :rescue_requests
+
   root to: 'pets#index'
   post '/search', to: 'pets#search'
 end

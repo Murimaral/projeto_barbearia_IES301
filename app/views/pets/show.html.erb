@@ -12,7 +12,9 @@
     <%= link_to 'já encontrei o dono', pet_confirm_deactivation_path(@pet) %><br>
   <% elsif @pet.user == current_user && @pet.lost? %>
     <%= link_to 'já encontrei meu pet', pet_confirm_deactivation_path(@pet) %><br>
-    <% end %>
+  <% elsif @pet.user != current_user && @pet.found? %>
+    <%= link_to 'sou dono deste pet!', new_rescue_request_path(found_pet_id: @pet.id) %><br>
+  <% end %>
   <%= @pet.species %>,
   <%= @pet.sex %>,
   <%= @pet.status %><br>
