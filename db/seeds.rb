@@ -1,25 +1,16 @@
-example_user = User.create(email: 'user@email.com', password: 'abc123', name: 'Olivia Lobo')
-admin = User.create(email: 'admin@pet-finder.com', password: 'abc123', name: 'ConnectPlus', admin: true)
+if Pet.count.zero?
+  example_user = User.create(email: 'user@email.com', password: 'abc123', name: 'Olivia Lobo', phone: '(11) 987654321')
+  admin = User.create(email: 'admin@pet-finder.com', password: 'abc123', name: 'ConnectPlus', admin: true, phone: '(11) 912345678')
+  User.create(email: 'leticia.silva@aluno.faculdadeimpacta.com.br', password: 'admin000', name: 'Leticia Mayumi', admin: true, phone: '(11) 933608464')
+  User.create(email: 'david.silva@aluno.faculdadeimpacta.com.br', password: 'admin000', name: 'David Lucas', admin: true, phone: '(11) 973065005')
 
-Pet.create(name: 'Adelaide', species: :cat, sex: :female, breed: 'SRD', color: 'Preto', image: Faker::Avatar.image(slug: '1'),
-           details: 'Gata companheira mansa de olhos verdes', city: 'Sao Paulo', state: 'SP', status: :found,
-           active: true, user: example_user)
-Pet.create(name: 'Lyra', species: :cat, sex: :female, breed: 'SRD', color: 'Branco', image: Faker::Avatar.image(slug: '2'),
-           details: 'Gata filhote de pelo claro', city: 'Sao Paulo', state: 'SP', status: :lost,
-           active: true, user: example_user)
-Pet.create(name: 'Lili', species: :cat, sex: :female, breed: 'Siames', color: 'Bege', image: Faker::Avatar.image(slug: '3'),
-           details: 'Gata siamesa desconfiada', city: 'Sao Paulo', state: 'SP', status: :found,
-           active: true, user: example_user)
-Pet.create(name: 'Link', species: :dog, sex: :male, breed: 'Lhasa apso', color: 'White', image: Faker::Avatar.image(slug: '4'),
-           details: 'Bom cachorro', city: 'Sao Paulo', state: 'SP', status: :lost,
-           active: true, user: example_user)
-Pet.create(name: 'Rex', species: :dog, sex: :male, breed: 'Pastor alemão', color: 'Marrom', image: Faker::Avatar.image(slug: '5'),
-           details: 'Cachorro grande e alerta', city: 'Sao Paulo', state: 'SP', status: :lost,
-           active: true, user: example_user)
-Pet.create(name: 'Susan', species: :dog, sex: :female, breed: 'Pinscher', color: 'Marrom', image: Faker::Avatar.image(slug: '6'),
-           details: 'Bom cachorro', city: 'Sao Paulo', state: 'SP', status: :lost,
-           active: false, user: example_user)
-
-Pet.create(name: 'Adezinha', species: :cat, sex: :female, breed: 'SRD', color: 'Preto', image: Faker::Avatar.image(slug: '7'),
-           details: 'Vista pela última vez no Bom Retiro, muito mansinha', city: 'Sao Paulo', state: 'SP', status: :lost,
-           active: true, user: admin)
+  30.times do
+    location = Locations::STATES.sample
+    species = ['cat', 'dog'].sample
+    pet = Pet.create(name: Faker::Creature::Dog.name, species: species, sex: ['male', 'female'].sample, breed: species == 'cat' ? Breeds::CAT_BREEDS.sample : Breeds::DOG_BREEDS.sample,
+                     color: Colors::COLORS.sample, details: Faker::Lorem.paragraph, city: location[:cities].sample, state: location[:name], status: ['found', 'lost'].sample,
+                     active: true, user: example_user)
+    generated_image = File.open('app/assets/images/paw.jpg')
+    pet.image.attach(io: generated_image, filename: 'avatar.jpg')
+  end
+end

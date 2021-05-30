@@ -32,19 +32,19 @@
     </label>
   </p>
 
-  <p>
+  <p class="input-field">
     <%= form.label :breed, 'Raça' %><br>
-    <%= form.text_field :breed %>
+    <%= form.text_field :breed, class: 'breed' %>
   </p>
 
-  <p>
+  <p class="input-field">
     <%= form.label :color, 'Cor' %><br>
-    <%= form.text_field :color %>
+    <%= form.text_field :color, class: 'color' %>
   </p>
 
   <p>
     <%= form.label :image, 'Foto'%>
-    <%= form.text_field :image %>
+    <%= form.file_field :image %>
   </p>
 
   <p>
@@ -52,18 +52,37 @@
     <%= form.text_area :details %>
   </p>
 
-  <p>
+  <p class="input-field">
     <%= form.label :city, 'Cidade' %><br>
-    <%= form.text_field :city %>
+    <%= form.text_field :city, class: 'city' %>
   </p>
 
-  <p>
+  <p class="input-field">
     <%= form.label :state, 'Estado' %><br>
-    <%= form.text_field :state %>
+    <%= form.text_field :state, class: 'state' %>
   </p>
 
-  <%= form.hidden_field :status, value: params[:status] %>
+  <%= form.hidden_field :status, value: params[:status] || @pet.status %>
 
   <%= form.submit 'Enviar' %>
 <% end %>
 
+<script>
+$(function() {
+  $('.breed').autocomplete({
+    data: <%= @breeds.to_json.html_safe %>,
+  });
+
+  $('.color').autocomplete({
+    data: <%= @colors.to_json.html_safe %>,
+  });
+
+  $('.city').autocomplete({
+    data: <%= @cities.to_json.html_safe %>,
+  });
+
+  $('.state').autocomplete({
+    data: <%= @states.to_json.html_safe %>,
+  });
+})
+</script>
