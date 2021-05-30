@@ -1,3 +1,4 @@
+# rubocop: disable Metrics/ClassLength
 class PetsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show search]
   before_action :find_pet, only: %i[show edit update confirm_deactivation deactive]
@@ -10,29 +11,31 @@ class PetsController < ApplicationController
 
   def new
     @pet = Pet.new
+    load_data
   end
 
   def create
     @pet = Pet.new(pet_params)
-    @pet.image = params[:image] || generate_avatar
     @pet.user = current_user
     if @pet.save
       redirect_to @pet
     else
-      flash[:alert] = 'Não foi possível registrar o pet'
+      flash[:alert] = @pet.errors
       render :new
     end
   end
 
   def show; end
 
-  def edit; end
+  def edit
+    load_data
+  end
 
   def update
     if @pet.update(pet_params)
       redirect_to @pet
     else
-      flash[:alert] = 'Erro na edição'
+      flash[:alert] = @pet.errors
       render :edit
     end
   end
@@ -59,10 +62,6 @@ class PetsController < ApplicationController
 
   def check_ownership
     redirect_to root_path unless @pet.user == current_user
-  end
-
-  def generate_avatar
-    Faker::Avatar.image(slug: params[:name])
   end
 
   def exact_search
@@ -105,4 +104,31 @@ class PetsController < ApplicationController
 
     array.select { |pet| pet[:active] == false }
   end
+
+  def load_data
+    find_states
+    find_cities
+    find_breeds
+    @colors = Colors::COLORS
+  end
+
+  def find_states
+    @states = {}
+    Locations::STATES.map { |state| @states[state[:name]] = nil }
+  end
+
+  def find_cities
+    all_cities = []
+    Locations::STATES.map { |state| all_cities.push(*state[:cities]) }
+    all_cities.sort!
+    @cities = {}
+    all_cities.map { |city| @cities[city] = nil }
+  end
+
+  def find_breeds
+    all_breeds = Breeds::DOG_BREEDS.push(*Breeds::CAT_BREEDS).sort
+    @breeds = {}
+    all_breeds.map { |breed| @breeds[breed] = nil }
+  end
 end
+# rubocop: enable Metrics/ClassLength

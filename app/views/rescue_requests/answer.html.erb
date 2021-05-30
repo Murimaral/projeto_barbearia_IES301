@@ -1,7 +1,7 @@
 <% if @rescue_request.owner_id == current_user.id %>
   <% if @rescue_request.found_pet_id.present? %>
     <h2>Responder ao resgatante de <%= @rescue_request.found_pet.name %></h2>
-    <%= image_tag(@rescue_request.found_pet.image) %><br>
+    <%= image_tag(@rescue_request.found_pet.image) if @rescue_request.found_pet.image.attached? %><br>
   <% else%>
     <h2>Responder ao resgatante <%= @rescue_request.rescuer.name %></h2>
   <% end %>
@@ -29,7 +29,7 @@
 <% else %>
   <% if @rescue_request.lost_pet_id.present? %>
     <h2>Responder ao dono de <%= @rescue_request.lost_pet.name %></h2>
-    <%= image_tag(@rescue_request.lost_pet.image) %><br>
+    <%= image_tag(@rescue_request.lost_pet.image) if @rescue_request.lost_pet.image.attached? %><br>
   <% else%>
     <h2>Responder ao pedido de resgate de <%= @rescue_request.owner.name %></h2>
   <% end %>

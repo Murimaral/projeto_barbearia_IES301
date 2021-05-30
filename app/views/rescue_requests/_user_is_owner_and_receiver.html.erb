@@ -17,7 +17,7 @@
 <h2>Mensagem</h2>
 <p>
   <%= @rescue_request.message %>
-  <%= image_tag(@rescue_request.image || '') %>
+  <%= image_tag(@rescue_request.image) if @rescue_request.image.attached? %>
 </p>
 <p>
   Enviado por <%= @rescue_request.rescuer.name %>, <%= @rescue_request.rescuer.phone %>
