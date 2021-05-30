@@ -11,7 +11,7 @@
 <h2>Mensagem</h2>
 <p>
   <%= @rescue_request.message %>
-  <%= image_tag(@rescue_request.image || '') %>
+  <%= image_tag(@rescue_request.image) if @rescue_request.image.attached? %>
 </p>
 <% if @rescue_request.lost_pet_id.present? %>
   <p>Anúncio: 

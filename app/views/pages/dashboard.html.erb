@@ -10,7 +10,7 @@
       <div class="collection card white">
         <div class="card-content collection-item avatar">
           <%= request.status %>, perdido
-          <%= image_tag(request.found_pet.image, class: 'circle') %>
+          <%= image_tag(request.found_pet.image, class: 'circle') if request.found_pet.image.attached? %>
           <span class="card-title pink-text text-accent-3"><%= link_to request.found_pet.name, request %></span>
           <p><i><%= request.rescuer.name %></i> respondeu:</p>
           <p><i><%= request.reply %></i></p>
@@ -22,7 +22,7 @@
       <div class="collection card white">
         <div class="card-content collection-item avatar">
           <%= request.status %>, resgatado
-          <%= image_tag(request.lost_pet.image, class: 'circle') %>
+          <%= image_tag(request.lost_pet.image, class: 'circle') if request.lost_pet.image.attached? %>
           <span class="card-title pink-text text-accent-3"><%= link_to request.lost_pet.name, request %></span>
           <p><i><%= request.owner.name %></i> respondeu:</p>
           <p><i><%= request.reply %></i></p>
@@ -40,7 +40,7 @@
       <div class="collection card white">
         <div class="card-content collection-item avatar">
           <%= request.status %>, perdido
-          <%= image_tag(request.found_pet.image, class: 'circle') %>
+          <%= image_tag(request.found_pet.image, class: 'circle') if request.found_pet.image.attached? %>
           <span class="card-title pink-text text-accent-3"><%= link_to request.found_pet.name, request %></span>
           <p>Enviado por <i><%= request.owner.name %></i></p>
           <p><i><%= request.message %></i></p>
@@ -52,7 +52,7 @@
       <div class="collection card white">
         <div class="card-content collection-item avatar">
           <%= request.status %>, resgatado
-          <%= image_tag(request.lost_pet.image, class: 'circle') %>
+          <%= image_tag(request.lost_pet.image, class: 'circle') if request.lost_pet.image.attached?  %>
           <span class="card-title pink-text text-accent-3"><%= link_to request.lost_pet.name, request %></span>
           <p>Enviado por <i><%= request.rescuer.name %></i></p>
           <p><i><%= request.message %></i></p>
@@ -71,7 +71,7 @@
         <div class="collection card white">
           <div class="card-content collection-item avatar">
             <%= request.status %>, perdido
-            <%= image_tag(request.found_pet.image, class: 'circle') %>
+            <%= image_tag(request.found_pet.image, class: 'circle') if request.found_pet.image.attached? %>
             <span class="card-title pink-text text-accent-3"><%= link_to request.found_pet.name, request %></span>
             <p>Resgate feito por <i><%= request.found_pet.user.name %></i></p>
             <p><i><%= request.message %></i></p>
@@ -83,7 +83,7 @@
         <div class="collection card white">
           <div class="card-content collection-item avatar">
             <%= request.status %>, resgatado
-            <%= image_tag(request.lost_pet.image, class: 'circle') %>
+            <%= image_tag(request.lost_pet.image, class: 'circle') if request.lost_pet.image.attached? %>
             <span class="card-title pink-text text-accent-3"><%= link_to request.lost_pet.name, request %></span>
             <p>Pertence a <i><%= request.lost_pet.user.name %></i></p>
             <p><i><%= request.message %></i></p>
@@ -100,7 +100,7 @@
     <div class="col s12 m4 pet-item">
       <div class="collection card white">
         <div class="card-content collection-item avatar">
-          <%= image_tag(pet.image, class: 'circle') %>
+          <%= image_tag(pet.image, class: 'circle') if pet.image.attached? %>
           <span class="card-title pink-text text-accent-3"><%= link_to pet.name, pet %></span>
           <p><i><%= pet.species %></i>, <%= pet.sex %>, <%= pet.breed %></p>
           <p><b><%= pet.city %></b>, <%= pet.state %></p>

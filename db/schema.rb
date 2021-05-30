@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_30_175843) do
+ActiveRecord::Schema.define(version: 2021_05_30_204504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 2021_05_30_175843) do
     t.integer "found_pet_id"
     t.integer "lost_pet_id"
     t.boolean "created_by_owner"
-    t.string "image"
     t.text "message"
     t.text "reply"
     t.integer "status", default: 1

@@ -1,3 +1,4 @@
+# rubocop: disable Metrics/ClassLength
 class PetsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show search]
   before_action :find_pet, only: %i[show edit update confirm_deactivation deactive]
@@ -105,19 +106,29 @@ class PetsController < ApplicationController
   end
 
   def load_data
+    find_states
+    find_cities
+    find_breeds
+    @colors = Colors::COLORS
+  end
+
+  def find_states
     @states = {}
     Locations::STATES.map { |state| @states[state[:name]] = nil }
+  end
 
+  def find_cities
     all_cities = []
     Locations::STATES.map { |state| all_cities.push(*state[:cities]) }
     all_cities.sort!
     @cities = {}
     all_cities.map { |city| @cities[city] = nil }
+  end
 
+  def find_breeds
     all_breeds = Breeds::DOG_BREEDS.push(*Breeds::CAT_BREEDS).sort
     @breeds = {}
     all_breeds.map { |breed| @breeds[breed] = nil }
-
-    @colors = Colors::COLORS
   end
 end
+# rubocop: enable Metrics/ClassLength
