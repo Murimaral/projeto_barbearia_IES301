@@ -17,10 +17,10 @@ class PetsController < ApplicationController
   def create
     @pet = Pet.new(pet_params)
     @pet.user = current_user
-    if @pet.save
+    if pet_params[:image] && @pet.save
       redirect_to @pet
     else
-      flash[:alert] = @pet.errors
+      flash[:alert] = 'Não foi possível salvar'
       render :new
     end
   end
@@ -35,7 +35,7 @@ class PetsController < ApplicationController
     if @pet.update(pet_params)
       redirect_to @pet
     else
-      flash[:alert] = @pet.errors
+      flash[:alert] = 'Não foi possível salvar'
       render :edit
     end
   end
@@ -126,7 +126,7 @@ class PetsController < ApplicationController
   end
 
   def find_breeds
-    all_breeds = Breeds::DOG_BREEDS.push(*Breeds::CAT_BREEDS).sort
+    all_breeds = [*Breeds::DOG_BREEDS, *Breeds::CAT_BREEDS].sort
     @breeds = {}
     all_breeds.map { |breed| @breeds[breed] = nil }
   end
