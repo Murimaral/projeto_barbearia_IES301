@@ -36,9 +36,9 @@
 <div class="row" id="pet-list">
   <% @pets.each do |pet| %>
     <div class="col s12 m4 pet-item">
-      <div class="collection card white">
+      <div class="card white">
         <div class="card-content collection-item avatar">
-          <%= image_tag(pet.image, class: 'circle') %>
+          <%= image_tag(pet.image) %>
           <span class="card-title pink-text text-accent-3"><%= link_to pet.name, pet %></span>
           <p><i><%= pet.species %></i>, <%= pet.sex %>, <%= pet.breed %></p>
           <p><b><%= pet.city %></b>, <%= pet.state %></p>

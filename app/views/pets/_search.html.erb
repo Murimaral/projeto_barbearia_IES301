@@ -97,9 +97,9 @@ function search() {
       data.forEach(function(pet) {
         searchResults = searchResults.concat(`
         <div class="col s12 m4 pet-item">
-        <div class="collection card white">
+        <div class="card white">
           <div class="card-content collection-item avatar">
-            <img class="circle" src="${pet.image}">
+            <img src="${pet.image}">
             <span class="card-title pink-text text-accent-3">
               <a href="/pets/${pet.id}">
                 ${pet.name}
