@@ -1,0 +1,11 @@
+<p>
+  <% if @rescue_request.owner_id == current_user.id && @rescue_request.created_by_owner? %>
+    <%= render 'user_is_owner_and_poster' %>
+  <% elsif @rescue_request.owner_id == current_user.id && !@rescue_request.created_by_owner? %>
+    <%= render 'user_is_owner_and_receiver' %>
+  <% elsif @rescue_request.rescuer_id == current_user.id && @rescue_request.created_by_owner? %>
+    <%= render 'user_is_rescuer_and_receiver' %>
+  <% elsif @rescue_request.rescuer_id == current_user.id  && !@rescue_request.created_by_owner? %>
+    <%= render 'user_is_rescuer_and_poster' %>
+  <% end %>
+</p>

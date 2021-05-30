@@ -1,0 +1,33 @@
+<h2>Acredito que estou com <%= @lost_pet.name %> e gostaria de devolvê-lo</h2>
+<% if flash[:alert] %>
+    <%= flash[:alert] %>
+<% end %>
+<%= form_for @rescue_request do |form| %>
+  <%= form.hidden_field :lost_pet_id, value: @lost_pet.id %>
+  <%= form.hidden_field :owner_id, value: @lost_pet.user_id %>
+  <%= form.hidden_field :rescuer_id, value: current_user.id %>
+  <%= form.hidden_field :created_by_owner, value: false %>
+  <%= form.hidden_field :status, value: 'open' %>
+
+  <div class="input-field ">
+    <select name="rescue_request[found_pet_id]" id="rescue_request_found_pet_id"  class="icons">
+      <option value="" disabled selected>Clique para selecionar</option>
+      <% @my_pets.each do |pet| %>
+        <option value="<%= pet.id %>" data-icon="<%= pet.image %>"><%= pet.name %></option>
+      <% end %>
+    </select>
+    <label>Já criou um anúncio para <%= @lost_pet.name %>?</label>
+  </div>
+
+  <p>
+    <%= form.label :image, 'Foto'%>
+    <%= form.text_field :image %>
+  </p>
+
+  <p>
+    <%= form.label :message, "Escreva uma mensagem para #{@lost_pet.user.name}" %><br>
+    <%= form.text_area :message %>
+  </p>
+
+  <%= form.submit 'Enviar' %>
+<% end %>

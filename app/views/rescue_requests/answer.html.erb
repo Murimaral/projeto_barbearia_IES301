@@ -1,0 +1,60 @@
+<% if @rescue_request.owner_id == current_user.id %>
+  <% if @rescue_request.found_pet_id.present? %>
+    <h2>Responder ao resgatante de <%= @rescue_request.found_pet.name %></h2>
+    <%= image_tag(@rescue_request.found_pet.image) %><br>
+  <% else%>
+    <h2>Responder ao resgatante <%= @rescue_request.rescuer.name %></h2>
+  <% end %>
+  <%= @rescue_request.message %><br>
+  <%= @rescue_request.created_at %>
+  <%= form_for @rescue_request do |form| %>
+    <p>
+      <%= form.label :reply, 'Resposta' %><br>
+      <%= form.text_area :reply %>
+    </p>
+
+    <p>
+      <strong>O pet resgatado por <%= @rescue_request.rescuer.name %> é <%= @rescue_request.lost_pet.name %>?</strong>
+      <label for="status_accepted">
+        <input name="rescue_request[status]" type="radio" id="status_accepted" value="accepted" />
+        <span>Sim, aceitar pedido e inativar anúncios</span>
+      </label>
+      <label for="status_refused">
+        <input name="rescue_request[status]" type="radio" id="status_refused" value="refused" />
+        <span>Não, recusar pedido e continuar procurando</span>
+      </label>
+    </p>
+    <%= form.submit 'Enviar' %>
+  <% end %>
+<% else %>
+  <% if @rescue_request.lost_pet_id.present? %>
+    <h2>Responder ao dono de <%= @rescue_request.lost_pet.name %></h2>
+    <%= image_tag(@rescue_request.lost_pet.image) %><br>
+  <% else%>
+    <h2>Responder ao pedido de resgate de <%= @rescue_request.owner.name %></h2>
+  <% end %>
+  <%= @rescue_request.message %><br>
+  <%= @rescue_request.created_at %>
+  
+  <%= form_for @rescue_request do |form| %>
+    <p>
+      <%= form.label :reply, 'Resposta' %><br>
+      <%= form.text_area :reply %>
+    </p>
+  
+    <p>
+      <strong><%= @rescue_request.owner.name %> é o dono de <%= @rescue_request.found_pet.name %>?</strong>
+      <label for="status_accepted">
+        <input name="rescue_request[status]" type="radio" id="status_accepted" value="accepted" />
+        <span>Sim, aceitar pedido e inativar anúncios</span>
+      </label>
+      <label for="status_refused">
+        <input name="rescue_request[status]" type="radio" id="status_refused" value="refused" />
+        <span>Não, recusar pedido e continuar procurando</span>
+      </label>
+    </p>
+    <%= form.submit 'Enviar' %>
+  <% end %>
+<% end %>
+
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_15_174244) do
+ActiveRecord::Schema.define(version: 2021_05_29_204307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,20 @@ ActiveRecord::Schema.define(version: 2021_05_15_174244) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_pets_on_user_id"
+  end
+
+  create_table "rescue_requests", force: :cascade do |t|
+    t.integer "owner_id"
+    t.integer "rescuer_id"
+    t.integer "found_pet_id"
+    t.integer "lost_pet_id"
+    t.boolean "created_by_owner"
+    t.string "image"
+    t.text "message"
+    t.text "reply"
+    t.integer "status", default: 1
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
