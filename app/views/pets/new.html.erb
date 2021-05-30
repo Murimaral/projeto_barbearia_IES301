@@ -1,2 +1,137 @@
 <h3>Cadastrar pet <%= params[:status] == 'lost' ? 'perdido' : 'encontrado' %></h3>
-<%= render 'form' %>
+<% if flash[:alert] %>
+    <%= flash[:alert] %>
+<% end %>
+<%= form_for @pet, html: { id: 'create-form' } do |form| %>
+  <p class="input-field">
+    <%= form.label :name , 'Nome' %>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <strong>Espécie</strong>
+    <label for="pet_species_cat">
+      <input name="pet[species]" type="radio" id="pet_species_cat" value="cat" <%= @pet.species == 'cat' ? 'checked' : '' %> />
+      <span>Gato</span>
+    </label>
+    <label for="pet_species_dog">
+      <input name="pet[species]" type="radio" id="pet_species_dog" value="dog" <%= @pet.species == 'dog' ? 'checked' : '' %> />
+      <span>Cachorro</span>
+    </label>
+  </p>
+
+  <p>
+    <strong>Sexo</strong>
+    <label for="pet_sex_female">
+      <input name="pet[sex]" type="radio" id="pet_sex_female" value="female" <%= @pet.sex == 'female' ? 'checked' : '' %> />
+      <span>Fêmea</span>
+    </label>
+    <label for="pet_sex_male">
+      <input name="pet[sex]" type="radio" id="pet_sex_male" value="male" <%= @pet.sex == 'male' ? 'checked' : '' %> />
+      <span>Macho</span>
+    </label>
+  </p>
+
+  <p>
+    <%= form.label :breed, 'Raça' %><br>
+    <%= form.text_field :breed %>
+  </p>
+
+  <p>
+    <%= form.label :color, 'Cor' %><br>
+    <%= form.text_field :color %>
+  </p>
+
+  <p>
+    <%= form.label :image, 'Foto'%>
+    <%= form.text_field :image %>
+  </p>
+
+  <p>
+    <%= form.label :details, 'Detalhes' %><br>
+    <%= form.text_area :details %>
+  </p>
+
+  <p>
+    <%= form.label :city, 'Cidade' %><br>
+    <%= form.text_field :city %>
+  </p>
+
+  <p>
+    <%= form.label :state, 'Estado' %><br>
+    <%= form.text_field :state %>
+  </p>
+
+  <%= form.hidden_field :status, value: params[:status] %>
+
+  <a class="waves-effect waves-light btn-large" onClick="finished()">
+    Salvar
+  </a>
+  <div id="search-results" class="d-none">
+    <h6>Encontramos estes pets similares, algum deles é o seu?</h6>
+    <div id="pet-list"></div>
+  </div>
+
+  <%= form.submit 'Não, avançar e registrar pet', class: 'd-none btn-large', id: 'submit-btn' %>
+<% end %>
+
+
+<script>
+$(function() {
+  $('input').change(function() { clearResults() })
+  $('input').keyup(function() { clearResults() })
+})
+
+function clearResults() {
+  document.getElementById('search-results').classList.add('d-none');
+  document.getElementById('submit-btn').classList.add('d-none');
+}
+
+function finished() {
+  const status = document.getElementById('pet_status').value == 'found' ? 'lost' : 'found'
+  const species = document.getElementById('pet_species_cat').checked ? 'cat' : 'dog'
+  const sex = document.getElementById('pet_sex_female').checked ? 'female' : 'male'
+  const breed = document.getElementById('pet_breed').value
+  const color = document.getElementById('pet_color').value
+  const city = document.getElementById('pet_city').value
+  const state = document.getElementById('pet_state').value
+
+  const myInit = {
+    method: 'POST'
+  }
+
+  fetch(`/search?status=${status}&species=${species}&breed=${breed}&color=${color}&city=${city}&state=${state}`, myInit)
+    .then(function(response) { return response.json() })
+    .then(function(data) {
+      if (data.length > 0) { appendSearchResults(data) }
+      else { document.getElementById('submit-btn').click() }
+  })
+  event.preventDefault()
+}
+
+function appendSearchResults(data) {
+  let searchResults = ''
+  data.forEach(function(pet) {
+    searchResults = searchResults.concat(`
+    <div class="col s12 m4 pet-item">
+    <div class="collection card white">
+      <div class="card-content collection-item avatar">
+        <img class="circle" src="${pet.image}">
+        <span class="card-title pink-text text-accent-3">
+          <a href="/pets/${pet.id}">
+            ${pet.name}
+          </a>
+        </span>
+        <p><i>${pet.species}</i>, ${pet.sex}, ${pet.breed}</p>
+        <p><b>${pet.city}</b>, ${pet.state}</p>
+        <p><a href="/pets/${pet.id}">Ver perfil</a></p>
+      </div>
+    </div>
+  </div>
+    `)  
+  })
+  document.getElementById('pet-list').innerHTML = searchResults;
+  document.getElementById('search-results').classList.remove('d-none');
+  document.getElementById('submit-btn').classList.remove('d-none');
+}
+</script>

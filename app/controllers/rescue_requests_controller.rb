@@ -38,6 +38,7 @@ class RescueRequestsController < ApplicationController
       render :edit
     end
   end
+
   private
 
   def rescue_params
