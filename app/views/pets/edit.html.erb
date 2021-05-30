@@ -1,2 +1,69 @@
 <h3>Editar perfil de <%= @pet.name %></h3>
-<%= render 'form' %>
+<% if flash[:alert] %>
+    <%= flash[:alert] %>
+<% end %>
+<%= form_for @pet, html: { id: 'create-form' } do |form| %>
+  <p class="input-field">
+    <%= form.label :name , 'Nome' %>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <strong>Espécie</strong>
+    <label for="pet_species_cat">
+      <input name="pet[species]" type="radio" id="pet_species_cat" value="cat" <%= @pet.species == 'cat' ? 'checked' : '' %> />
+      <span>Gato</span>
+    </label>
+    <label for="pet_species_dog">
+      <input name="pet[species]" type="radio" id="pet_species_dog" value="dog" <%= @pet.species == 'dog' ? 'checked' : '' %> />
+      <span>Cachorro</span>
+    </label>
+  </p>
+
+  <p>
+    <strong>Sexo</strong>
+    <label for="pet_sex_female">
+      <input name="pet[sex]" type="radio" id="pet_sex_female" value="female" <%= @pet.sex == 'female' ? 'checked' : '' %> />
+      <span>Fêmea</span>
+    </label>
+    <label for="pet_sex_male">
+      <input name="pet[sex]" type="radio" id="pet_sex_male" value="male" <%= @pet.sex == 'male' ? 'checked' : '' %> />
+      <span>Macho</span>
+    </label>
+  </p>
+
+  <p>
+    <%= form.label :breed, 'Raça' %><br>
+    <%= form.text_field :breed %>
+  </p>
+
+  <p>
+    <%= form.label :color, 'Cor' %><br>
+    <%= form.text_field :color %>
+  </p>
+
+  <p>
+    <%= form.label :image, 'Foto'%>
+    <%= form.text_field :image %>
+  </p>
+
+  <p>
+    <%= form.label :details, 'Detalhes' %><br>
+    <%= form.text_area :details %>
+  </p>
+
+  <p>
+    <%= form.label :city, 'Cidade' %><br>
+    <%= form.text_field :city %>
+  </p>
+
+  <p>
+    <%= form.label :state, 'Estado' %><br>
+    <%= form.text_field :state %>
+  </p>
+
+  <%= form.hidden_field :status, value: params[:status] %>
+
+  <%= form.submit 'Enviar' %>
+<% end %>
+
