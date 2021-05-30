@@ -10,10 +10,12 @@ class RescueRequestsController < ApplicationController
 
   def create
     @rescue_params = rescue_params
+    @user_claims_ownership = user_claims_ownership?
     @rescue_request = RescueRequest.new(@rescue_params)
     if @rescue_request.save
       redirect_to @rescue_request
     else
+      load_data
       flash[:alert] = 'Não foi possível criar o pedido de resgate'
       render :new
     end

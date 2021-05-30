@@ -8,8 +8,8 @@ if Pet.count.zero?
     location = Locations::STATES.sample
     species = ['cat', 'dog'].sample
     pet = Pet.create(name: Faker::Creature::Dog.name, species: species, sex: ['male', 'female'].sample, breed: species == 'cat' ? Breeds::CAT_BREEDS.sample : Breeds::DOG_BREEDS.sample,
-                     color: Colors::COLORS.sample, details: Faker::Lorem.paragraph, city: location[:cities].sample, state: location[:name], status: ['found', 'lost'].sample,
-                     active: true, user: example_user)
+                     color: Colors::COLORS.keys.sample, details: Faker::Lorem.paragraph, city: location[:cities].sample, state: location[:name], status: ['found', 'lost'].sample,
+                     active: true, user: User.first)
     generated_image = File.open('app/assets/images/paw.jpg')
     pet.image.attach(io: generated_image, filename: 'avatar.jpg')
   end
