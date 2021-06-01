@@ -5,6 +5,11 @@ services:
     command: rails s -b 0.0.0.0
     container_name: pet-finder
     depends_on: [db]
+    environment:
+      AWS_ACCESS_KEY_ID: AKIATOZKRCQHRTN2ZPP5
+      AWS_SECRET_ACCESS_KEY: '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'
+      AWS_REGION: us-east-2
+      S3_BUCKET_NAME: pet-finder-rails
     ports:
       - 3000:3000
     volumes:
