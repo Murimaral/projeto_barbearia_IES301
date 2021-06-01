@@ -1,6 +1,6 @@
 # rubocop: disable Metrics/ClassLength
 class PetsController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show search]
+  before_action :authenticate_user!, except: %i[index show search searchpage]
   before_action :find_pet, only: %i[show edit update confirm_deactivation deactive]
   before_action :check_ownership, only: %i[edit update confirm_deactivation]
   skip_before_action :verify_authenticity_token, only: :search
@@ -50,8 +50,14 @@ class PetsController < ApplicationController
   def search
     @search_params = search_params
     @pets = params[:exact] == 'true' ? exact_search : advanced_search
+    @results = []
+    @pets.each do |pet|
+      result = JSON.parse(pet.to_json)
+      result[:image] = url_for(pet.image)
+      @results << result
+    end
 
-    render json: @pets, status: :ok
+    render json: @results, status: :ok
   end
 
   private
@@ -100,9 +106,15 @@ class PetsController < ApplicationController
   end
 
   def check_visibility(array)
-    return array.select { |pet| pet[:active] == true } unless params[:active] == 'false'
+    result = array
+    result = result.select { |pet| pet[:active] == true }
+    if @search_params[:state].present?
+      result = result.select do |pet|
+        pet[:state].downcase.include?(@search_params[:state].downcase)
+      end
+    end
 
-    array.select { |pet| pet[:active] == false }
+    result
   end
 
   def load_data
