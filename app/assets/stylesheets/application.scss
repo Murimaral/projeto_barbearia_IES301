@@ -14,6 +14,31 @@ $c_background: #f9f6f4;
 $hd_bg: $c_main;
 // Footer
 $ft_bg: $c_sec;
+
+// OTHERS
+button, html [type="button"], [type="reset"], [type="submit"] {
+  text-decoration: none;
+  color: #fff;
+  background-color: $c_main;
+  text-align: center;
+  letter-spacing: .5px;
+  transition: background-color .2s ease-out;
+  cursor: pointer;
+  padding: 10px 25px;
+  border-radius: 5px;
+  margin: 1rem 0;
+  border: 0;
+}
+[type="radio"]:checked + span:after, .with-gap[type="radio"]:checked + span:after{
+background-color: $c_main;
+}
+[type="radio"]:checked + span:after, .with-gap[type="radio"]:checked + span:before, .with-gap[type="radio"]:checked + span:after{
+border: 2px solid $c_main;
+}
+a{
+color: $c_main;
+}
+
 //HEADER
 #header{
     background-color: $hd_bg;
@@ -35,6 +60,7 @@ $ft_bg: $c_sec;
   }
   > span,>p{
     padding: 0 10px;
+    min-height: 43px;
   }
 }
 body {
@@ -93,6 +119,11 @@ body {
         right: 0;
       }
     }
+    &.search{
+      img{
+        object-position: 0 30%;
+      }
+    }
   }
   
 //HOME END
@@ -132,17 +163,25 @@ body {
     }
 }
 // PET DETAILS END
-// OTHERS
-button, html [type="button"], [type="reset"], [type="submit"] {
-    text-decoration: none;
-    color: #fff;
-    background-color: $c_main;
-    text-align: center;
-    letter-spacing: .5px;
-    transition: background-color .2s ease-out;
-    cursor: pointer;
-    padding: 10px 25px;
-    border-radius: 5px;
-    margin: 1rem 0;
-    border: 0;
+
+//searchpage
+
+#searchpage{
+  .filters {
+    background: white;
+    border-radius: 25px;
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: baseline;
+      padding: 0 20px;
+    }
+  }
+  .usefiltersmsg{
+    display: block;
+    font-size: 17px;
+    opacity: 0.75;
+    padding: 5rem;
+  }
 }

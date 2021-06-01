@@ -21,20 +21,20 @@
         </span>
       </a>
     </div>
+    <div class="col s12 m12">
+      <a href="<%= search_path %>" class="home_button_find pet search">
+        <%= image_tag("dog_04.jpg", :alt => "Fazer uma busca avançada") %>
+        <span>
+          <i class="material-icons">search</i> Fazer uma busca avançada
+        </span>
+      </a>
+    </div>
     </div>
     <br><br>
   </div>
 </div>
-<ul class="collapsible">
-  <li>
-    <div class="collapsible-header"><i class="material-icons">search</i>Buscar por um pet</div>
-    <div class="collapsible-body">
-      <%= render 'search' %>
-    </div>
-  </li>
-</ul> 
 <div class="row" id="pet-list">
-  <% @pets.each do |pet| %>
+  <% @pets.take(9).each do |pet| %>
     <div class="col s12 m4 pet-item">
       <div class="card white">
         <div class="card-content collection-item avatar">

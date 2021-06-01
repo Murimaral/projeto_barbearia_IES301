@@ -11,5 +11,6 @@ Rails.application.routes.draw do
 
   root to: 'pets#index'
   get '/dashboard', to: 'pages#dashboard'
+  get '/search', to: 'pets#searchpage'
   post '/search', to: 'pets#search'
 end
