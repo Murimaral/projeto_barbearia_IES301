@@ -38,6 +38,9 @@ border: 2px solid $c_main;
 a{
 color: $c_main;
 }
+h1, h2, h3 {
+  color: $c_sec;
+}
 
 //HEADER
 #header{
@@ -230,5 +233,22 @@ body {
 
   .input-field {
     margin: 2rem 0;
+  }
+}
+
+// RESCUE REQUESTS
+.rescue-request {
+  &_form {
+    margin: 0 auto;
+    max-width: 800px;
+
+    h2, h3 {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .input-field {
+      margin: 3rem 0;
+    }
   }
 }

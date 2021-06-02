@@ -1,4 +1,6 @@
-<h2>Acredito que <%= @found_pet.name %> seja meu pet</h2>
+<p>
+  Escreva uma mensagem para <%= @found_pet.user.name %> sobre o anúncio <%= link_to @found_pet.name, @found_pet %> e forneça mais detalhes sobre seu pet perdido e sobre você.
+</p>
 <% if flash[:alert] %>
     <%= flash[:alert] %>
 <% end %>
@@ -19,15 +21,26 @@
     <label>Já cadastrou seu pet na plataforma?</label>
   </div>
 
-  <p>
-    <%= form.label :image, 'Foto'%>
-    <%= form.file_field :image %>
-  </p>
+  <div class="file-field input-field">
+    <p>Você pode anexar uma foto do seu pet abaixo, para auxiliar na identificação:</p>
+    <div class="btn red lighten-1">
+      <i class="large material-icons">add_a_photo</i>
+      <%= form.file_field :image %>
+    </div>
+    <div class="file-path-wrapper">
+      <input class="file-path validate" type="text">
+    </div>
+  </div>
 
-  <p>
-    <%= form.label :message, "Escreva uma mensagem para #{@found_pet.user.name}" %><br>
-    <%= form.text_area :message %>
-  </p>
+  <p>Escreva abaixo o máximo de informações sobre seu pet! Procure incluir descrição física, data e local em que foi visto pela última vez.</p>
+  <div class="input-field">
+    <%= form.text_area :message, class: 'materialize-textarea' %>
+    <label for="message">Corpo da mensagem</label>
+  </div>
 
-  <%= form.submit 'Enviar' %>
+  <p><%= @found_pet.user.name %> será capaz de visualizar seu número de telefone.</p>
+
+  <div class="center-align">
+    <%= form.submit 'Enviar', class: 'red lighten-1' %>
+  </div>
 <% end %>
