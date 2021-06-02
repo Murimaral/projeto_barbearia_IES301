@@ -190,3 +190,45 @@ body {
     padding: 5rem;
   }
 }
+
+// AUTH
+.auth-form {
+  background-color: white;
+  border-radius: 2rem;
+  margin: 0 auto;
+  max-width: 600px;
+  text-align: center;
+
+  &_container {
+    padding: 0 6rem;
+  }
+
+  &_actions {
+    color: white;
+    background-color: $c_sec;
+    border-radius: 0 0 2rem 2rem;
+    padding: 20px 0;
+
+    li {
+      display: inline-block;
+      margin: 1rem;
+
+      a {
+        color: white;
+        font-weight: 600;
+      }
+    }
+  }
+
+  h2 {
+    background-color: $c_sec;
+    border-radius: 2rem 2rem 0 0;
+    color: whitesmoke;
+    line-height: 6rem;
+    margin-bottom: 60px;;
+  }
+
+  .input-field {
+    margin: 2rem 0;
+  }
+}
