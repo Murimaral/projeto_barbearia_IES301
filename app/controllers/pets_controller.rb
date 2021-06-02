@@ -17,9 +17,10 @@ class PetsController < ApplicationController
   def create
     @pet = Pet.new(pet_params)
     @pet.user = current_user
-    if pet_params[:image] && @pet.save
+    if @pet.save
       redirect_to @pet
     else
+      binding.pry
       flash[:alert] = 'Não foi possível salvar'
       render :new
     end
