@@ -150,6 +150,9 @@
             </div>
             <div class="pet-card__content">
               <span class="card-title"><%= link_to pet.name, pet %></span><br />
+              <span class="pet-card__badge <%= pet.status == 'found' ? 'indigo' : 'red' %>">
+                <%= status(pet.status) %>
+              </span>
               <span class="pet-card__badge <%= pet.species == 'dog' ? 'amber' : 'teal' %>">
                 <%= species(pet.species) %>
               </span>
