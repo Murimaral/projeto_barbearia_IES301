@@ -1,0 +1,6 @@
+<% if @rescue_request.created_by_owner %>
+  <h2>Confirmação de resgate de <%= @rescue_request.found_pet.name %></h2>
+<% else %>
+  <h2>Pedido de contato com o dono de <%= @rescue_request.lost_pet.name %></h2>
+<% end %>
+

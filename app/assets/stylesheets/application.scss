@@ -41,6 +41,9 @@ color: $c_main;
 h1, h2, h3 {
   color: $c_sec;
 }
+h4 {
+  color: $c_main;
+}
 
 //HEADER
 #header{
@@ -132,6 +135,10 @@ body {
 
 .container-app {
   min-height: 67.8vh;
+
+  img {
+    max-width: 100%;
+  }
 }
   
 //HOME END
@@ -251,4 +258,16 @@ body {
       margin: 3rem 0;
     }
   }
+
+  &_message-item {
+    background-color: white;
+    padding: 2rem;
+    width: 100%;
+  }
+}
+span.badge {
+  padding: 20px;
+  line-height: 2px;
+  color: white;
+  font-weight: 600;
 }

@@ -1,9 +1,9 @@
-<p>
-  <strong>Desativar o anúncio de <%= @pet.name %>?</strong><br>
-  <%= link_to 'Não, voltar para o perfil', @pet %> |
+<h2 class="center-align">Desativar o anúncio de <%= @pet.name %>?</h2><br>
+<p class="center-align">
+  <%= link_to 'Não, voltar para o perfil', @pet, class: 'btn red' %>
   <% if @pet.found? %>
-    <%= link_to 'Sim, já encontrei o dono', pet_deactive_path(@pet), method: :post %><br>
+    <%= link_to 'Sim, já encontrei o dono', pet_deactive_path(@pet), method: :post, class: 'btn indigo' %>
   <% elsif @pet.lost? %>
-    <%= link_to 'Sim, já encontrei meu pet', pet_deactive_path(@pet), method: :post %><br>
+    <%= link_to 'Sim, já encontrei meu pet', pet_deactive_path(@pet), method: :post, class: 'btn indigo' %>
   <% end %>
 </p>
