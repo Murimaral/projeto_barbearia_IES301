@@ -6,11 +6,11 @@ class RescueRequest < ApplicationRecord
   has_one_attached :image
 
   def found_pet
-    Pet.find(found_pet_id)
+    Pet.find(found_pet_id) if found_pet_id
   end
 
   def lost_pet
-    Pet.find(lost_pet_id)
+    Pet.find(lost_pet_id) if lost_pet_id
   end
 
   def owner

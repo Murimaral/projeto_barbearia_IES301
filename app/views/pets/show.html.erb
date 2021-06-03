@@ -1,45 +1,59 @@
-<div id="pet-details">
-  <div class="row"> 
+<div class="pet-details">
+  <div class="row">
     <div class="col m6 s12">
       <%= image_tag(url_for(@pet.image)) %>
     </div>
-    <div class="col m6 sm12">
-      <h1 class="pet name">
-        <%= @pet.name %>
-      </h1>
+    <div class="col m6 s12">
+      <h2><%= @pet.name %></h2>
+      <p>Cadastrado por <strong><%= @pet.user.name %></strong></p>
       <% unless @pet.active? %>
-      <span class="pet archive">
-        Perfil arquivado
-      </span>
+        <div class="row">
+          <span class="pet-details__badge red">
+            Perfil arquivado
+          </span>
+        </div>
       <% end %>
-      <div class="pet infos">
-        <div class="pet infos species <%= @pet.species %>">
-          <%= @pet.species %>
-        </div>
-        <div class="pet infos sex <%= @pet.sex %>">
-          <%= @pet.sex %>
-        </div>
-        <div class="pet infos status <%= @pet.status %>">
-          <%= @pet.status %>
-        </div>
+      <div class="row">
+        <span class="pet-details__badge <%= @pet.species == 'dog' ? 'amber' : 'deep-purple accent-2' %>">
+          <%= species(@pet.species) %>
+        </span>
+        <span class="pet-details__badge <%= @pet.sex == 'male' ? 'light-blue accent-4' : 'pink accent-4' %>">
+          <%= sex(@pet.sex) %>
+        </span>
+        <span class="pet-details__badge red">
+          <%= status(@pet.status) %>
+        </span>
+        <span class="pet-details__badge deep-purple lighten-1">
+          <%= @pet.breed %>
+        </span>
       </div>
-      <% if @pet.user == current_user %>
-        <%= link_to 'editar', edit_pet_path(@pet), class: "waves-effect waves-light btn-small pet_btn" %>
-      <% end %>
-      <% if @pet.user == current_user && @pet.found? %>
-        <%= link_to 'já encontrei o dono', pet_confirm_deactivation_path(@pet) , class: "waves-effect waves-light btn-small pet_btn"%><br>
-      <% elsif @pet.user == current_user && @pet.lost? %>
-        <%= link_to 'já encontrei meu pet', pet_confirm_deactivation_path(@pet) , class: "waves-effect waves-light btn-small pet_btn"%><br>
-      <% elsif @pet.user != current_user && @pet.found? %>
-        <%= link_to 'sou dono deste pet!', new_rescue_request_path(found_pet_id: @pet.id) , class: "waves-effect waves-light btn-small pet_btn"%><br>
-      <% elsif @pet.user != current_user && @pet.lost? %>
-        <%= link_to 'encontrei este pet!', new_rescue_request_path(lost_pet_id: @pet.id) , class: "waves-effect waves-light btn-small pet_btn"%><br>
-      <% end %>
+      <div class="row right-align">
+        <% if @pet.user == current_user && @pet.active? %>
+          <%= link_to 'editar', edit_pet_path(@pet), class: "indigo lighten-1 btn-small" %>
+          <% if @pet.found? %>
+            <%= link_to 'já encontrei o dono', pet_confirm_deactivation_path(@pet) , class: "indigo darken-3 btn-small"%>
+          <% else %>
+            <%= link_to 'já encontrei meu pet', pet_confirm_deactivation_path(@pet) , class: "indigo darken-3 btn-small"%>
+          <% end %>
+          <%= link_to 'desativar', pet_confirm_deactivation_path(@pet) , class: "red btn-small"%>
+        <% end %>
+      </div>
+      <p>
+        <h4>Localização</h4>
+        <%= @pet.city %>, <strong><%= @pet.state %></strong>
+      </p>
+      <p>
+        <h4>Detalhes</h4>
+        <%= @pet.details %>
+      </p>
 
-      <span class="pet owner">
-        Posted by <%= @pet.user.name %>
-      </span>
-
+      <p class="pet-details__actions">
+        <% if @pet.user != current_user && @pet.found? %>
+          <%= link_to 'sou dono deste pet!', new_rescue_request_path(found_pet_id: @pet.id) , class: "btn-large indigo"%>
+        <% elsif @pet.user != current_user && @pet.lost? %>
+          <%= link_to 'encontrei este pet!', new_rescue_request_path(lost_pet_id: @pet.id) , class: "btn-large indigo"%>
+        <% end %>
+      </p>
     </div>
   </div>
 </div>

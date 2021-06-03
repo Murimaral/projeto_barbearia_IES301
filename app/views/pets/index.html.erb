@@ -1,6 +1,6 @@
 <div class="section no-pad-bot" id="index-banner">
   <div>
-    <h1 class="header center orange-text">PetFinder</h1>
+    <h1 class="header center indigo-text text-darken-4">PetFinder</h1>
     <div class="row center">
       <h5 class="header col s12 light">Feito para ajudar pets e donos a se encontrarem!</h5>
     </div>
@@ -23,9 +23,9 @@
     </div>
     <div class="col s12 m12">
       <a href="<%= search_path %>" class="home_button_find pet search">
-        <%= image_tag("dog_04.jpg", :alt => "Fazer uma busca avançada") %>
+        <%= image_tag("dog_04.jpg", :alt => "Realizar uma busca por pet") %>
         <span>
-          <i class="material-icons">search</i> Fazer uma busca avançada
+          <i class="material-icons">search</i> Realizar uma busca por pet
         </span>
       </a>
     </div>
@@ -34,14 +34,25 @@
   </div>
 </div>
 <div class="row" id="pet-list">
+  <h3>Últimos pets cadastrados</h3>
   <% @pets.take(9).each do |pet| %>
     <div class="col s12 m4 pet-item">
       <div class="card white">
         <div class="card-content collection-item avatar">
-          <%= image_tag(pet.image) if pet.image.attached? %>
-          <span class="card-title pink-text text-accent-3"><%= link_to pet.name, pet %></span>
-          <p><i><%= pet.species %></i>, <%= pet.sex %>, <%= pet.breed %></p>
-          <p><b><%= pet.city %></b>, <%= pet.state %></p>
+          <%= image_tag(pet.image) %>
+          <div class="pet-card__content">
+            <span class="card-title"><%= link_to pet.name, pet %></span>
+            <span class="pet-card__badge <%= pet.species == 'dog' ? 'amber' : 'deep-purple accent-2' %>">
+              <%= species(pet.species) %>
+            </span>
+            <span class="pet-card__badge <%= pet.sex == 'male' ? 'light-blue accent-4' : 'pink accent-4' %>">
+              <%= sex(pet.sex) %>
+            </span>
+            <span class="pet-card__badge deep-purple lighten-1">
+              <%= pet.breed %>
+            </span><br />
+            <b><%= pet.city %></b>, <%= pet.state %>
+          </div>
         </div>
       </div>
     </div>
