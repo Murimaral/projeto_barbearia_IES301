@@ -1,71 +1,95 @@
-<h3>Editar perfil de <%= @pet.name %></h3>
-<% if flash[:alert] %>
-    <%= flash[:alert] %>
-<% end %>
-<%= form_for @pet, html: { id: 'create-form' } do |form| %>
-  <p class="input-field">
-    <%= form.label :name , 'Nome' %>
-    <%= form.text_field :name %>
-  </p>
+<div class="pet-form">
+  <h3>Editar perfil de <%= @pet.name %></h3>
+  <% unless flash[:alert].empty? %>
+    <div class="deep-orange-text text-darken-3 deep-orange lighten-4 warning"><%= flash[:alert] %></div>
+  <% end %>
+  <%= form_for @pet do |form| %>
+    <div class="row pet-form__row pet-form__row--radio">
+      <div class="col s12 l6 p0">
+        <span class="pet-form__label--radio">Espécie:</span>
+        <label for="pet_species_cat">
+          <input name="pet[species]" type="radio" id="pet_species_cat" value="cat" <%= @pet.species == 'cat' ? 'checked' : '' %> />
+          <span>Gato</span>
+        </label>
+        <label for="pet_species_dog">
+          <input name="pet[species]" type="radio" id="pet_species_dog" value="dog" <%= @pet.species == 'dog' ? 'checked' : '' %> />
+          <span>Cachorro</span>
+        </label>
+      </div>
 
-  <p>
-    <strong>Espécie</strong>
-    <label for="pet_species_cat">
-      <input name="pet[species]" type="radio" id="pet_species_cat" value="cat" <%= @pet.species == 'cat' ? 'checked' : '' %> />
-      <span>Gato</span>
-    </label>
-    <label for="pet_species_dog">
-      <input name="pet[species]" type="radio" id="pet_species_dog" value="dog" <%= @pet.species == 'dog' ? 'checked' : '' %> />
-      <span>Cachorro</span>
-    </label>
-  </p>
+      <div class="col s12 l6 p0 a-right">
+        <span class="pet-form__label--radio">Sexo:</span>
+        <label for="pet_sex_female">
+          <input name="pet[sex]" type="radio" id="pet_sex_female" value="female"  />
+          <span>Fêmea</span>
+        </label>
+        <label for="pet_sex_male">
+          <input name="pet[sex]" type="radio" id="pet_sex_male" value="male" />
+          <span>Macho</span>
+        </label>
+      </div>
+    </div>
 
-  <p>
-    <strong>Sexo</strong>
-    <label for="pet_sex_female">
-      <input name="pet[sex]" type="radio" id="pet_sex_female" value="female" <%= @pet.sex == 'female' ? 'checked' : '' %> />
-      <span>Fêmea</span>
-    </label>
-    <label for="pet_sex_male">
-      <input name="pet[sex]" type="radio" id="pet_sex_male" value="male" <%= @pet.sex == 'male' ? 'checked' : '' %> />
-      <span>Macho</span>
-    </label>
-  </p>
+    <div class="row pet-form__row">
+      <p class="input-field">
+        <%= form.text_field :name, placeholder: "#{ @pet.status == 'found' ? 'Este será o título do seu anúncio na plataforma' : 'Nome do seu pet - este será o título do seu anúncio' }" %>
+        <%= form.label :name , "#{ @pet.status == 'found' ? 'Título' : 'Nome' }" %>
+      </p>
+    </div>
 
-  <p class="input-field">
-    <%= form.label :breed, 'Raça' %><br>
-    <%= form.text_field :breed, class: 'breed' %>
-  </p>
+    <div class="row pet-form__row">
+      <p class="input-field">
+        <%= form.text_field :breed, class: 'breed', placeholder: 'Ex.: Sem Raça Definida (SRD)' %>
+        <%= form.label :breed, 'Raça' %><br>
+      </p>
+    </div>
 
-  <p class="input-field">
-    <%= form.label :color, 'Cor' %><br>
-    <%= form.text_field :color, class: 'color' %>
-  </p>
+    <div class="row pet-form__row">
+      <p class="input-field">
+        <%= form.text_field :color, class: 'color', placeholder: 'Ex.: branco, cinza, branco e preto...' %>
+        <%= form.label :color, 'Cor do pêlo' %>
+      </p>
+    </div>
 
-  <p>
-    <%= form.label :image, 'Foto'%>
-    <%= form.file_field :image %>
-  </p>
+    <div class="row pet-form__row">
+      <div class="file-field input-field">
+        <div class="btn indigo lighten-1">
+          <i class="large material-icons">add_a_photo</i>
+          <%= form.file_field :image %>
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
+    </div>
 
-  <p>
-    <%= form.label :details, 'Detalhes' %><br>
-    <%= form.text_area :details %>
-  </p>
+    <div class="row pet-form__row">
+      <div class="input-field">
+        <%= form.text_area :details, class: 'materialize-textarea', placeholder: 'Descreva aqui os detalhes que possam ajudar na identificação!' %>
+        <%= form.label :details, 'Detalhes' %>
+      </div>
+      <caption>Procure citar características físicas do pet, acessórios, porte, locais de referência.</caption>
+    </div>
 
-  <p class="input-field">
-    <%= form.label :city, 'Cidade' %><br>
-    <%= form.text_field :city, class: 'city' %>
-  </p>
+    <div class="row pet-form__row">
+      <p class="input-field">
+        <%= form.text_field :city, class: 'city', placeholder: 'ex.: São Paulo, Curitiba, Brasília' %>
+        <%= form.label :city, 'Cidade' %>
+      </p>
+    </div>
 
-  <p class="input-field">
-    <%= form.label :state, 'Estado' %><br>
-    <%= form.text_field :state, class: 'state' %>
-  </p>
+    <div class="row pet-form__row">
+      <p class="input-field">
+        <%= form.text_field :state, class: 'state', placeholder: 'ex.: São Paulo, Paraná, Distrito Federal' %>
+        <%= form.label :state, 'Estado' %>
+      </p>
+    </div>
 
-  <%= form.hidden_field :status, value: params[:status] || @pet.status %>
-
-  <%= form.submit 'Enviar' %>
-<% end %>
+    <div class="center-align">
+      <%= form.submit 'Salvar alterações', class: 'indigo btn-large center' %>
+    </div>
+  <% end %>
+</div>
 
 <script>
 $(function() {

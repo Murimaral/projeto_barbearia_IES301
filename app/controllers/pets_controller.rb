@@ -10,6 +10,7 @@ class PetsController < ApplicationController
   end
 
   def new
+    flash[:alert] = ''
     @pet = Pet.new
     load_data
   end
@@ -20,7 +21,8 @@ class PetsController < ApplicationController
     if pet_params[:image] && @pet.save
       redirect_to @pet
     else
-      flash[:alert] = 'Não foi possível salvar'
+      load_data
+      flash[:alert] = 'Não foi possível salvar. Verifique todos os campos!'
       render :new
     end
   end
@@ -28,6 +30,7 @@ class PetsController < ApplicationController
   def show; end
 
   def edit
+    flash[:alert] = ''
     load_data
   end
 
@@ -35,7 +38,7 @@ class PetsController < ApplicationController
     if @pet.update(pet_params)
       redirect_to @pet
     else
-      flash[:alert] = 'Não foi possível salvar'
+      flash[:alert] = 'Não foi possível salvar. Verifique todos os campos!'
       render :edit
     end
   end

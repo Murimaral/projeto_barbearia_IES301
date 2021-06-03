@@ -247,10 +247,16 @@ body {
 
   &_message-item {
     background-color: white;
-    padding: 2rem;
+    padding: 1rem 2rem 2rem 2rem;
     width: 100%;
+
+    p {
+      border-left: 5px solid lightgrey;
+      padding-left: 1rem;
+    }
   }
 }
+
 span.badge {
   padding: 20px;
   line-height: 2px;
@@ -266,8 +272,69 @@ span.badge {
   &__badge {
     border-radius: 20px;
     color: white;
+    height: 30px;
     line-height: 1.8rem;
-    margin-right: 4px;
+    margin: 0 4px 4px 0;
     padding: 2px 6px;
+    display: inline-block;
+  }
+}
+
+.pet-form {
+  margin: 0 auto;
+  max-width: 600px;
+
+  &__row {
+    margin-bottom: 40px;
+
+    &--radio {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__label {
+    &--radio {
+      margin-right: 20px;
+    }
+  }
+
+  &__search-results {
+    margin: 40px auto;
+  }
+
+  h3 {
+    margin: 40px 0;
+  }
+
+  .p0 {
+    padding: 0;
+  }
+
+  .a-right {
+    margin-left: 0;
+  }
+
+  .warning {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;  
+  }
+}
+
+.user-dashboard {
+  h2, h3, p {
+    text-align: center;
+  }
+
+  h2, h3 {
+    margin-top: 30px;
+  }
+
+  hr {
+    margin-bottom: 60px;
+  }
+
+  input {
+    margin-bottom: 40px ;
   }
 }

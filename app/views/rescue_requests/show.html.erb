@@ -1,4 +1,3 @@
-<%= render "header_#{@view_options[:access_type]}" %>
 <% if @rescue_request.accepted? %>
   <span class="green badge">Aceito</span>
 <% elsif @rescue_request.open? %>
@@ -8,6 +7,8 @@
 <% else %>
   <span class="red badge">Recusado</span>
 <% end %>
+
+<%= render "header_#{@view_options[:access_type]}" %>
 
 <caption><%= @rescue_request.created_at %></caption>
 
@@ -38,7 +39,7 @@
         </div>
         <div class="pet-card__content">
           <span class="card-title"><%= link_to @view_options[:target_pet].name, @view_options[:target_pet] %></span><br />
-          <span class="pet-card__badge <%= @view_options[:target_pet].species == 'dog' ? 'amber' : 'deep-purple accent-2' %>">
+          <span class="pet-card__badge <%= @view_options[:target_pet].species == 'dog' ? 'amber' : 'teal' %>">
             <%= species(@view_options[:target_pet].species) %>
           </span>
           <span class="pet-card__badge <%= @view_options[:target_pet].sex == 'male' ? 'light-blue accent-4' : 'pink accent-4' %>">
@@ -58,7 +59,7 @@
         </div>
         <div class="pet-card__content">
           <span class="card-title"><%= link_to @view_options[:secondary_pet].name, @view_options[:secondary_pet] %></span><br />
-          <span class="pet-card__badge <%= @view_options[:secondary_pet].species == 'dog' ? 'amber' : 'deep-purple accent-2' %>">
+          <span class="pet-card__badge <%= @view_options[:secondary_pet].species == 'dog' ? 'amber' : 'teal' %>">
             <%= species(@view_options[:secondary_pet].species) %>
           </span>
           <span class="pet-card__badge <%= @view_options[:secondary_pet].sex == 'male' ? 'light-blue accent-4' : 'pink accent-4' %>">
