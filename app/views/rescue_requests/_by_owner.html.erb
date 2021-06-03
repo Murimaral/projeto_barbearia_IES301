@@ -15,7 +15,7 @@
     <select name="rescue_request[lost_pet_id]" id="rescue_request_lost_pet_id"  class="icons">
       <option value="" disabled selected>Clique para selecionar</option>
       <% @my_pets.each do |pet| %>
-        <option value="<%= pet.id %>" data-icon="<%= pet.image %>"><%= pet.name %></option>
+        <option value="<%= pet.id %>" data-icon="<%= url_for(pet.image) %>"><%= pet.name %></option>
       <% end %>
     </select>
     <label>Já cadastrou seu pet na plataforma?</label>
@@ -41,6 +41,6 @@
   <p><%= @found_pet.user.name %> será capaz de visualizar seu número de telefone.</p>
 
   <div class="center-align">
-    <%= form.submit 'Enviar', class: 'red lighten-1' %>
+    <%= form.submit 'Enviar', class: 'red lighten-1 btn-large' %>
   </div>
 <% end %>

@@ -1,20 +1,27 @@
+<section class="rescue-request_form">
 <% if @rescue_request.owner_id == current_user.id %>
-  <% if @rescue_request.found_pet_id.present? %>
-    <h2>Responder ao resgatante de <%= @rescue_request.found_pet.name %></h2>
-    <%= image_tag(@rescue_request.found_pet.image) if @rescue_request.found_pet.image.attached? %><br>
-  <% else%>
-    <h2>Responder ao resgatante <%= @rescue_request.rescuer.name %></h2>
+  <h2>Responder ao resgatante</h2>
+
+  <p class="center-align">
+    <strong><%= @rescue_request.rescuer.name %></strong> disse em <em><%= @rescue_request.created_at %></em>:
+  </p>
+
+  <p class="center-align">"<%= @rescue_request.message %>"</p>
+
+  <% if @rescue_request.image.attached? %>
+  <p class="center-align"><%= image_tag(@rescue_request.image, class: 'circle') %></p>
   <% end %>
-  <%= @rescue_request.message %><br>
-  <%= @rescue_request.created_at %>
+
   <%= form_for @rescue_request do |form| %>
     <p>
-      <%= form.label :reply, 'Resposta' %><br>
+      <%= form.label :reply, "Escreva uma resposta para #{@rescue_request.rescuer.name}" %><br>
       <%= form.text_area :reply %>
     </p>
 
     <p>
       <strong>O pet resgatado por <%= @rescue_request.rescuer.name %> é <%= @rescue_request.lost_pet.name %>?</strong>
+    </p>
+    <p>
       <label for="status_accepted">
         <input name="rescue_request[status]" type="radio" id="status_accepted" value="accepted" />
         <span>Sim, aceitar pedido e inativar anúncios</span>
@@ -24,26 +31,31 @@
         <span>Não, recusar pedido e continuar procurando</span>
       </label>
     </p>
-    <%= form.submit 'Enviar' %>
+    <div class="input-field  center-align">
+      <%= form.submit 'Enviar', class: 'indigo btn-large' %>
+    </div>
   <% end %>
 <% else %>
-  <% if @rescue_request.lost_pet_id.present? %>
-    <h2>Responder ao dono de <%= @rescue_request.lost_pet.name %></h2>
-    <%= image_tag(@rescue_request.lost_pet.image) if @rescue_request.lost_pet.image.attached? %><br>
-  <% else%>
-    <h2>Responder ao pedido de resgate de <%= @rescue_request.owner.name %></h2>
+  <p class="center-align">
+    <strong><%= @rescue_request.owner.name %></strong> disse em <em><%= @rescue_request.created_at %></em>:
+  </p>
+
+  <p class="center-align">"<%= @rescue_request.message %>"</p>
+
+  <% if @rescue_request.image.attached? %>
+  <p class="center-align"><%= image_tag(@rescue_request.image, class: 'circle') %></p>
   <% end %>
-  <%= @rescue_request.message %><br>
-  <%= @rescue_request.created_at %>
-  
+
   <%= form_for @rescue_request do |form| %>
     <p>
-      <%= form.label :reply, 'Resposta' %><br>
+      <%= form.label :reply, "Escreva uma resposta para #{@rescue_request.owner.name}" %><br>
       <%= form.text_area :reply %>
     </p>
-  
+
     <p>
       <strong><%= @rescue_request.owner.name %> é o dono de <%= @rescue_request.found_pet.name %>?</strong>
+    </p>
+    <p>
       <label for="status_accepted">
         <input name="rescue_request[status]" type="radio" id="status_accepted" value="accepted" />
         <span>Sim, aceitar pedido e inativar anúncios</span>
@@ -53,8 +65,9 @@
         <span>Não, recusar pedido e continuar procurando</span>
       </label>
     </p>
-    <%= form.submit 'Enviar' %>
+    <div class="input-field  center-align">
+      <%= form.submit 'Enviar', class: 'indigo btn-large' %>
+    </div>
   <% end %>
 <% end %>
-
-
+</section>
