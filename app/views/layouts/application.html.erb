@@ -27,9 +27,14 @@
         </ul>
 
         <ul id="nav-mobile" class="sidenav">
-          <li><%= link_to 'Login', new_user_session_path %></li>
-          <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
-          </ul>
+          <% if !user_signed_in? %>
+            <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+            <li><%= link_to 'Login', new_user_session_path %></li>
+          <% else  %>
+            <li><%= link_to 'Meus pets', dashboard_path %></li>
+            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+          <% end %>
+        </ul>
         <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       </div>
     </nav>
