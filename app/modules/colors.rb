@@ -1,5 +1,6 @@
 class Colors
   COLORS = {
+    Preto: nil,
     Branco: nil,
     Cinza: nil,
     Amarelo: nil,
