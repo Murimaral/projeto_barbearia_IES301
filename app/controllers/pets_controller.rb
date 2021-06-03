@@ -70,7 +70,7 @@ class PetsController < ApplicationController
   end
 
   def check_ownership
-    redirect_to root_path unless @pet.user == current_user
+    redirect_to root_path unless @pet.user == current_user || current_user.admin?
   end
 
   def exact_search
