@@ -23,6 +23,7 @@ class RescueRequestsController < ApplicationController
 
   def show
     @rescue_request = RescueRequest.find(params[:id])
+    @view_options = load_vew_options
   end
 
   def answer
@@ -67,5 +68,35 @@ class RescueRequestsController < ApplicationController
 
     @rescue_request.found_pet.update(active: false) if @rescue_request.found_pet_id.present?
     @rescue_request.lost_pet.update(active: false) if @rescue_request.lost_pet_id.present?
+  end
+
+  def load_vew_options
+    {
+      show_owner_phone: show_owner_phone,
+      show_rescuer_phone: show_rescuer_phone,
+      target_pet: target_pet,
+      secondary_pet: secondary_pet,
+      access_type: access_type
+    }
+  end
+
+  def show_owner_phone
+    @rescue_request.accepted? || (access_type == 'as_receiver' && current_user == @rescue_request.rescuer) || (access_type == 'as_poster' && current_user == @rescue_request.owner)
+  end
+
+  def show_rescuer_phone
+    @rescue_request.accepted? || (access_type == 'as_poster' && current_user == @rescue_request.rescuer) || (access_type == 'as_receiver' && current_user == @rescue_request.owner)
+  end
+
+  def secondary_pet
+    @rescue_request.created_by_owner? ? @rescue_request.lost_pet : @rescue_request.found_pet
+  end
+
+  def target_pet
+    @rescue_request.created_by_owner? ? @rescue_request.found_pet : @rescue_request.lost_pet
+  end
+
+  def access_type
+    target_pet.user == current_user ? 'as_receiver' : 'as_poster'
   end
 end

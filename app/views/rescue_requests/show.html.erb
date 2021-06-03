@@ -1,11 +1,87 @@
-<p>
-  <% if @rescue_request.owner_id == current_user.id && @rescue_request.created_by_owner? %>
-    <%= render 'user_is_owner_and_poster' %>
-  <% elsif @rescue_request.owner_id == current_user.id && !@rescue_request.created_by_owner? %>
-    <%= render 'user_is_owner_and_receiver' %>
-  <% elsif @rescue_request.rescuer_id == current_user.id && @rescue_request.created_by_owner? %>
-    <%= render 'user_is_rescuer_and_receiver' %>
-  <% elsif @rescue_request.rescuer_id == current_user.id  && !@rescue_request.created_by_owner? %>
-    <%= render 'user_is_rescuer_and_poster' %>
-  <% end %>
-</p>
+<%= render "header_#{@view_options[:access_type]}" %>
+<% if @rescue_request.accepted? %>
+  <span class="green badge">Aceito</span>
+<% elsif @rescue_request.open? %>
+  <span class="amber badge">Aberto</span>
+<% elsif @rescue_request.cancelled? %>
+  <span class="red badge">Cancelado</span>
+<% else %>
+  <span class="red badge">Recusado</span>
+<% end %>
+
+<caption><%= @rescue_request.created_at %></caption>
+
+<section class="row">
+  <div class="col s12 l3">
+    <h4>Resgatante</h4>
+    <p>
+      <strong><%= @rescue_request.rescuer.name %></strong>
+      <% if @view_options[:show_rescuer_phone] %>
+        <br />
+        <%= @rescue_request.rescuer.phone %>
+      <% end %>
+    </p>
+    <hr>
+    <h4>Dono(a) do animal</h4>
+    <p>
+      <strong><%= @rescue_request.owner.name %></strong>
+      <% if @view_options[:show_owner_phone] %>
+        <br />
+        <%= @rescue_request.owner.phone %>
+      <% end %>
+    </p>
+    <hr>
+      <h4>Pet <%= @view_options[:target_pet].status == 'found' ? 'resgatado' : 'perdido' %></h4>
+      <h5><%= @view_options[:target_pet].name %></h5>
+
+      <div class="card small">
+        <div class="card-image">
+          <%= image_tag(@view_options[:target_pet].image) %>
+        </div>
+        <div class="card-content">
+          <span class="card-title"><%= link_to @view_options[:target_pet].name, @view_options[:target_pet] %></span>
+          <p><i><%= @view_options[:target_pet].species %></i>, <%= @view_options[:target_pet].sex %>, <%= @view_options[:target_pet].breed %></p>
+          <p><b><%= @view_options[:target_pet].city %></b>, <%= @view_options[:target_pet].state %></p>
+        </div>
+      </div>
+    <% if @view_options[:secondary_pet].present? %>
+      <h4>Pet <%= @view_options[:secondary_pet].status == 'found' ? 'resgatado' : 'perdido' %></h4>
+      <div class="card small">
+        <div class="card-image">
+          <%= image_tag(@view_options[:secondary_pet].image) %>
+        </div>
+        <div class="card-content">
+          <span class="card-title"><%= link_to @view_options[:secondary_pet].name, @view_options[:secondary_pet] %></span>
+          <p><i><%= @view_options[:secondary_pet].species %></i>, <%= @view_options[:secondary_pet].sex %>, <%= @view_options[:secondary_pet].breed %></p>
+          <p><b><%= @view_options[:secondary_pet].city %></b>, <%= @view_options[:secondary_pet].state %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col s12 l9">
+    <% if @rescue_request.reply.present? %>
+      <h3>Resposta</h3>
+      <div class="rescue-request_message-item">
+        <p>
+          <%= @rescue_request.reply %>
+        </p>
+      </div>
+      <p class="right-align">
+        Respondido por <strong><%= @rescue_request.created_by_owner? ? @rescue_request.rescuer.name : @rescue_request.owner.name %></strong>, <%= @rescue_request.updated_at %>
+      </p>
+      <hr />
+    <% end %>
+
+    <h3>Mensagem</h3>
+    <div class="rescue-request_message-item">
+      <p>
+        <%= @rescue_request.message %>
+      </p>
+      <%= image_tag(@rescue_request.image) if @rescue_request.image.attached? %>
+    </div>
+    <p class="right-align">
+      Enviado por <strong><%= @rescue_request.created_by_owner? ? @rescue_request.owner.name : @rescue_request.rescuer.name %></strong>, <%= @rescue_request.created_at %>
+    </p>
+  </div>
+</section>
