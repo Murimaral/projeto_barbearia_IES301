@@ -84,7 +84,7 @@
             <div class="pet-card__content">
               <span class="card-title"><%= link_to request.lost_pet.name, request %></span><br />
               <span class="pet-card__badge amber"><%= rescue_status(request.status) %></span>
-              <span class="pet-card__badge indigo"><%= status(request.found_pet.status) %></span>
+              <span class="pet-card__badge indigo"><%= status(request.lost_pet.status) %></span>
               <p>
                 Enviado por <strong><%= request.rescuer.name %></strong>
               </p>
@@ -168,7 +168,7 @@
               <div class="pet-card__content">
                 <span class="card-title"><%= link_to request.lost_pet.name, request %></span><br />
                 <span class="pet-card__badge amber"><%= rescue_status(request.status) %></span>
-                <span class="pet-card__badge indigo"><%= status(request.found_pet.status) %></span>
+                <span class="pet-card__badge indigo"><%= status(request.lost_pet.status) %></span>
                 <p>
                   Pertence a <i><%= request.lost_pet.user.name %></i>
                 </p>
