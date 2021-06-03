@@ -32,7 +32,7 @@
           <%= link_to 'editar', edit_pet_path(@pet), class: "indigo lighten-1 btn-small" %>
           <%= link_to 'desativar', pet_confirm_deactivation_path(@pet) , class: "red btn-small"%>
         <% end %>
-        <% if @pet.user == current_user && @pet.active? %>
+        <% if @pet.user == current_user && @pet.active? && !current_user&.admin? %>
           <%= link_to 'editar', edit_pet_path(@pet), class: "indigo lighten-1 btn-small" %>
           <% if @pet.found? %>
             <%= link_to 'já encontrei o dono', pet_confirm_deactivation_path(@pet) , class: "indigo darken-3 btn-small"%>

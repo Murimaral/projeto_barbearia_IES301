@@ -97,6 +97,48 @@
   <hr />
   <% end %>
 
+  <% unless @accepted_rescue_requests.empty? %>
+    <h4>Aceitos</h4>
+    <div class="row">
+    <% @accepted_rescue_requests.each do |request| %>
+      <% if request.created_by_owner? %>
+        <div class="col s12 m4 l3">
+          <div class="card medium">
+            <div class="card-image">
+              <%= image_tag(request.found_pet.image) %>
+            </div>
+            <div class="pet-card__content">
+              <span class="card-title"><%= link_to request.found_pet.name, request %></span><br />
+              <span class="pet-card__badge amber"><%= rescue_status(request.status) %></span>
+              <span class="pet-card__badge indigo"><%= status(request.found_pet.status) %></span>
+              <p>
+                Enviado por <strong><%= request.owner.name %></strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="col s12 m4 l3">
+          <div class="card medium">
+            <div class="card-image">
+              <%= image_tag(request.lost_pet.image) %>
+            </div>
+            <div class="pet-card__content">
+              <span class="card-title"><%= link_to request.lost_pet.name, request %></span><br />
+              <span class="pet-card__badge amber"><%= rescue_status(request.status) %></span>
+              <span class="pet-card__badge indigo"><%= status(request.lost_pet.status) %></span>
+              <p>
+                Enviado por <strong><%= request.rescuer.name %></strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    </div>
+  <hr />
+  <% end %>
+
   <% unless @my_rescue_requests.empty? %>
     <h4>Enviados</h4>
     <div class="row">
