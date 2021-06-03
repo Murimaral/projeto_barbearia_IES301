@@ -20,11 +20,11 @@
       <div class="col s12 l6 p0 a-right">
         <span class="pet-form__label--radio">Sexo:</span>
         <label for="pet_sex_female">
-          <input name="pet[sex]" type="radio" id="pet_sex_female" value="female"  />
+          <input name="pet[sex]" type="radio" id="pet_sex_female" value="female" <%= @pet.sex == 'female' ? 'checked' : '' %> />
           <span>Fêmea</span>
         </label>
         <label for="pet_sex_male">
-          <input name="pet[sex]" type="radio" id="pet_sex_male" value="male" />
+          <input name="pet[sex]" type="radio" id="pet_sex_male" value="male" <%= @pet.sex == 'male' ? 'checked' : '' %> />
           <span>Macho</span>
         </label>
       </div>
