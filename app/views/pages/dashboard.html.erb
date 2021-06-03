@@ -1,8 +1,8 @@
 <h2><%= current_user.name %></h2>
-<caption>
+<p>
   <strong>Email:</strong> <%= current_user.email %><br />
   <strong>Telefone:</strong> <%= current_user.phone %>
-</caption>
+</p>
 
 <h3>Pedidos de resgate</h3>
 <% if @replied_rescue_requests.empty? && @awaiting_rescue_requests.empty? && @my_rescue_requests.empty? %>
@@ -14,12 +14,14 @@
     <% @replied_rescue_requests.each do |request| %>
       <% if request.created_by_owner? %>
         <div class="col s12 m4 l3">
-          <div class="card small">
+          <div class="card medium">
             <div class="card-image">
               <%= image_tag(request.found_pet.image) %>
             </div>
-            <div class="card-content">
-              <span class="card-title"><%= link_to request.found_pet.name, request %>, <%= request.status %></span>
+            <div class="pet-card__content">
+              <span class="card-title"><%= link_to request.found_pet.name, request %></span><br />
+              <span class="pet-card__badge <%= request.accepted? ? 'green' : 'red' %>"><%= rescue_status(request.status) %></span>
+              <span class="pet-card__badge indigo"><%= status(request.found_pet.status) %></span>
               <p>
                 <strong><%= request.rescuer.name %></strong> respondeu:<br />
                 "<i><%= request.reply %></i>"
@@ -29,12 +31,14 @@
         </div>
       <% else %>
         <div class="col s12 m4 l3">
-          <div class="card small">
+          <div class="card medium">
             <div class="card-image">
               <%= image_tag(request.lost_pet.image) %>
             </div>
-            <div class="card-content">
-              <span class="card-title"><%= link_to request.lost_pet.name, request %>, <%= request.status %></span>
+            <div class="pet-card__content">
+              <span class="card-title"><%= link_to request.lost_pet.name, request %></span><br />
+              <span class="pet-card__badge <%= request.accepted? ? 'green' : 'red' %>"><%= rescue_status(request.status) %></span>
+              <span class="pet-card__badge indigo"><%= status(request.lost_pet.status) %></span>
               <p>
                 <strong><%= request.lost_pet.user.name %></strong> respondeu:<br />
                 "<i><%= request.reply %></i>"
@@ -53,14 +57,15 @@
   <% @awaiting_rescue_requests.each do |request| %>
     <% if request.created_by_owner? %>
       <div class="col s12 m4 l3">
-        <div class="card small">
+        <div class="card medium">
           <div class="card-image">
             <%= image_tag(request.found_pet.image) %>
           </div>
-          <div class="card-content">
-            <span class="card-title"><%= link_to request.found_pet.name, request %></span>
+          <div class="pet-card__content">
+            <span class="card-title"><%= link_to request.found_pet.name, request %></span><br />
+            <span class="pet-card__badge amber"><%= rescue_status(request.status) %></span>
+            <span class="pet-card__badge indigo"><%= status(request.found_pet.status) %></span>
             <p>
-              <%= request.status %>, resgatado<br />
               Enviado por <strong><%= request.owner.name %></strong>
             </p>
           </div>
@@ -68,14 +73,15 @@
       </div>
     <% else %>
       <div class="col s12 m4 l3">
-        <div class="card small">
+        <div class="card medium">
           <div class="card-image">
             <%= image_tag(request.lost_pet.image) %>
           </div>
-          <div class="card-content">
-            <span class="card-title"><%= link_to request.lost_pet.name, request %></span>
+          <div class="pet-card__content">
+            <span class="card-title"><%= link_to request.lost_pet.name, request %></span><br />
+            <span class="pet-card__badge amber"><%= rescue_status(request.status) %></span>
+            <span class="pet-card__badge indigo"><%= status(request.found_pet.status) %></span>
             <p>
-              <%= request.status %>, perdido<br />
               Enviado por <strong><%= request.rescuer.name %></strong>
             </p>
           </div>
@@ -92,14 +98,15 @@
     <% @my_rescue_requests.each do |request| %>
       <% if request.created_by_owner? %>
         <div class="col s12 m4 l3">
-          <div class="card small">
+          <div class="card medium">
             <div class="card-image">
               <%= image_tag(request.found_pet.image) %>
             </div>
-            <div class="card-content">
-              <span class="card-title"><%= link_to request.found_pet.name, request %></span>
+            <div class="pet-card__content">
+              <span class="card-title"><%= link_to request.found_pet.name, request %></span><br />
+              <span class="pet-card__badge amber"><%= rescue_status(request.status) %></span>
+              <span class="pet-card__badge indigo"><%= status(request.found_pet.status) %></span>
               <p>
-                <%= request.status %>, resgatado<br />
                 Resgate feito por <i><%= request.found_pet.user.name %></i>
               </p>
             </div>
@@ -107,14 +114,15 @@
         </div>
       <% else %>
         <div class="col s12 m4 l3">
-          <div class="card small">
+          <div class="card medium">
             <div class="card-image">
               <%= image_tag(request.lost_pet.image) %>
             </div>
-            <div class="card-content">
-              <span class="card-title"><%= link_to request.lost_pet.name, request %></span>
+            <div class="pet-card__content">
+              <span class="card-title"><%= link_to request.lost_pet.name, request %></span><br />
+              <span class="pet-card__badge amber"><%= rescue_status(request.status) %></span>
+              <span class="pet-card__badge indigo"><%= status(request.found_pet.status) %></span>
               <p>
-                <%= request.status %>, perdido<br />
                 Pertence a <i><%= request.lost_pet.user.name %></i>
               </p>
             </div>
@@ -130,14 +138,22 @@
   <div class="row">
     <% current_user.pets.each do |pet| %>
       <div class="col s12 m4 l3">
-        <div class="card small">
+        <div class="card medium">
           <div class="card-image">
             <%= image_tag(pet.image) %>
           </div>
-          <div class="card-content">
-            <span class="card-title"><%= link_to pet.name, pet %></span>
-            <p><i><%= pet.species %></i>, <%= pet.sex %>, <%= pet.breed %></p>
-            <p><b><%= pet.city %></b>, <%= pet.state %></p>
+          <div class="pet-card__content">
+            <span class="card-title"><%= link_to pet.name, pet %></span><br />
+            <span class="pet-card__badge <%= pet.species == 'dog' ? 'amber' : 'deep-purple accent-2' %>">
+              <%= species(pet.species) %>
+            </span>
+            <span class="pet-card__badge <%= pet.sex == 'male' ? 'light-blue accent-4' : 'pink accent-4' %>">
+              <%= sex(pet.sex) %>
+            </span>
+            <span class="pet-card__badge deep-purple lighten-1">
+              <%= pet.breed %>
+            </span><br />
+            <b><%= pet.city %></b>, <%= pet.state %>
           </div>
         </div>
       </div>

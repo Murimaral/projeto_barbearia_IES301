@@ -97,19 +97,29 @@ function search() {
       data.forEach(function(pet) {
         searchResults = searchResults.concat(`
         <div class="col s12 m4 pet-item">
-        <div class="card white">
-          <div class="card-content collection-item avatar">
-            <img src="${pet.image}">
-            <span class="card-title pink-text text-accent-3">
-              <a href="/pets/${pet.id}">
-                ${pet.name}
-              </a>
-            </span>
-            <p><i>${pet.species}</i>, ${pet.sex}, ${pet.breed}</p>
-            <p><b>${pet.city}</b>, ${pet.state}</p>
+          <div class="card white">
+            <div class="card-content collection-item avatar">
+              <img src="${pet.image}">
+              <div class="pet-card__content">
+                <span class="card-title">
+                  <a href="/pets/${pet.id}">
+                    ${pet.name}
+                  </a>
+                </span>
+                <span class="pet-card__badge ${pet.species == 'dog' ? 'amber' : 'deep-purple accent-2'}">
+                  ${pet.species == 'dog' ? 'Cachorro' : 'Gato'}
+                </span>
+                <span class="pet-card__badge ${pet.sex == 'male' ? 'light-blue accent-4' : 'pink accent-4'}">
+                  ${pet.sex == 'male' ? 'Macho' : 'Fêmea'}
+                </span>
+                <span class="pet-card__badge deep-purple lighten-1">
+                  ${pet.breed}
+                </span><br />
+                <b>${pet.city}</b>, ${pet.state}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
         `)
       })
       document.getElementById('pet-list').innerHTML = searchResults;

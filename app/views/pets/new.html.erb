@@ -69,7 +69,7 @@
   </a>
   <div id="search-results" class="d-none">
     <h6>Encontramos estes pets similares, algum deles é o seu?</h6>
-    <div id="pet-list"></div>
+    <div id="pet-list" class="row"></div>
   </div>
 
   <%= form.submit 'Não, avançar e registrar pet', class: 'd-none btn-large', id: 'submit-btn' %>
@@ -119,7 +119,7 @@ function finished() {
   fetch(`/search?status=${status}&species=${species}&breed=${breed}&color=${color}&city=${city}&state=${state}`, myInit)
     .then(function(response) { return response.json() })
     .then(function(data) {
-      if (data.length > 0) { appendSearchResults(data) }
+      if (data.length > 0) { appendSearchResults(data.slice(0,4)) }
       else { document.getElementById('submit-btn').click() }
   })
   event.preventDefault()
@@ -129,21 +129,30 @@ function appendSearchResults(data) {
   let searchResults = ''
   data.forEach(function(pet) {
     searchResults = searchResults.concat(`
-    <div class="col s12 m4 pet-item">
-    <div class="collection card white">
-      <div class="card-content collection-item avatar">
-        <img class="circle" src="${pet.image}">
-        <span class="card-title pink-text text-accent-3">
-          <a href="/pets/${pet.id}">
-            ${pet.name}
-          </a>
-        </span>
-        <p><i>${pet.species}</i>, ${pet.sex}, ${pet.breed}</p>
-        <p><b>${pet.city}</b>, ${pet.state}</p>
-        <p><a href="/pets/${pet.id}">Ver perfil</a></p>
+      <div class="col s12 m3 pet-item">
+        <div class="card white">
+          <div class="card-content collection-item avatar">
+            <img src="${pet.image}">
+            <div class="pet-card__content">
+              <span class="card-title">
+                <a href="/pets/${pet.id}">
+                  ${pet.name}
+                </a>
+              </span>
+              <span class="pet-card__badge ${pet.species == 'dog' ? 'amber' : 'deep-purple accent-2'}">
+                ${pet.species == 'dog' ? 'Cachorro' : 'Gato'}
+              </span>
+              <span class="pet-card__badge ${pet.sex == 'male' ? 'light-blue accent-4' : 'pink accent-4'}">
+                ${pet.sex == 'male' ? 'Macho' : 'Fêmea'}
+              </span>
+              <span class="pet-card__badge deep-purple lighten-1">
+                ${pet.breed}
+              </span><br />
+              <b>${pet.city}</b>, ${pet.state}
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
     `)  
   })
   document.getElementById('pet-list').innerHTML = searchResults;

@@ -16,7 +16,7 @@ $hd_bg: $c_main;
 $ft_bg: $c_sec;
 
 // OTHERS
-button, html [type="button"], [type="reset"], [type="submit"] {
+button, html [type="button"], [type="reset"] {
   text-decoration: none;
   color: #fff;
   background-color: $c_main;
@@ -139,43 +139,29 @@ body {
   img {
     max-width: 100%;
   }
+
+  h2, h3 {
+    margin-top: 0;
+  }
 }
   
 //HOME END
 // PET DETAILS
-.pet_btn {
-    margin: 6px 10px 6px 0;
-    
-}
-.pet.infos {
-    display: flex;
-    > div {
-        padding: 2px 16px;
-        background: #e8e8e8;
-        border-radius: 25px;
-        margin: 1rem 10px 1rem 0;
-        color: white;
-        text-transform: uppercase;
-        font-weight: bold;
-        &.dog{
-            background: #f44336;
-        }
-        &.cat{
-            background: #f436e6;
-        }
-        &.male{
-            background: #363cf4;
-        }
-        &.female{
-            background: #ee6e73;
-        }
-        &.lost{
-            background: #860000fc;
-        }
-        &.found{
-            background: #008616fc;
-        }
-    }
+.pet-details {
+  &__badge {
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    line-height: 2.8rem;
+    margin: 0.5rem;
+    padding: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  &__actions {
+    margin-top: 60px;
+    text-align: center;
+  }
 }
 // PET DETAILS END
 
@@ -270,4 +256,18 @@ span.badge {
   line-height: 2px;
   color: white;
   font-weight: 600;
+}
+
+.pet-card {
+  &__content {
+    padding: 8px;
+  }
+
+  &__badge {
+    border-radius: 20px;
+    color: white;
+    line-height: 1.8rem;
+    margin-right: 4px;
+    padding: 2px 6px;
+  }
 }

@@ -32,16 +32,22 @@
     </p>
     <hr>
       <h4>Pet <%= @view_options[:target_pet].status == 'found' ? 'resgatado' : 'perdido' %></h4>
-      <h5><%= @view_options[:target_pet].name %></h5>
-
       <div class="card small">
         <div class="card-image">
           <%= image_tag(@view_options[:target_pet].image) %>
         </div>
-        <div class="card-content">
-          <span class="card-title"><%= link_to @view_options[:target_pet].name, @view_options[:target_pet] %></span>
-          <p><i><%= @view_options[:target_pet].species %></i>, <%= @view_options[:target_pet].sex %>, <%= @view_options[:target_pet].breed %></p>
-          <p><b><%= @view_options[:target_pet].city %></b>, <%= @view_options[:target_pet].state %></p>
+        <div class="pet-card__content">
+          <span class="card-title"><%= link_to @view_options[:target_pet].name, @view_options[:target_pet] %></span><br />
+          <span class="pet-card__badge <%= @view_options[:target_pet].species == 'dog' ? 'amber' : 'deep-purple accent-2' %>">
+            <%= species(@view_options[:target_pet].species) %>
+          </span>
+          <span class="pet-card__badge <%= @view_options[:target_pet].sex == 'male' ? 'light-blue accent-4' : 'pink accent-4' %>">
+            <%= sex(@view_options[:target_pet].sex) %>
+          </span>
+          <span class="pet-card__badge deep-purple lighten-1">
+            <%= @view_options[:target_pet].breed %>
+          </span><br />
+          <b><%= @view_options[:target_pet].city %></b>, <%= @view_options[:target_pet].state %>
         </div>
       </div>
     <% if @view_options[:secondary_pet].present? %>
@@ -50,10 +56,18 @@
         <div class="card-image">
           <%= image_tag(@view_options[:secondary_pet].image) %>
         </div>
-        <div class="card-content">
-          <span class="card-title"><%= link_to @view_options[:secondary_pet].name, @view_options[:secondary_pet] %></span>
-          <p><i><%= @view_options[:secondary_pet].species %></i>, <%= @view_options[:secondary_pet].sex %>, <%= @view_options[:secondary_pet].breed %></p>
-          <p><b><%= @view_options[:secondary_pet].city %></b>, <%= @view_options[:secondary_pet].state %></p>
+        <div class="pet-card__content">
+          <span class="card-title"><%= link_to @view_options[:secondary_pet].name, @view_options[:secondary_pet] %></span><br />
+          <span class="pet-card__badge <%= @view_options[:secondary_pet].species == 'dog' ? 'amber' : 'deep-purple accent-2' %>">
+            <%= species(@view_options[:secondary_pet].species) %>
+          </span>
+          <span class="pet-card__badge <%= @view_options[:secondary_pet].sex == 'male' ? 'light-blue accent-4' : 'pink accent-4' %>">
+            <%= sex(@view_options[:secondary_pet].sex) %>
+          </span>
+          <span class="pet-card__badge deep-purple lighten-1">
+            <%= @view_options[:secondary_pet].breed %>
+          </span><br />
+          <b><%= @view_options[:secondary_pet].city %></b>, <%= @view_options[:secondary_pet].state %>
         </div>
       </div>
     <% end %>
@@ -83,5 +97,10 @@
     <p class="right-align">
       Enviado por <strong><%= @rescue_request.created_by_owner? ? @rescue_request.owner.name : @rescue_request.rescuer.name %></strong>, <%= @rescue_request.created_at %>
     </p>
+    <% if @view_options[:access_type] == 'as_receiver' && @rescue_request.open? %>
+      <p class="right-align">
+        <%= link_to 'Responder', rescue_request_answer_path(@rescue_request) , class: "btn-large indigo"%>
+      </p>
+    <% end %>
   </div>
 </section>
