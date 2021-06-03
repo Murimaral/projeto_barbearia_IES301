@@ -28,7 +28,7 @@
         </span>
       </div>
       <div class="row right-align">
-        <% if current_user.admin? %>
+        <% if current_user&.admin? %>
           <%= link_to 'editar', edit_pet_path(@pet), class: "indigo lighten-1 btn-small" %>
           <%= link_to 'desativar', pet_confirm_deactivation_path(@pet) , class: "red btn-small"%>
         <% end %>
