@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def status(status)
-    status == 'found' ? 'Resgatado' : 'Perdido'
+    status == 'found' ? 'Procurando dono' : 'Perdido'
   end
 
   def rescue_status(status)
