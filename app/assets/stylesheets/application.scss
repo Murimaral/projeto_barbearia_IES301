@@ -271,6 +271,7 @@ span.badge {
 .pet-card {
   &__content {
     padding: 8px;
+    min-height: 146px;
   }
 
   &__badge {
