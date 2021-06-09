@@ -34,41 +34,43 @@
     <hr>
       <h4>Pet <%= @view_options[:target_pet].status == 'found' ? 'procurando dono' : 'perdido' %></h4>
       <div class="card small">
-        <div class="card-image">
+        <div class="card-content collection-item avatar">
           <%= image_tag(@view_options[:target_pet].image) %>
-        </div>
-        <div class="pet-card__content">
-          <span class="card-title"><%= link_to @view_options[:target_pet].name, @view_options[:target_pet] %></span><br />
-          <span class="pet-card__badge <%= @view_options[:target_pet].species == 'dog' ? 'amber' : 'teal' %>">
-            <%= species(@view_options[:target_pet].species) %>
-          </span>
-          <span class="pet-card__badge <%= @view_options[:target_pet].sex == 'male' ? 'light-blue accent-4' : 'pink accent-4' %>">
-            <%= sex(@view_options[:target_pet].sex) %>
-          </span>
-          <span class="pet-card__badge deep-purple lighten-1">
-            <%= @view_options[:target_pet].breed %>
-          </span><br />
-          <b><%= @view_options[:target_pet].city %></b>, <%= @view_options[:target_pet].state %>
+          <div class="pet-card__content">
+            <span class="card-title"><%= link_to @view_options[:target_pet].name, @view_options[:target_pet] %></span>
+            <span class="pet-card__badge <%= @view_options[:target_pet].species == 'dog' ? 'amber' : 'teal' %>">
+              <%= species(@view_options[:target_pet].species) %>
+            </span>
+            <span class="pet-card__badge <%= @view_options[:target_pet].sex == 'male' ? 'light-blue accent-4' : 'pink accent-4' %>">
+              <%= sex(@view_options[:target_pet].sex) %>
+            </span>
+            <span class="pet-card__badge deep-purple lighten-1">
+              <%= @view_options[:target_pet].breed %>
+            </span><br />
+            <b><%= @view_options[:target_pet].city %></b><br />
+            <%= @view_options[:target_pet].state %>
+          </div>
         </div>
       </div>
     <% if @view_options[:secondary_pet].present? %>
       <h4>Pet <%= @view_options[:secondary_pet].status == 'found' ? 'procurando dono' : 'perdido' %></h4>
       <div class="card small">
-        <div class="card-image">
+        <div class="card-content collection-item avatar">
           <%= image_tag(@view_options[:secondary_pet].image) %>
-        </div>
-        <div class="pet-card__content">
-          <span class="card-title"><%= link_to @view_options[:secondary_pet].name, @view_options[:secondary_pet] %></span><br />
-          <span class="pet-card__badge <%= @view_options[:secondary_pet].species == 'dog' ? 'amber' : 'teal' %>">
-            <%= species(@view_options[:secondary_pet].species) %>
-          </span>
-          <span class="pet-card__badge <%= @view_options[:secondary_pet].sex == 'male' ? 'light-blue accent-4' : 'pink accent-4' %>">
-            <%= sex(@view_options[:secondary_pet].sex) %>
-          </span>
-          <span class="pet-card__badge deep-purple lighten-1">
-            <%= @view_options[:secondary_pet].breed %>
-          </span><br />
-          <b><%= @view_options[:secondary_pet].city %></b>, <%= @view_options[:secondary_pet].state %>
+          <div class="pet-card__content">
+            <span class="card-title"><%= link_to @view_options[:secondary_pet].name, @view_options[:secondary_pet] %></span>
+            <span class="pet-card__badge <%= @view_options[:secondary_pet].species == 'dog' ? 'amber' : 'teal' %>">
+              <%= species(@view_options[:secondary_pet].species) %>
+            </span>
+            <span class="pet-card__badge <%= @view_options[:secondary_pet].sex == 'male' ? 'light-blue accent-4' : 'pink accent-4' %>">
+              <%= sex(@view_options[:secondary_pet].sex) %>
+            </span>
+            <span class="pet-card__badge deep-purple lighten-1">
+              <%= @view_options[:secondary_pet].breed %>
+            </span><br />
+            <b><%= @view_options[:secondary_pet].city %></b><br />
+            <%= @view_options[:secondary_pet].state %>
+          </div>
         </div>
       </div>
     <% end %>

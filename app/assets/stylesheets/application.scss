@@ -151,8 +151,8 @@ body {
   &__badge {
     border-radius: 20px;
     color: white;
+    display: inline-block;
     font-weight: bold;
-    line-height: 2.8rem;
     margin: 0.5rem;
     padding: 0.6rem;
     text-transform: uppercase;
@@ -344,4 +344,11 @@ span.badge {
   input {
     margin-bottom: 40px ;
   }
+}
+
+.card .card-title, span.card-title {
+  height: 27px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
