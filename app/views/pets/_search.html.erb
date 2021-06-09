@@ -1,6 +1,5 @@
 
 <form id="search-form">
-<div class="row">
   <div class="input-field">
     <input type="text" id="name" name="name">
     <label for="name" class="active">Nome/título do anúncio</label>
@@ -21,59 +20,58 @@
     <input type="text" id="state" name="state">
     <label for="state" class="active">Estado</label>
   </div>
-</div>
-<div class="row">
-  <label>
-    <input name="species" id="dog" value="dog" type="radio" />
-    <span>Cachorro</span>
-  </label>
-  <label>
-    <input name="species" id="cat" value="cat" type="radio" />
-    <span>Gato</span>
-  </label>
-  <label>
-    <input name="species" id="any" value="" type="radio" checked />
-    <span>Todos</span>
-  </label>
-</div>
-<div class="row">
-  <label>
-    <input name="sex" id="female" value="female" type="radio" checked />
-    <span>Fêmea</span>
-  </label>
-  <label>
-    <input name="sex" id="male" value="male" type="radio" />
-    <span>Macho</span>
-  </label>
-  <label>
-    <input name="sex" id="any" value="" type="radio" checked />
-    <span>Todos</span>
-  </label>
-</div>
-<div class="row">
-  <label>
-    <input name="status" id="found" value="found" type="radio" checked />
-    <span>Encontrado</span>
-  </label>
-  <label>
-    <input name="status" id="lost" value="lost" type="radio" />
-    <span>Perdido</span>
-  </label>
-  <label>
-    <input name="status" id="any" value="" type="radio" checked />
-    <span>Todos</span>
-  </label>
-</div>
-<div class="row">
-  <label>
-    <input name="exact" type="radio" id="true" value="true" checked>
-    <span>Busca exata</span>
-  </label>
-  <label>
-    <input name="exact" type="radio" id="false" value="false">
-    <span>Melhores resultados</span>
-  </label>
-</div>
+  <div class="row">
+    <label>
+      <input name="species" id="dog" value="dog" type="radio" />
+      <span>Cachorro</span>
+    </label>
+    <label>
+      <input name="species" id="cat" value="cat" type="radio" />
+      <span>Gato</span>
+    </label>
+    <label>
+      <input name="species" id="any" value="" type="radio" checked />
+      <span>Todos</span>
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <input name="sex" id="female" value="female" type="radio" checked />
+      <span>Fêmea</span>
+    </label>
+    <label>
+      <input name="sex" id="male" value="male" type="radio" />
+      <span>Macho</span>
+    </label>
+    <label>
+      <input name="sex" id="any" value="" type="radio" checked />
+      <span>Todos</span>
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <input name="status" id="found" value="found" type="radio" checked />
+      <span>Encontrado</span>
+    </label>
+    <label>
+      <input name="status" id="lost" value="lost" type="radio" />
+      <span>Perdido</span>
+    </label>
+    <label>
+      <input name="status" id="any" value="" type="radio" checked />
+      <span>Todos</span>
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <input name="exact" type="radio" id="true" value="true" checked>
+      <span>Busca exata</span>
+    </label>
+    <label>
+      <input name="exact" type="radio" id="false" value="false">
+      <span>Melhores resultados</span>
+    </label>
+  </div>
 </form>
 
 <script>
@@ -118,7 +116,8 @@ function search() {
                 <span class="pet-card__badge deep-purple lighten-1">
                   ${pet.breed}
                 </span><br />
-                <b>${pet.city}</b>, ${pet.state}
+                <b>${pet.city}</b><br />
+                ${pet.state}
               </div>
             </div>
           </div>
