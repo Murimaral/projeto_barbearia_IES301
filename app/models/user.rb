@@ -4,7 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  def pets
-    Pet.where(user_id: id)
-  end
+  has_many :pets
+  has_many :rescue_requests
 end
