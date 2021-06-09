@@ -1,5 +1,5 @@
 <div class="pet-form">
-  <h3>Cadastrar pet <%= params[:status] == 'lost' ? 'perdido' : 'resgatado' %></h3>
+  <h3><%= params[:status] == 'lost' ? 'Cadastrar pet perdido' : 'Procurar pelo dono de um pet' %></h3>
   <% unless flash[:alert].empty? %>
     <div class="deep-orange-text text-darken-3 deep-orange lighten-4 warning"><%= flash[:alert] %></div>
   <% end %>
