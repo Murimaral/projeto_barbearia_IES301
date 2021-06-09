@@ -104,15 +104,15 @@ function search() {
                     ${pet.name}
                   </a>
                 </span>
-                <span class="pet-card__badge ${pet.status == 'found' ? 'indigo' : 'red'}">
-                  ${pet.status == 'found' ? 'Procurando dono' : 'Perdido'}
-                </span>
                 <span class="pet-card__badge ${pet.species == 'dog' ? 'amber' : 'teal'}">
                   ${pet.species == 'dog' ? 'Cachorro' : 'Gato'}
                 </span>
                 <span class="pet-card__badge ${pet.sex == 'male' ? 'light-blue accent-4' : 'pink accent-4'}">
                   ${pet.sex == 'male' ? 'Macho' : 'Fêmea'}
-                </span>
+                </span><br />
+                <span class="pet-card__badge ${pet.status == 'found' ? 'indigo' : 'red'}">
+                  ${pet.status == 'found' ? 'Procurando dono' : 'Perdido'}
+                </span><br />
                 <span class="pet-card__badge deep-purple lighten-1">
                   ${pet.breed}
                 </span><br />
