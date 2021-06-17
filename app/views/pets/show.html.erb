@@ -42,12 +42,15 @@
           <%= link_to 'desativar', pet_confirm_deactivation_path(@pet) , class: "red btn-small"%>
         <% end %>
       </div>
+      <h4>Localização</h4>
       <p>
-        <h4>Localização</h4>
         <%= @pet.city %>, <strong><%= @pet.state %></strong>
       </p>
+      <h4>Detalhes</h4>
       <p>
-        <h4>Detalhes</h4>
+        <strong>Cor:</strong> <%= @pet.color %>
+      </p>
+      <p>
         <%= @pet.details %>
       </p>
 

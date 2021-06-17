@@ -185,7 +185,7 @@
   <% if current_user.pets.count > 0 %>
     <div class="row">
       <% current_user.pets.each do |pet| %>
-        <div class="col s12 m4 l3">
+        <div class="col s12 m6 xl3">
           <div class="card">
             <div class="card-content collection-item avatar">
               <%= image_tag(pet.image) %>
@@ -196,7 +196,7 @@
                 </span>
                 <span class="pet-card__badge <%= pet.sex == 'male' ? 'light-blue accent-4' : 'pink accent-4' %>">
                   <%= sex(pet.sex) %>
-                </span>
+                </span><br />
                 <span class="pet-card__badge <%= pet.status == 'found' ? 'indigo' : 'red' %>">
                   <%= status(pet.status) %>
                 </span><br />

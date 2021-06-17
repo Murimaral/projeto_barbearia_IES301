@@ -36,7 +36,7 @@
 <div class="row" id="pet-list">
   <h3>Últimos pets cadastrados</h3>
   <% @pets.take(9).each do |pet| %>
-    <div class="col s12 m4 pet-item">
+    <div class="col s12 m6 xl4 pet-item">
       <div class="card white">
         <div class="card-content collection-item avatar">
           <%= image_tag(pet.image) %>
@@ -45,16 +45,17 @@
             <span class="pet-card__badge <%= pet.species == 'dog' ? 'amber' : 'teal' %>">
               <%= species(pet.species) %>
             </span>
+            <span class="pet-card__badge <%= pet.status == 'found' ? 'indigo' : 'red' %>">
+              <%= status(pet.status) %>
+            </span><br />
             <span class="pet-card__badge <%= pet.sex == 'male' ? 'light-blue accent-4' : 'pink accent-4' %>">
               <%= sex(pet.sex) %>
             </span>
             <span class="pet-card__badge deep-purple lighten-1">
               <%= pet.breed %>
             </span><br />
-            <span class="pet-card__badge <%= pet.status == 'found' ? 'indigo' : 'red' %>">
-              <%= status(pet.status) %>
-            </span><br />
-            <b><%= pet.city %></b>, <%= pet.state %>
+            <span class="city"><%= pet.city %></span><br />
+            <%= pet.state %>
           </div>
         </div>
       </div>

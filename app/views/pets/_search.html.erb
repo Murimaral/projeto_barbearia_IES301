@@ -51,7 +51,7 @@
   <div class="row">
     <label>
       <input name="status" id="found" value="found" type="radio" checked />
-      <span>Encontrado</span>
+      <span>Procurando dono</span>
     </label>
     <label>
       <input name="status" id="lost" value="lost" type="radio" />
@@ -94,7 +94,7 @@ function search() {
       let searchResults = ''
       data.forEach(function(pet) {
         searchResults = searchResults.concat(`
-        <div class="col s12 m4 pet-item">
+        <div class="col s12 m6 xl4 pet-item">
           <div class="card white">
             <div class="card-content collection-item avatar">
               <img src="${pet.image}">
@@ -116,7 +116,7 @@ function search() {
                 <span class="pet-card__badge deep-purple lighten-1">
                   ${pet.breed}
                 </span><br />
-                <b>${pet.city}</b><br />
+                <span class="city">${pet.city}</span><br />
                 ${pet.state}
               </div>
             </div>

@@ -284,6 +284,7 @@ span.badge {
     margin: 0 4px 4px 0;
     padding: 2px 6px;
     display: inline-block;
+    overflow: hidden;
   }
 }
 
@@ -351,4 +352,12 @@ span.badge {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.city {
+  display: inline-block;
+  height: 24px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
