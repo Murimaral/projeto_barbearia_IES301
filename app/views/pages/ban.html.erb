@@ -1,0 +1,11 @@
+<h2 class="center-align">Banir o usuário <%= @user.name %>?</h2>
+<p class="center-align">
+  Deseja realmente banir o usuário <strong><%= @user.name %></strong> (<%= @user.email %>) e desativar os anúncios criados por ele?
+</p>
+<p class="center-align">
+  Esta ação não pode ser revertida.
+</p>
+<p class="center-align">
+  <%= link_to 'Não, cancelar', root_path, class: 'btn red' %>
+  <%= link_to 'Sim, continuar', ban_path(user_id: @user.id), method: :post, class: 'btn indigo' %>
+</p>

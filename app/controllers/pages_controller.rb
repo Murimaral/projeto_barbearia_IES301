@@ -8,6 +8,20 @@ class PagesController < ApplicationController
     @accepted_rescue_requests = accepted_rescue_requests
   end
 
+  def ban
+    @user = User.find(params[:user_id])
+  end
+
+  def destroy_user
+    @user = User.find(params[:user_id])
+    Pet.where(user: @user).each { |pet| pet.update(active: false) }
+    RescueRequest.where(owner_id: @user.id).each { |request| request.update(status: :cancelled) }
+    RescueRequest.where(rescuer_id: @user.id).each { |request| request.update(status: :cancelled) }
+    @user.destroy
+
+    redirect_to root_path
+  end
+
   private
 
   def awaiting_rescue_requests

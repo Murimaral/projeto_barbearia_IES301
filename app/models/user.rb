@@ -6,4 +6,12 @@ class User < ApplicationRecord
 
   has_many :pets
   has_many :rescue_requests
+
+  def destroy
+    update(deactivated: true) unless deactivated
+  end
+
+  def active_for_authentication?
+    super && !deactivated
+  end
 end

@@ -33,7 +33,7 @@
     </p>
     <hr>
       <h4>Pet <%= @view_options[:target_pet].status == 'found' ? 'procurando dono' : 'perdido' %></h4>
-      <div class="card small">
+      <div class="card">
         <div class="card-content collection-item avatar">
           <%= image_tag(@view_options[:target_pet].image) %>
           <div class="pet-card__content">
@@ -54,7 +54,7 @@
       </div>
     <% if @view_options[:secondary_pet].present? %>
       <h4>Pet <%= @view_options[:secondary_pet].status == 'found' ? 'procurando dono' : 'perdido' %></h4>
-      <div class="card small">
+      <div class="card">
         <div class="card-content collection-item avatar">
           <%= image_tag(@view_options[:secondary_pet].image) %>
           <div class="pet-card__content">
