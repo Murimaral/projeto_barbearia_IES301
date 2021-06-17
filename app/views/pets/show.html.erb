@@ -33,7 +33,7 @@
           <% if @pet.active? %>
             <%= link_to 'desativar', pet_confirm_deactivation_path(@pet) , class: "red btn-small"%>
           <% end %>
-          <% unless @pet.user.deactivated? %>
+          <% if !@pet.user.deactivated && @pet.user != current_user %>
             <%= link_to 'banir usuário', ban_path(user_id: @pet.user.id) , class: "black btn-small"%>
           <% end %>
         <% end %>

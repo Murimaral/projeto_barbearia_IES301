@@ -8,11 +8,11 @@
       <div class="col s12 l6 p0">
         <span class="pet-form__label--radio">Espécie:</span>
         <label for="pet_species_cat">
-          <input name="pet[species]" type="radio" id="pet_species_cat" value="cat" />
+          <input name="pet[species]" type="radio" id="pet_species_cat" value="cat" <%= params.dig('pet',  'species') == 'cat' ? 'checked' : '' %> />
           <span>Gato</span>
         </label>
         <label for="pet_species_dog">
-          <input name="pet[species]" type="radio" id="pet_species_dog" value="dog" />
+          <input name="pet[species]" type="radio" id="pet_species_dog" value="dog" <%= params.dig('pet',  'species') == 'dog' ? 'checked' : '' %> />
           <span>Cachorro</span>
         </label>
       </div>
@@ -20,11 +20,11 @@
       <div class="col s12 l6 p0 a-right">
         <span class="pet-form__label--radio">Sexo:</span>
         <label for="pet_sex_female">
-          <input name="pet[sex]" type="radio" id="pet_sex_female" value="female"  />
+          <input name="pet[sex]" type="radio" id="pet_sex_female" value="female" <%= params.dig('pet',  'sex') == 'female' ? 'checked' : '' %>  />
           <span>Fêmea</span>
         </label>
         <label for="pet_sex_male">
-          <input name="pet[sex]" type="radio" id="pet_sex_male" value="male" />
+          <input name="pet[sex]" type="radio" id="pet_sex_male" value="male" <%= params.dig('pet',  'sex') == 'male' ? 'checked' : '' %> />
           <span>Macho</span>
         </label>
       </div>
@@ -95,9 +95,12 @@
     <div id="search-results" class="pet-form__search-results d-none">
       <h6>Encontramos estes pets similares, algum deles é o seu?</h6>
       <div id="pet-list" class="row pet-form__row"></div>
+      <h6 class="center-align">Não é um destes pets?</h6>
     </div>
 
-    <%= form.submit 'Não é um destes pets, avançar e registrar como novo pet', class: 'd-none btn-large indigo', id: 'submit-btn' %>
+    <p class="center-align">
+      <%= form.submit 'Avançar e registrar como novo pet', class: 'd-none btn-large indigo', id: 'submit-btn' %>
+    </p>
   <% end %>
 </div>
 
@@ -154,7 +157,7 @@ function appendSearchResults(data) {
   let searchResults = ''
   data.forEach(function(pet) {
     searchResults = searchResults.concat(`
-      <div class="col s12 m3 pet-item">
+      <div class="col s12 m6 xl4 pet-item">
         <div class="card white">
           <div class="card-content collection-item avatar">
             <img src="${pet.image}">
@@ -173,7 +176,8 @@ function appendSearchResults(data) {
               <span class="pet-card__badge deep-purple lighten-1">
                 ${pet.breed}
               </span><br />
-              <span class="city">${pet.city}</span>, ${pet.state}
+              <span class="city">${pet.city}</span><br />
+              ${pet.state}
             </div>
           </div>
         </div>
