@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'pages#dashboard'
   get '/search', to: 'pets#searchpage'
   post '/search', to: 'pets#search'
+  get '/ban', to: 'pages#ban'
+  post '/ban', to: 'pages#destroy_user'
 end

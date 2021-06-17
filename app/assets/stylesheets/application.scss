@@ -54,7 +54,6 @@ h4 {
 //FOOTER
 .page-footer{
     background-color: $ft_bg;
-    bottom: 0;
 }
 //FOOTER END
 // HOME
@@ -134,8 +133,6 @@ body {
   }
 
 .container-app {
-  min-height: 67.8vh;
-
   img {
     max-width: 100%;
   }
@@ -360,4 +357,14 @@ span.badge {
   font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
 }

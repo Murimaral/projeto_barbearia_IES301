@@ -73,14 +73,14 @@
 
     <div class="row pet-form__row">
       <p class="input-field">
-        <%= form.text_field :city, class: 'city', placeholder: 'ex.: São Paulo, Curitiba, Brasília' %>
+        <%= form.text_field :city, class: 'pet-city', placeholder: 'ex.: São Paulo, Curitiba, Brasília' %>
         <%= form.label :city, 'Cidade' %>
       </p>
     </div>
 
     <div class="row pet-form__row">
       <p class="input-field">
-        <%= form.text_field :state, class: 'state', placeholder: 'ex.: São Paulo, Paraná, Distrito Federal' %>
+        <%= form.text_field :state, class: 'pet-state', placeholder: 'ex.: São Paulo, Paraná, Distrito Federal' %>
         <%= form.label :state, 'Estado' %>
       </p>
     </div>
@@ -114,11 +114,11 @@ $(function() {
     data: <%= @colors.to_json.html_safe %>,
   });
 
-  $('.city').autocomplete({
+  $('.pet-city').autocomplete({
     data: <%= @cities.to_json.html_safe %>,
   });
 
-  $('.state').autocomplete({
+  $('.pet-state').autocomplete({
     data: <%= @states.to_json.html_safe %>,
   });
 })
