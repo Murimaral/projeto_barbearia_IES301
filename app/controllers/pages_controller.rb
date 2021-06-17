@@ -17,6 +17,7 @@ class PagesController < ApplicationController
     Pet.where(user: @user).each { |pet| pet.update(active: false) }
     RescueRequest.where(owner_id: @user.id).each { |request| request.update(status: :cancelled) }
     RescueRequest.where(rescuer_id: @user.id).each { |request| request.update(status: :cancelled) }
+    @user.update(name: 'Usuário não encontrado')
     @user.destroy
 
     redirect_to root_path

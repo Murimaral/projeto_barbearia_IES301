@@ -30,8 +30,12 @@
       <div class="row right-align">
         <% if current_user&.admin? %>
           <%= link_to 'editar', edit_pet_path(@pet), class: "indigo lighten-1 btn-small" %>
-          <%= link_to 'desativar', pet_confirm_deactivation_path(@pet) , class: "red btn-small"%>
-          <%= link_to 'banir usuário', ban_path(user_id: @pet.user.id) , class: "black btn-small"%>
+          <% if @pet.active? %>
+            <%= link_to 'desativar', pet_confirm_deactivation_path(@pet) , class: "red btn-small"%>
+          <% end %>
+          <% unless @pet.user.deactivated? %>
+            <%= link_to 'banir usuário', ban_path(user_id: @pet.user.id) , class: "black btn-small"%>
+          <% end %>
         <% end %>
         <% if @pet.user == current_user && @pet.active? && !current_user&.admin? %>
           <%= link_to 'editar', edit_pet_path(@pet), class: "indigo lighten-1 btn-small" %>
