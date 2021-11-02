@@ -19,11 +19,13 @@ require 'faker'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module PetFinder
+module Barbershop
   class Application < Rails::Application
     config.load_defaults 6.1
 
     config.generators.system_tests = nil
+
+    config.i18n.default_locale = :"pt-BR"
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do

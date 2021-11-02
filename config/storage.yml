@@ -9,14 +9,14 @@ local:
 
 google:
   service: GCS
-  project: pet-finder-rails
+  project: barbershop-rails
   credentials: <%= ENV['GOOGLE_APPLICATION_CREDENTIALS'].as_json %>
-  bucket: pet-finder-rails
+  bucket: barbershop-rails
   public: true
 
 google_dev:
   service: GCS
-  project: pet-finder-rails
-  credentials: <%= Rails.root.join("config/secrets/pet-finder-upload.json") %>
-  bucket: pet-finder-rails
+  project: barbershop-rails
+  credentials: <%= Rails.root.join("config/secrets/barbershop-upload.json") %>
+  bucket: barbershop-rails
   public: true

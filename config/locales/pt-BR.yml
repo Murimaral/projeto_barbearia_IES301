@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      employee: Funcionário
+    attributes:
+      employee:
+        status:
+          active: Ativo
+          vacation: Férias
+          deactivated: Desativado
+        genders:
+          male: Masculino
+          female: Feminino
+          other: Outro

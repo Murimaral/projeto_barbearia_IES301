@@ -1,0 +1,80 @@
+<div class="employee-form">
+
+  <h3>Cadastrar Funcionário</h3>
+  <% unless flash[:alert].empty? %>
+    <div class="deep-orange-text text-darken-3 deep-orange lighten-4 warning"><%= flash[:alert] %></div>
+  <% end %>
+
+  <%= form_for @employee do |form| %>
+
+    <div class="row employee-form__row">
+      <p class="input-field">
+        <%= form.text_field :name, placeholder: "Nome" %>
+        <%= form.label :name, "Nome" %>
+      </p>
+    </div>
+
+    <div class="row employee-form__row">
+      <p class="input-field">
+        <%= form.text_field :phone, placeholder: "Telefone", data: {mask: '(99) 99999-9999'} %>
+        <%= form.label :phone, "Telefone" %>
+      </p>
+    </div>
+
+    <div class="col s12 l6 p0 a-right">
+      <span class="pet-form__label--radio">Gênero:</span>
+      <label for="employee_gender_female">
+        <input name="employee[gender]" type="radio" id="employee_gender_female" value="female" <%= params.dig('employee', 'gender') == 'female' ? 'checked' : '' %>  />
+        <span>Feminino</span>
+      </label>
+      <label for="employee_gender_male">
+        <input name="employee[gender]" type="radio" id="employee_gender_male" value="male" <%= params.dig('employee', 'gender') == 'male' ? 'checked' : '' %>  />
+        <span>Masculino</span>
+      </label>
+      <label for="employee_gender_other">
+        <input name="employee[gender]" type="radio" id="employee_gender_other" value="other" <%= params.dig('employee', 'gender') == 'other' ? 'checked' : '' %>  />
+        <span>Outro</span>
+      </label>
+    </div>
+
+    <div class="row employee-form__row">
+      <p class="input-field">
+        <%= form.text_field :email, placeholder: "Email" %>
+        <%= form.label :email, "Email" %>
+      </p>
+    </div>
+
+    <div class="row employee-form__row">
+      <p class="input-field">
+        <%= form.text_field :birthdate, placeholder: "Data de Nascimento", class: "datepicker" %>
+        <%= form.label :birthdate, "Data de Nascimento" %>
+      </p>
+    </div>
+
+    <div class="row employee-form__row">
+      <p class="input-field">
+        <%= form.text_field :document, placeholder: "Número do Documento" %>
+        <%= form.label :document, "Número do documento" %>
+      </p>
+    </div>
+
+    <div class="row employee-form__row">
+      <p class="input-field">
+        <%= form.text_field :address, placeholder: "Endereço" %>
+        <%= form.label :address, "Endereço" %>
+      </p>
+    </div>
+
+
+    <div class="center-align">
+      <%= form.submit 'Cadastrar', class: 'red lighten-1 btn-large' %>
+    </div>
+  <% end %>
+</div>
+
+
+<script>
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+</script>

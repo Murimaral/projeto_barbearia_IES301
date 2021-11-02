@@ -15,7 +15,7 @@ orientation: horizontal
 polymorphism: false
 sort: true
 warn: true
-title: Projeto de Banco de Dados - PetFinder
+title: Projeto de Banco de Dados - Barbershop
 exclude: null
 only: null
 only_recursion_depth: null

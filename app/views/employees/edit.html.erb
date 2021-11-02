@@ -1,0 +1,89 @@
+<div class="employee-form">
+
+  <h3>Atualizar cadastro de Funcionário</h3>
+  <% unless flash[:alert].empty? %>
+    <div class="deep-orange-text text-darken-3 deep-orange lighten-4 warning"><%= flash[:alert] %></div>
+  <% end %>
+
+  <%= form_for @employee do |form| %>
+    <div class="row customer-form__row customer-form__row--radio">
+      <div class="col s12 l6 p0">
+        <span class="customer-form__label--radio">Status:</span>
+        <label for="employee_status_active">
+          <input name="employee[status]" type="radio" id="employee_status_active" value="active" <%= @employee.status == 'active' ? 'checked' : '' %> />
+          <span>Ativo</span>
+        </label>
+        <label for="employee_status_vacation">
+          <input name="employee[status]" type="radio" id="employee_status_vacation" value="vacation" <%= @employee.status == 'vacation' ? 'checked' : '' %> />
+          <span>Férias</span>
+        </label>
+        <label for="employee_status_deactivated">
+          <input name="employee[status]" type="radio" id="employee_status_deactivated" value="deactivated" <%= @employee.status == 'deactivated' ? 'checked' : '' %> />
+          <span>Desativado</span>
+        </label>
+      </div>
+
+      <div class="col s12 l6 p0">
+        <span class="customer-form__label--radio">gender:</span>
+        <label for="employee_gender_male">
+          <input name="employee[gender]" type="radio" id="employee_gender_male" value="male" <%= @employee.gender == 'male' ? 'checked' : '' %> />
+          <span>Masculino</span>
+        </label>
+        <label for="employee_gender_female">
+          <input name="employee[gender]" type="radio" id="employee_gender_female" value="female" <%= @employee.gender == 'female' ? 'checked' : '' %> />
+          <span>Feminino</span>
+        </label>
+        <label for="employee_gender_other">
+          <input name="employee[gender]" type="radio" id="employee_gender_other" value="other" <%= @employee.gender == 'other' ? 'checked' : '' %> />
+          <span>Outro</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="row employee-form__row">
+      <p class="input-field">
+        <%= form.text_field :name, placeholder: "Nome" %>
+        <%= form.label :name, "Nome" %>
+      </p>
+    </div>
+
+    <div class="row employee-form__row">
+      <p class="input-field">
+        <%= form.text_field :phone, placeholder: "Telefone", data: {mask: '(99) 99999-9999'} %>
+        <%= form.label :phone, "Telefone" %>
+      </p>
+    </div>
+
+    <div class="row employee-form__row">
+      <p class="input-field">
+        <%= form.text_field :email, placeholder: "Email" %>
+        <%= form.label :email, "Email" %>
+      </p>
+    </div>
+
+    <div class="row employee-form__row">
+      <p class="input-field">
+        <%= form.text_field :birthdate, placeholder: "Data de Nascimento", class: "datepicker" %>
+        <%= form.label :birthdate, "Data de Nascimento" %>
+      </p>
+    </div>
+
+    <div class="row employee-form__row">
+      <div class="input-field">
+        <%= form.text_area :address, class: 'materialize-textarea' %>
+        <%= form.label :address, 'Endereço' %>
+      </div>
+    </div>
+
+    <div class="center-align">
+      <%= form.submit 'Salvar', class: 'red lighten-1 btn-large' %>
+    </div>
+  <% end %>
+</div>
+
+
+<script>
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+</script>

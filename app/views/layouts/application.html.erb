@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PetFinder</title>
+    <title>Barbershop</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -14,7 +14,7 @@
   <body>
     <nav id="header" class="lighten-1" role="navigation">
       <div class="nav-wrapper container">
-        <%= link_to 'PetFinder', root_path, class: 'brand-logo' %>
+        <%= link_to 'Barbershop', root_path, class: 'brand-logo' %>
         <ul class="right hide-on-med-and-down">
           <li>Olá, <%= current_user&.name || 'Visitante' %>!</li>
           <% if !user_signed_in? %>

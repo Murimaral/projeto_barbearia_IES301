@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_17_185156) do
+ActiveRecord::Schema.define(version: 2021_10_14_220828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,12 +43,36 @@ ActiveRecord::Schema.define(version: 2021_06_17_185156) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.text "details"
+    t.text "email"
+    t.date "birthdate"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.integer "gender"
+    t.integer "status", default: 0
+    t.text "email"
+    t.text "document"
+    t.text "address"
+    t.date "birthdate"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "pets", force: :cascade do |t|
     t.string "name"
     t.integer "species"
     t.integer "sex"
     t.string "breed"
     t.string "color"
+    t.string "image"
     t.text "details"
     t.string "city"
     t.string "state"
@@ -66,6 +90,7 @@ ActiveRecord::Schema.define(version: 2021_06_17_185156) do
     t.integer "found_pet_id"
     t.integer "lost_pet_id"
     t.boolean "created_by_owner"
+    t.string "image"
     t.text "message"
     t.text "reply"
     t.integer "status", default: 1

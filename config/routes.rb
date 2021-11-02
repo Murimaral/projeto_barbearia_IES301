@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
+
   resources :pets do
     get :confirm_deactivation
     post :deactive
   end
-  
+
+  resources :customers
+  resources :employees
+
   resources :rescue_requests do
     get 'answer', to: 'rescue_requests#answer'
   end

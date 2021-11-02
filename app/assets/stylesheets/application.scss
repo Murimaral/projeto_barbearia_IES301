@@ -7,7 +7,7 @@
 
 $c_main: #ff5454;
 $c_sec: #231651;
-$c_ter: #4DCCBD;
+$c_ter: #4dccbd;
 $c_background: #f9f6f4;
 
 // Header
@@ -16,29 +16,36 @@ $hd_bg: $c_main;
 $ft_bg: $c_sec;
 
 // OTHERS
-button, html [type="button"], [type="reset"] {
-  text-decoration: none;
-  color: #fff;
+// button,
+// html [type="button"],
+// [type="reset"] {
+//   text-decoration: none;
+//   // color: #fff;
+//   // background-color: $c_main;
+//   text-align: center;
+//   letter-spacing: 0.5px;
+//   // transition: background-color 0.2s ease-out;
+//   cursor: pointer;
+//   padding: 10px 25px;
+//   border-radius: 5px;
+//   margin: 1rem 0;
+//   border: 0;
+// }
+[type="radio"]:checked + span:after,
+.with-gap[type="radio"]:checked + span:after {
   background-color: $c_main;
-  text-align: center;
-  letter-spacing: .5px;
-  transition: background-color .2s ease-out;
-  cursor: pointer;
-  padding: 10px 25px;
-  border-radius: 5px;
-  margin: 1rem 0;
-  border: 0;
 }
-[type="radio"]:checked + span:after, .with-gap[type="radio"]:checked + span:after{
-background-color: $c_main;
+[type="radio"]:checked + span:after,
+.with-gap[type="radio"]:checked + span:before,
+.with-gap[type="radio"]:checked + span:after {
+  border: 2px solid $c_main;
 }
-[type="radio"]:checked + span:after, .with-gap[type="radio"]:checked + span:before, .with-gap[type="radio"]:checked + span:after{
-border: 2px solid $c_main;
+a {
+  color: $c_main;
 }
-a{
-color: $c_main;
-}
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: $c_sec;
 }
 h4 {
@@ -46,105 +53,107 @@ h4 {
 }
 
 //HEADER
-#header{
-    background-color: $hd_bg;
-    box-shadow: none;
+#header {
+  background-color: $hd_bg;
+  box-shadow: none;
 }
 //HEADER END
 //FOOTER
-.page-footer{
-    background-color: $ft_bg;
+.page-footer {
+  background-color: $ft_bg;
 }
 //FOOTER END
 // HOME
-.card .card-content{
-  padding: 0!important;
-  img{
+.card .card-content {
+  padding: 0 !important;
+  img {
     width: 100%;
     height: 130px;
     object-fit: cover;
   }
-  > span,>p{
+  > span,
+  > p {
     padding: 0 10px;
     min-height: 43px;
   }
 }
 body {
-    background-color: $c_background;
-  }
-  a.home_button_find {
+  background-color: $c_background;
+}
+a.home_button_find {
+  width: 100%;
+  display: block;
+  height: 14rem;
+  border-radius: 25px;
+  background-color: #e2e2e2;
+  margin: 1rem 0;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  img {
+    position: absolute;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    left: 0;
+    top: 0;
+  }
+  span {
+    position: absolute;
+    z-index: 2;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
     display: block;
-    height: 14rem;
-    border-radius: 25px;
-    background-color: #e2e2e2;
-    margin: 1rem 0;
-    position: relative;
-    border-radius: 5px;
-    overflow: hidden;
-    img {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      left: 0;
-      top: 0;
-    }
+    width: 100%;
+    padding: 1rem;
+    height: auto;
+    bottom: 0;
+  }
+  &:before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(0deg, #000000ba 25%, rgba(0, 0, 0, 0) 100%);
+    display: block;
+    z-index: 1;
+    position: absolute;
+  }
+  &.customer {
     span {
-      position: absolute;
-      z-index: 2;
-      font-size: 16px;
-      color: white;
-      font-weight: bold;
-      text-transform: uppercase;
-      display: block;
-      width: 100%;
-      padding: 1rem;
-      height: auto;
-      bottom: 0;
-    }
-    &:before {
-      content: "";
-      height: 100%;
-      width: 100%;
-      background: linear-gradient(0deg, #000000ba 25%, rgba(0,0,0,0) 100%);
-      display: block;
-      z-index: 1;
-      position: absolute;
-    }
-    &.pet {
-      span {
-        text-align: left;
-        float: left;
-      }
-    }
-    &.owner {
-      span {
-        text-align: right;
-        margin-left: auto;
-        right: 0;
-      }
-    }
-    &.search{
-      img{
-        object-position: 0 30%;
-      }
+      text-align: left;
+      float: left;
     }
   }
+  &.owner {
+    span {
+      text-align: right;
+      margin-left: auto;
+      right: 0;
+    }
+  }
+  &.search {
+    img {
+      object-position: 0 30%;
+    }
+  }
+}
 
 .container-app {
   img {
     max-width: 100%;
   }
 
-  h2, h3 {
+  h2,
+  h3 {
     margin-top: 0;
   }
 }
-  
+
 //HOME END
-// PET DETAILS
-.pet-details {
+// customer DETAILS
+.customer-details {
   &__badge {
     border-radius: 20px;
     color: white;
@@ -160,11 +169,11 @@ body {
     text-align: center;
   }
 }
-// PET DETAILS END
+// customer DETAILS END
 
 //searchpage
 
-#searchpage{
+#searchpage {
   .filters {
     background: white;
     border-radius: 25px;
@@ -178,7 +187,7 @@ body {
       padding: 0 20px;
     }
   }
-  .usefiltersmsg{
+  .usefiltersmsg {
     display: block;
     font-size: 17px;
     opacity: 0.75;
@@ -220,7 +229,7 @@ body {
     border-radius: 32px 32px 0 0;
     color: whitesmoke;
     line-height: 6rem;
-    margin-bottom: 60px;;
+    margin-bottom: 60px;
   }
 
   .input-field {
@@ -238,7 +247,8 @@ body {
       max-width: 400px;
     }
 
-    h2, h3 {
+    h2,
+    h3 {
       text-align: center;
       margin-bottom: 4rem;
     }
@@ -267,7 +277,7 @@ span.badge {
   font-weight: 600;
 }
 
-.pet-card {
+.customer-card {
   &__content {
     padding: 8px;
     min-height: 146px;
@@ -285,7 +295,7 @@ span.badge {
   }
 }
 
-.pet-form {
+.customer-form {
   margin: 0 auto;
   max-width: 600px;
 
@@ -322,16 +332,19 @@ span.badge {
   .warning {
     text-align: center;
     margin-bottom: 40px;
-    padding: 20px;  
+    padding: 20px;
   }
 }
 
 .user-dashboard {
-  h2, h3, p {
+  h2,
+  h3,
+  p {
     text-align: center;
   }
 
-  h2, h3 {
+  h2,
+  h3 {
     margin-top: 30px;
   }
 
@@ -340,11 +353,12 @@ span.badge {
   }
 
   input {
-    margin-bottom: 40px ;
+    margin-bottom: 40px;
   }
 }
 
-.card .card-title, span.card-title {
+.card .card-title,
+span.card-title {
   height: 27px;
   overflow: hidden;
   text-overflow: ellipsis;

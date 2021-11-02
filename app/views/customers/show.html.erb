@@ -1,0 +1,27 @@
+<div class="customer-details">
+  <div class="row">
+    <div class="col s6">
+      <h2><%= @customer.name %></h2>
+
+      <div class="">
+        <% if current_user&.admin? %>
+          <%= link_to 'editar', edit_customer_path(@customer), class: "indigo lighten-1 btn-small" %>
+        <% end %>
+
+      </div>
+
+      <h4>Telefone</h4>
+      <p>
+        <%= @customer.phone %>
+      </p>
+      <h4>Data de Nascimento</h4>
+      <p>
+        <%= @customer.birthdate %>
+      </p>
+      <h4>Detalhes</h4>
+      <p>
+        <%= @customer.details %>
+      </p>
+    </div>
+  </div>
+</div>

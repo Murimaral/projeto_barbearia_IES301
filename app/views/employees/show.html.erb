@@ -1,0 +1,38 @@
+<div class="employee-details">
+  <div class="row">
+    <div class="col s4">
+      <h2><%= @employee.name %></h2>
+    </div>
+
+    <div class="col s4 right-align">
+      <span class="customer-details__badge red">
+        <%= I18n.t(@employee.status, scope: 'activerecord.attributes.employee.status') %>
+      </span>
+      <span class="customer-details__badge blue">
+        <%= I18n.t(@employee.gender, scope: 'activerecord.attributes.employee.genders') %>
+      </span>
+    </div>
+
+    <div class="col s4 right-align">
+      <% if current_user&.admin? %>
+        <%= link_to 'editar', edit_employee_path(@employee), class: "indigo lighten-1 btn-small" %>
+      <% end %>
+    </div>
+
+  </div>
+
+
+
+  <h4>Telefone</h4>
+  <p>
+  <%= @employee.phone %>
+  </p>
+  <h4>Data de Nascimento</h4>
+  <p>
+  <%= @employee.birthdate %>
+  </p>
+  <h4>Endereço</h4>
+  <p>
+  <%= @employee.address %>
+  </p>
+</div>
