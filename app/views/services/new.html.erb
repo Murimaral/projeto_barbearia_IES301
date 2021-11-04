@@ -1,0 +1,28 @@
+<div class="customer-form">
+
+  <h3>Cadastrar Serviço</h3>
+  <% unless flash[:alert].empty? %>
+    <div class="deep-orange-text text-darken-3 deep-orange lighten-4 warning"><%= flash[:alert] %></div>
+  <% end %>
+
+  <%= form_for @service do |form| %>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <%= form.text_field :name, placeholder: "Nome" %>
+        <%= form.label :name, "Nome" %>
+      </p>
+    </div>
+
+    <div class="center-align">
+      <%= form.submit 'Cadastrar', class: 'red lighten-1 btn-large' %>
+    </div>
+  <% end %>
+</div>
+
+
+<script>
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+</script>

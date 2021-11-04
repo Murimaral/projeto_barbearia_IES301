@@ -5,7 +5,7 @@
       <h5 class="header col s12 light">Feito para ajudar pets e donos a se encontrarem!</h5>
     </div>
     <div class="row center">
-    <div class="col s12 m4">
+    <div class="col s12 m3">
       <a href="<%= new_customer_path(status: 'lost') %>" class="home_button_find pet">
       <%= image_tag("cat_01.jpg", :alt => "Cadastrar um Cliente") %>
       <span>
@@ -13,7 +13,7 @@
       </span>
       </a>
     </div>
-    <div class="col s12 m4">
+    <div class="col s12 m3">
       <a href="<%= new_employee_path(status: 'found') %>" class="home_button_find owner">
         <%= image_tag("dog_01.jpg", :alt => "Cadastrar um funcinário") %>
         <span>
@@ -21,11 +21,27 @@
         </span>
       </a>
     </div>
-    <div class="col s12 m4">
+    <div class="col s12 m3">
+      <a href="<%= new_service_path %>" class="home_button_find owner">
+        <%= image_tag("dog_01.jpg", :alt => "Estou procurando um dono de um pet") %>
+        <span>
+          Cadastrar um Serviço
+        </span>
+      </a>
+    </div>
+    <div class="col s12 m3">
       <a href="<%= new_pet_path(status: 'found') %>" class="home_button_find owner">
         <%= image_tag("dog_01.jpg", :alt => "Estou procurando um dono de um pet") %>
         <span>
           Estou procurando um dono de um pet
+        </span>
+      </a>
+    </div>
+    <div class="col s12 m12">
+      <a href="<%= search_path %>" class="home_button_find pet search">
+        <%= image_tag("calendario.jpg", :alt => "Realizar um Agendamento") %>
+        <span>
+          <i class="material-icons">search</i> Realizar um Agendamento
         </span>
       </a>
     </div>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :customers
   resources :employees
+  resources :services
 
   resources :rescue_requests do
     get 'answer', to: 'rescue_requests#answer'
