@@ -1,0 +1,61 @@
+
+<form id="search-form">
+  <div class="input-field">
+    <input type="text" id="name" name="name">
+    <label for="name" class="active">Buscar</label>
+  </div>
+</form>
+
+<script>
+$(function() {
+  $('input').change(function() { search(); })
+  $('input').keyup(function() { search(); })
+})
+
+function search() {
+  const form = new FormData(document.getElementById('search-form'));
+
+  const myInit = {
+    method: 'POST',
+    body: form
+  }
+
+  fetch('/search', myInit)
+    .then(function(response) { return response.json() })
+    .then(function(data) {
+      let searchResults = ''
+      data.forEach(function(customer) {
+        searchResults = searchResults.concat(`
+        <div class="col s12 m6 xl4 customer-item">
+          <div class="card white">
+            <div class="card-content collection-item avatar">
+              <a class="btn" href="">Criar Agendamento</a>
+              <div class="customer-card__content">
+                <span class="card-title">
+                  <a href="/customers/${customer.id}">
+                    ${customer.name}
+                  </a>
+                </span>
+                <span class="pet-card__badge">
+                  ${customer.details}
+                </span><br />
+                <span class="pet-card__badge">
+                  ${customer.phone}
+                </span><br />
+                <span class="pet-card__badge">
+                  ${customer.email}
+                </span><br />
+                <span class="pet-card__badge">
+                  ${customer.birthdate}
+                </span><br />
+              </div>
+            </div>
+          </div>
+        </div>
+        `)
+      })
+      document.getElementById('customer-list').innerHTML = searchResults;
+    })
+  event.preventDefault()
+}
+</script>

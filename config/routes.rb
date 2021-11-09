@@ -17,8 +17,8 @@ Rails.application.routes.draw do
 
   root to: 'pets#index'
   get '/dashboard', to: 'pages#dashboard'
-  get '/search', to: 'pets#searchpage'
-  post '/search', to: 'pets#search'
+  get '/search', to: 'customers#searchpage'
+  post '/search', to: 'customers#search'
   get '/ban', to: 'pages#ban'
   post '/ban', to: 'pages#destroy_user'
 end
