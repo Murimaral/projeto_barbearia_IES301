@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @attendance.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @attendance.description %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @attendance.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @attendance.end_date %>
+</p>
+
+<p>
+  <strong>Customer:</strong>
+  <%= @attendance.customer_id %>
+</p>
+
+<p>
+  <strong>Employee:</strong>
+  <%= @attendance.employee_id %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @attendance.service_id %>
+</p>
+
+<%= link_to 'Edit', edit_attendance_path(@attendance) %> |
+<%= link_to 'Back', attendances_path %>
