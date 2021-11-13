@@ -1,0 +1,18 @@
+<div id="calendar"></div>
+
+<script>
+  $(document).ready(function() {
+    var calendarEl = document.getElementById('calendar');
+
+    new Calendar(calendarEl, {
+      plugins: [ dayGridPlugin, timeGridPlugin, listPlugin ],
+      initialView: 'dayGridMonth',
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,listWeek'
+      },
+      events: <%= @attendances.to_json.html_safe %>
+    }).render()
+  });
+</script>

@@ -1,5 +1,72 @@
-<h1>New Attendance</h1>
+<div class="customer-form">
 
-<%= render 'form', attendance: @attendance %>
+  <h3>Cadastrar Cliente</h3>
+  <% unless flash[:alert].empty? %>
+    <div class="deep-orange-text text-darken-3 deep-orange lighten-4 warning"><%= flash[:alert] %></div>
+  <% end %>
 
-<%= link_to 'Back', attendances_path %>
+  <%= form_for @attendance do |form| %>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <%= form.text_field :title, placeholder: "Título" %>
+        <%= form.label :title, "Título" %>
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <%= form.text_field :description, placeholder: "Descrição" %>
+        <%= form.label :description, "Descrição" %>
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <label for="day">Dia do Atendimento</label><br>
+        <input type="text" name="attendance[day]" id="day" class="datepicker">
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <label for="start_at">Horário de início</label><br>
+        <input type="text" name="attendance[start_at]" id="start_at" class="timepicker">
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <label for="end_at">Horário de término</label><br>
+        <input type="text" name="attendance[end_at]" id="end_at" class="timepicker">
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <label for="attendance_service_id">Serviço</label><br>
+        <%= collection_select(:attendance, :service_id, @services, :id, :name, {}, { class: 'input-field' }) %>
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <label for="attendance_employee_id">Funcionário</label><br>
+        <%= collection_select(:attendance, :employee_id, @employees, :id, :name, {}, { class: 'input-field' }) %>
+      </p>
+    </div>
+
+    <%= form.hidden_field :customer_id, { value: params[:customer_id] } %>
+
+    <div class="center-align">
+      <%= form.submit 'Cadastrar', class: 'red lighten-1 btn-large' %>
+    </div>
+  <% end %>
+</div>
+
+
+<script>
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+</script>

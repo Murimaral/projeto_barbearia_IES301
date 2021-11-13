@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :attendances
   devise_for :users
 
   resources :pets do
@@ -10,6 +9,7 @@ Rails.application.routes.draw do
   resources :customers
   resources :employees
   resources :services
+  resources :attendances
 
   resources :rescue_requests do
     get 'answer', to: 'rescue_requests#answer'
@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   post '/search', to: 'customers#search'
   get '/ban', to: 'pages#ban'
   post '/ban', to: 'pages#destroy_user'
+  get '/schedule', to: 'attendances#schedule'
 end

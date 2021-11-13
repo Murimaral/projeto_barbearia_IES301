@@ -12,7 +12,11 @@ class AttendancesController < ApplicationController
 
   # GET /attendances/new
   def new
+    flash[:alert] = ''
     @attendance = Attendance.new
+    @services = Service.all
+    @employees = Employee.all
+    @customer_id = params[:customer_id]
   end
 
   # GET /attendances/1/edit
@@ -21,7 +25,18 @@ class AttendancesController < ApplicationController
 
   # POST /attendances or /attendances.json
   def create
-    @attendance = Attendance.new(attendance_params)
+    start_at = DateTime.parse("#{attendance_params[:day]} #{attendance_params[:start_at]}")
+    end_at = DateTime.parse("#{attendance_params[:day]} #{attendance_params[:end_at]}")
+
+    @attendance = Attendance.new({
+      title: attendance_params[:title],
+      description: attendance_params[:description],
+      start_date: start_at,
+      end_date: end_at,
+      customer_id: attendance_params[:customer_id],
+      employee_id: attendance_params[:employee_id],
+      service_id: attendance_params[:service_id]
+    })
 
     respond_to do |format|
       if @attendance.save
@@ -56,6 +71,16 @@ class AttendancesController < ApplicationController
     end
   end
 
+  def schedule
+    @attendances = Attendance.all.map do |attendance|
+      {
+        title: attendance.title,
+        start: attendance.start_date,
+        end: attendance.end_date
+      }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_attendance
@@ -64,6 +89,6 @@ class AttendancesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def attendance_params
-      params.require(:attendance).permit(:title, :description, :start_date, :end_date, :customer_id, :employee_id, :service_id)
+      params.require(:attendance).permit!
     end
 end
