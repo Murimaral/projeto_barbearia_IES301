@@ -9,7 +9,7 @@
 
     <div class="row customer-form__row">
       <p class="input-field">
-        <%= form.text_field :title, placeholder: "Título" %>
+        <%= form.text_field :title, placeholder: "Título", value: @attendance.title || '' %>
         <%= form.label :title, "Título" %>
       </p>
     </div>
@@ -17,28 +17,28 @@
     <div class="row customer-form__row">
       <p class="input-field">
         <%= form.text_field :description, placeholder: "Descrição" %>
-        <%= form.label :description, "Descrição" %>
+        <%= form.label :description, "Descrição", value: @attendance.description || ''  %>
       </p>
     </div>
 
     <div class="row customer-form__row">
       <p class="input-field">
         <label for="day">Dia do Atendimento</label><br>
-        <input type="text" name="attendance[day]" id="day" class="datepicker">
+        <input type="text" name="attendance[day]" id="day" class="datepicker" value= <%= @date.to_date.to_s %>>
       </p>
     </div>
 
     <div class="row customer-form__row">
       <p class="input-field">
-        <label for="start_at">Horário de início</label><br>
-        <input type="text" name="attendance[start_at]" id="start_at" class="timepicker">
+      <label for="start_at">Horário de início</label><br>
+      <input type="text" name="attendance[start_at]" id="start_at" class="timepicker" value="<%= @date.to_s(:time) %>">
       </p>
     </div>
 
     <div class="row customer-form__row">
       <p class="input-field">
         <label for="end_at">Horário de término</label><br>
-        <input type="text" name="attendance[end_at]" id="end_at" class="timepicker">
+        <input type="text" name="attendance[end_at]" id="end_at" class="timepicker" value="<%= (@date + 1.hour).to_s(:time) %>" >
       </p>
     </div>
 
@@ -57,6 +57,7 @@
     </div>
 
     <%= form.hidden_field :customer_id, { value: params[:customer_id] } %>
+    <%= form.hidden_field :date, { value: params[:date] } %>
 
     <div class="center-align">
       <%= form.submit 'Cadastrar', class: 'red lighten-1 btn-large' %>

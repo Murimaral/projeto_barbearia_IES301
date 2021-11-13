@@ -17,6 +17,9 @@ class AttendancesController < ApplicationController
     @services = Service.all
     @employees = Employee.all
     @customer_id = params[:customer_id]
+
+    date_params = params[:date] || DateTime.now.to_s
+    @date = Time.parse(date_params)
   end
 
   # GET /attendances/1/edit
@@ -25,8 +28,8 @@ class AttendancesController < ApplicationController
 
   # POST /attendances or /attendances.json
   def create
-    start_at = DateTime.parse("#{attendance_params[:day]} #{attendance_params[:start_at]}")
-    end_at = DateTime.parse("#{attendance_params[:day]} #{attendance_params[:end_at]}")
+    start_at = DateTime.parse("#{attendance_params[:day]} #{attendance_params[:start_at]} utc-3")
+    end_at = DateTime.parse("#{attendance_params[:day]} #{attendance_params[:end_at]} utc-3")
 
     @attendance = Attendance.new({
       title: attendance_params[:title],
@@ -43,6 +46,14 @@ class AttendancesController < ApplicationController
         format.html { redirect_to @attendance, notice: "Attendance was successfully created." }
         format.json { render :show, status: :created, location: @attendance }
       else
+        flash[:alert] = 'Atendimento não pode ser salvo, horário indisponível'
+        @services = Service.all
+        @employees = Employee.all
+        @customer_id = params[:customer_id]
+
+        date_params = start_at.to_s || DateTime.now.to_s
+        @date = Time.parse(date_params)
+
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @attendance.errors, status: :unprocessable_entity }
       end
@@ -82,13 +93,13 @@ class AttendancesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_attendance
-      @attendance = Attendance.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_attendance
+    @attendance = Attendance.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def attendance_params
-      params.require(:attendance).permit!
-    end
+  # Only allow a list of trusted parameters through.
+  def attendance_params
+    params.require(:attendance).permit!
+  end
 end

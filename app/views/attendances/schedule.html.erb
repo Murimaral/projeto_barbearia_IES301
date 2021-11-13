@@ -5,12 +5,17 @@
     var calendarEl = document.getElementById('calendar');
 
     new Calendar(calendarEl, {
-      plugins: [ dayGridPlugin, timeGridPlugin, listPlugin ],
-      initialView: 'dayGridMonth',
+      plugins: [ dayGridPlugin, timeGridPlugin, listPlugin, interactorPlugin ],
+      initialView: 'timeGridWeek',
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,listWeek'
+      },
+      dateClick: e => {
+        const customer_id = document.location.search.split("?")[1]
+
+        if(customer_id) window.location.href = `/attendances/new?date=${e.dateStr}&${customer_id}`
       },
       events: <%= @attendances.to_json.html_safe %>
     }).render()
