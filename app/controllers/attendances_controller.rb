@@ -15,7 +15,7 @@ class AttendancesController < ApplicationController
     flash[:alert] = ''
     @attendance = Attendance.new
     @services = Service.all
-    @employees = Employee.all
+    @employees = Employee.active.all
     @customer_id = params[:customer_id]
 
     date_params = params[:date] || DateTime.now.to_s
@@ -24,6 +24,9 @@ class AttendancesController < ApplicationController
 
   # GET /attendances/1/edit
   def edit
+    flash[:alert] = ''
+    @services = Service.all
+    @employees = Employee.active.all
   end
 
   # POST /attendances or /attendances.json
@@ -62,9 +65,25 @@ class AttendancesController < ApplicationController
 
   # PATCH/PUT /attendances/1 or /attendances/1.json
   def update
+    start_at = DateTime.parse("#{attendance_params[:day]} #{attendance_params[:start_at]} utc-3")
+    end_at = DateTime.parse("#{attendance_params[:day]} #{attendance_params[:end_at]} utc-3")
+
+    att = {
+      title: attendance_params[:title],
+      description: attendance_params[:description],
+      start_date: start_at,
+      end_date: end_at,
+      customer_id: attendance_params[:customer_id],
+      employee_id: attendance_params[:employee_id],
+      service_id: attendance_params[:service_id]
+    }
+
+    @services = Service.all
+    @employees = Employee.all
+
     respond_to do |format|
-      if @attendance.update(attendance_params)
-        format.html { redirect_to @attendance, notice: "Attendance was successfully updated." }
+      if @attendance.update(att)
+        format.html { redirect_to schedule_path }
         format.json { render :show, status: :ok, location: @attendance }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -85,6 +104,7 @@ class AttendancesController < ApplicationController
   def schedule
     @attendances = Attendance.all.map do |attendance|
       {
+        id: attendance.id,
         title: attendance.title,
         start: attendance.start_date,
         end: attendance.end_date

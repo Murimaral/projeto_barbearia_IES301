@@ -10,12 +10,15 @@
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,listWeek'
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
       dateClick: e => {
         const customer_id = document.location.search.split("?")[1]
 
         if(customer_id) window.location.href = `/attendances/new?date=${e.dateStr}&${customer_id}`
+      },
+      eventClick: e => {
+        window.location.href = `/attendances/${e.event._def.publicId}/edit`
       },
       events: <%= @attendances.to_json.html_safe %>
     }).render()

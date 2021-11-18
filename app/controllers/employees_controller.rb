@@ -5,7 +5,9 @@ class EmployeesController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :search
 
   def index
-    @pets = Pet.where(active: true).order('created_at DESC')
+    @employees = Employee.active.order('name ASC')
+    @deactivated_employees = Employee.deactivated.order('name ASC')
+    @vacation_employees = Employee.vacation.order('name ASC')
   end
 
   def new

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Barbershop</title>
+    <title>Barbearia Luz do Mundo</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -14,14 +14,13 @@
   <body>
     <nav id="header" class="lighten-1" role="navigation">
       <div class="nav-wrapper container">
-        <%= link_to 'Barbershop', root_path, class: 'brand-logo' %>
+        <%= link_to 'Barbearia Luz do Mundo', root_path, class: 'brand-logo' %>
         <ul class="right hide-on-med-and-down">
           <li>Olá, <%= current_user&.name || 'Visitante' %>!</li>
           <% if !user_signed_in? %>
-            <li><%= link_to 'Sign Up', new_user_registration_path %></li>
             <li><%= link_to 'Login', new_user_session_path %></li>
           <% else  %>
-            <li><%= link_to 'Meus pets', dashboard_path %></li>
+            <li><%# link_to 'Criar novo login', new_user_registration_path %></li>
             <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
           <% end %>
         </ul>
@@ -48,39 +47,5 @@
         <%= yield %>
       </div>
     </main>
-  
-    <footer id="footer" class="page-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Sobre este site</h5>
-            <p class="grey-text text-lighten-4">
-              Este site trata-se de um projeto realizado pelo grupo ConnectPlus para a disciplina Oficina de Projeto de Empresa 2, ofertada pela Faculdade Impacta de Tecnologia.
-            </p>
-          </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">Docs</h5>
-            <ul>
-              <li><a class="white-text" href="https://guides.rubyonrails.org/">Rails Guides</a></li>
-              <li><a class="white-text" href="http://materializecss.com">Materialize</a></li>
-              <li><a class="white-text" href="https://github.com/heartcombo/devise">Devise</a></li>
-            </ul>
-          </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">GitHub</h5>
-            <ul>
-              <li><a class="white-text" href="https://github.com/l-mayumi">Leticia Mayumi</a></li>
-              <li><a class="white-text" href="https://github.com/delkshk">David Silva</a></li>
-              <li><a class="white-text" href="https://github.com/felipepassosdev">Felipe Passos</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-copyright">
-        <div class="container">
-        Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-        </div>
-      </div>
-    </footer>
   </body>
 </html>

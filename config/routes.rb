@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     get 'answer', to: 'rescue_requests#answer'
   end
 
-  root to: 'pets#index'
+  root to: 'home#index'
   get '/dashboard', to: 'pages#dashboard'
   get '/search', to: 'customers#searchpage'
   post '/search', to: 'customers#search'

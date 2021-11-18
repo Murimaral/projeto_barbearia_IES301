@@ -1,0 +1,15 @@
+<div class="section no-pad-bot" id="index-banner">
+  <h2 class="header center indigo-text text-darken-4">Serviços</h2>
+</div>
+
+<% if current_user.admin? %>
+<div style="display: flex;">
+  <a href="<%= new_service_path %>"style="margin: auto; margin-bottom: 24px;" class="red lighten-1 btn">Novo Serviço</a>
+</div>
+<% end %>
+
+<div class="collection">
+  <% @services.each do |service|  %>
+    <a href="<%= edit_service_path(service.id) %>" class="collection-item"><%= service.name %></a>
+  <% end %>
+</div>
