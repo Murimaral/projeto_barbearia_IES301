@@ -1,12 +1,16 @@
-<div id="calendar"></div>
-
+<div style='height: 850px;'>
+  <div id="calendar"></div>
+</div>
 <script>
   $(document).ready(function() {
     var calendarEl = document.getElementById('calendar');
 
     new Calendar(calendarEl, {
       plugins: [ dayGridPlugin, timeGridPlugin, listPlugin, interactorPlugin ],
+      locales: [brLocale],
+      locale: 'pt-br',
       initialView: 'timeGridWeek',
+      height: '100%',
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
@@ -20,7 +24,7 @@
       eventClick: e => {
         window.location.href = `/attendances/${e.event._def.publicId}/edit`
       },
-      events: <%= @attendances.to_json.html_safe %>
+      events: <%= @attendances.to_json.html_safe  %>
     }).render()
   });
 </script>

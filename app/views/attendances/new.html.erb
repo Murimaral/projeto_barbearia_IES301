@@ -5,7 +5,7 @@
     <div class="deep-orange-text text-darken-3 deep-orange lighten-4 warning"><%= flash[:alert] %></div>
   <% end %>
 
-  <%= form_for @attendance do |form| %>
+  <%= form_for @attendance, url: attendances_path(customer_id: @customer_id) do |form| %>
 
     <div class="row customer-form__row">
       <p class="input-field">
