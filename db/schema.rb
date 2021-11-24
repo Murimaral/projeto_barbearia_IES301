@@ -81,38 +81,6 @@ ActiveRecord::Schema.define(version: 2021_11_05_003940) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "pets", force: :cascade do |t|
-    t.string "name"
-    t.integer "species"
-    t.integer "sex"
-    t.string "breed"
-    t.string "color"
-    t.string "image"
-    t.text "details"
-    t.string "city"
-    t.string "state"
-    t.integer "status"
-    t.boolean "active", default: true
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_pets_on_user_id"
-  end
-
-  create_table "rescue_requests", force: :cascade do |t|
-    t.integer "owner_id"
-    t.integer "rescuer_id"
-    t.integer "found_pet_id"
-    t.integer "lost_pet_id"
-    t.boolean "created_by_owner"
-    t.string "image"
-    t.text "message"
-    t.text "reply"
-    t.integer "status", default: 1
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "services", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -137,5 +105,4 @@ ActiveRecord::Schema.define(version: 2021_11_05_003940) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "pets", "users"
 end

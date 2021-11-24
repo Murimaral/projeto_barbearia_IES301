@@ -1,9 +1,0 @@
-<h2 class="center-align">Desativar o anúncio de <%= @pet.name %>?</h2><br>
-<p class="center-align">
-  <%= link_to 'Não, cancelar', @pet, class: 'btn red' %>
-  <% if @pet.found? %>
-    <%= link_to 'Sim, desativar perfil', pet_deactive_path(@pet), method: :post, class: 'btn indigo' %>
-  <% elsif @pet.lost? %>
-    <%= link_to 'Sim, desativar perfil', pet_deactive_path(@pet), method: :post, class: 'btn indigo' %>
-  <% end %>
-</p>
