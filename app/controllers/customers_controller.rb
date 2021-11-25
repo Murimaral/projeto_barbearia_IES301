@@ -4,10 +4,6 @@ class CustomersController < ApplicationController
   before_action :set_customer, only: %i[edit show update]
   skip_before_action :verify_authenticity_token, only: :search
 
-  def index
-    @pets = Pet.where(active: true).order('created_at DESC')
-  end
-
   def new
     flash[:alert] = ''
     @customer = Customer.new
@@ -37,13 +33,6 @@ class CustomersController < ApplicationController
       flash[:alert] = 'Não foi possível salvar. Verifique todos os campos!'
       render :edit
     end
-  end
-
-  def confirm_deactivation; end
-
-  def deactive
-    @pet.update(active: false)
-    redirect_to @pet
   end
 
   def search

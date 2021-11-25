@@ -4,9 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :pets
-  has_many :rescue_requests
-
   def destroy
     update(deactivated: true) unless deactivated
   end
