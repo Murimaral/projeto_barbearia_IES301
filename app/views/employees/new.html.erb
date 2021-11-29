@@ -21,22 +21,6 @@
       </p>
     </div>
 
-    <div class="col s12 l6 p0 a-right">
-      <span class="customer-form__label--radio">Gênero:</span>
-      <label for="employee_gender_female">
-        <input name="employee[gender]" type="radio" id="employee_gender_female" value="female" <%= params.dig('employee', 'gender') == 'female' ? 'checked' : '' %>  />
-        <span>Feminino</span>
-      </label>
-      <label for="employee_gender_male">
-        <input name="employee[gender]" type="radio" id="employee_gender_male" value="male" <%= params.dig('employee', 'gender') == 'male' ? 'checked' : '' %>  />
-        <span>Masculino</span>
-      </label>
-      <label for="employee_gender_other">
-        <input name="employee[gender]" type="radio" id="employee_gender_other" value="other" <%= params.dig('employee', 'gender') == 'other' ? 'checked' : '' %>  />
-        <span>Outro</span>
-      </label>
-    </div>
-
     <div class="row employee-form__row">
       <p class="input-field">
         <%= form.text_field :email, placeholder: "Email" %>

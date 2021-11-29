@@ -1,6 +1,5 @@
 # rubocop: disable Metrics/ClassLength
 class CustomersController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show search searchpage]
   before_action :set_customer, only: %i[edit show update]
   skip_before_action :verify_authenticity_token, only: :search
 
@@ -15,7 +14,7 @@ class CustomersController < ApplicationController
     if @customer.save
       redirect_to @customer
     else
-      flash[:alert] = 'Não foi possível salvar. Verifique todos os campos!'
+      flash[:alert] = 'Não foi possível cadastrar. Preencha todos os campos'
       render :new
     end
   end
@@ -30,7 +29,7 @@ class CustomersController < ApplicationController
     if @customer.update(customer_params)
       redirect_to @customer
     else
-      flash[:alert] = 'Não foi possível salvar. Verifique todos os campos!'
+      flash[:alert] = 'Não foi possível cadastrar. Preencha todos os campos'
       render :edit
     end
   end
