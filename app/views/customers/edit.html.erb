@@ -29,18 +29,11 @@
     </div>
 
     <div class="row customer-form__row">
-      <p class="input-field">
-        <%= form.text_field :birthdate, placeholder: "Data de Nascimento", class: "datepicker" %>
-        <%= form.label :birthdate, "Data de Nascimento" %>
-      </p>
-    </div>
-
-    <div class="row customer-form__row">
       <div class="input-field">
         <%= form.text_area :details, class: 'materialize-textarea', placeholder: 'Descreva aqui os detalhes que possam ajudar na identificação!' %>
         <%= form.label :details, 'Detalhes' %>
       </div>
-      <caption>Procure citar características que identifiquem o Cliente, como apelido, parentesco etc</caption>
+      <caption>Coloque aqui características que identifiquem o cliente, como um apelido, o parentesco com alguém etc.</caption>
     </div>
 
     <div class="center-align">
@@ -48,7 +41,6 @@
     </div>
   <% end %>
 </div>
-
 
 <script>
   $(document).ready(function(){

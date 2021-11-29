@@ -22,49 +22,33 @@
           <span>Desativado</span>
         </label>
       </div>
-
-      <div class="col s12 l6 p0">
-        <span class="customer-form__label--radio">gender:</span>
-        <label for="employee_gender_male">
-          <input name="employee[gender]" type="radio" id="employee_gender_male" value="male" <%= @employee.gender == 'male' ? 'checked' : '' %> />
-          <span>Masculino</span>
-        </label>
-        <label for="employee_gender_female">
-          <input name="employee[gender]" type="radio" id="employee_gender_female" value="female" <%= @employee.gender == 'female' ? 'checked' : '' %> />
-          <span>Feminino</span>
-        </label>
-        <label for="employee_gender_other">
-          <input name="employee[gender]" type="radio" id="employee_gender_other" value="other" <%= @employee.gender == 'other' ? 'checked' : '' %> />
-          <span>Outro</span>
-        </label>
-      </div>
     </div>
 
     <div class="row employee-form__row">
       <p class="input-field">
-        <%= form.text_field :name, placeholder: "Nome" %>
-        <%= form.label :name, "Nome" %>
+      <%= form.text_field :name, placeholder: "Nome" %>
+      <%= form.label :name, "Nome" %>
       </p>
     </div>
 
     <div class="row employee-form__row">
       <p class="input-field">
-        <%= form.text_field :phone, placeholder: "Telefone", data: {mask: '(99) 99999-9999'} %>
-        <%= form.label :phone, "Telefone" %>
+      <%= form.text_field :phone, placeholder: "Telefone", data: {mask: '(99) 99999-9999'} %>
+      <%= form.label :phone, "Telefone" %>
       </p>
     </div>
 
     <div class="row employee-form__row">
       <p class="input-field">
-        <%= form.text_field :email, placeholder: "Email" %>
-        <%= form.label :email, "Email" %>
+      <%= form.text_field :email, placeholder: "Email" %>
+      <%= form.label :email, "Email" %>
       </p>
     </div>
 
     <div class="row employee-form__row">
       <p class="input-field">
-        <%= form.text_field :birthdate, placeholder: "Data de Nascimento", class: "datepicker" %>
-        <%= form.label :birthdate, "Data de Nascimento" %>
+      <%= form.text_field :birthdate, placeholder: "Data de Nascimento", class: "datepicker" %>
+      <%= form.label :birthdate, "Data de Nascimento" %>
       </p>
     </div>
 
