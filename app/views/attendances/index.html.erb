@@ -26,9 +26,9 @@
         <td><%= attendance.customer_id %></td>
         <td><%= attendance.employee_id %></td>
         <td><%= attendance.service_id %></td>
-        <td><%= link_to 'Show', attendance %></td>
-        <td><%= link_to 'Edit', edit_attendance_path(attendance) %></td>
-        <td><%= link_to 'Destroy', attendance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Visualizar', attendance %></td>
+        <td><%= link_to 'Alterar', edit_attendance_path(attendance) %></td>
+        <td><%= link_to 'Apagar', attendance, method: :delete, data: { confirm: 'Você quer mesmo apagar?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -36,4 +36,4 @@
 
 <br>
 
-<%= link_to 'New Attendance', new_attendance_path %>
+<%= link_to 'Novo agendamento', new_attendance_path %>
