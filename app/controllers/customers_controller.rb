@@ -15,7 +15,7 @@ class CustomersController < ApplicationController
     if @customer.save
       redirect_to @customer
     else
-      flash[:alert] = 'Não foi possível salvar. Verifique todos os campos!'
+      flash[:alert] = 'Não foi possível cadastrar. Preencha todos os campos'
       render :new
     end
   end
@@ -30,7 +30,7 @@ class CustomersController < ApplicationController
     if @customer.update(customer_params)
       redirect_to @customer
     else
-      flash[:alert] = 'Não foi possível salvar. Verifique todos os campos!'
+      flash[:alert] = 'Não foi possível cadastrar. Preencha todos os campos'
       render :edit
     end
   end
