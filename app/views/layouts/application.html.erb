@@ -18,21 +18,21 @@
         <ul class="right hide-on-med-and-down">
           <li>Olá, <%= current_user&.name || 'Visitante' %>!</li>
           <% if !user_signed_in? %>
-            <li><%= link_to 'Login', new_user_session_path %></li>
+            <li><%= link_to 'Entrar', new_user_session_path %></li>
           <% else  %>
             <li><%# link_to 'Criar novo login', new_user_registration_path %></li>
-            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+            <li><%= link_to 'Sair', destroy_user_session_path, method: :delete %></li>
           <% end %>
         </ul>
 
         <ul id="nav-mobile" class="sidenav">
           <% if !user_signed_in? %>
             <li><%= link_to 'Página inicial', root_path %></li>
-            <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-            <li><%= link_to 'Login', new_user_session_path %></li>
+            <li><%= link_to 'Cadastrar', new_user_registration_path %></li>
+            <li><%= link_to 'Entrar', new_user_session_path %></li>
           <% else  %>
             <li><%= link_to 'Página inicial', root_path %></li>
-            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+            <li><%= link_to 'Sair', destroy_user_session_path, method: :delete %></li>
           <% end %>
         </ul>
         <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
