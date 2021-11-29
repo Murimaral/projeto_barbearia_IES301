@@ -1,7 +1,6 @@
 # rubocop: disable Metrics/ClassLength
 
 class ServicesController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show search searchpage]
   before_action :set_service, only: %i[edit show update]
   skip_before_action :verify_authenticity_token, only: :search
 

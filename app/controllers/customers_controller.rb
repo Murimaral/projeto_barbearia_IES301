@@ -1,6 +1,5 @@
 # rubocop: disable Metrics/ClassLength
 class CustomersController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show search searchpage]
   before_action :set_customer, only: %i[edit show update]
   skip_before_action :verify_authenticity_token, only: :search
 
