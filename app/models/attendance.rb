@@ -4,6 +4,7 @@ class Attendance < ApplicationRecord
   belongs_to :service
 
   validate :employee_availability
+  validate :end_after_start
 
   def employee_availability
     attendances = Attendance.
@@ -13,6 +14,12 @@ class Attendance < ApplicationRecord
 
     unless attendances.blank?
       errors.add(:base, 'Funcionário já possui agendamento nesse horário')
+    end
+  end
+
+  def end_after_start
+    if start_date > end_date
+      errors.add(:base, 'Horário de término não pode ser maior o de que início')
     end
   end
 end

@@ -52,7 +52,12 @@ class AttendancesController < ApplicationController
         format.html { redirect_to @attendance, notice: "Attendance was successfully created." }
         format.json { render :show, status: :created, location: @attendance }
       else
-        flash[:alert] = 'Atendimento não pode ser salvo, horário indisponível'
+        if @attendance.errors[:base].blank?
+          flash[:alert] = 'Atendimento não pode ser salvo, horário indisponível'
+        else
+          flash[:alert] = @attendance.errors[:base].to_sentence
+        end
+
         @services = Service.all
         @employees = Employee.all
         @customer_id = params[:customer_id]
@@ -97,6 +102,7 @@ class AttendancesController < ApplicationController
 
   # DELETE /attendances/1 or /attendances/1.json
   def destroy
+    binding.pry
     @attendance.destroy
     respond_to do |format|
       format.html { redirect_to attendances_url, notice: "Attendance was successfully destroyed." }

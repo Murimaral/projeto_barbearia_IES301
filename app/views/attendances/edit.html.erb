@@ -1,6 +1,9 @@
 <div class="customer-form">
 
-  <h3>Alterar Agendamento</h3>
+  <div style="display: flex; align-items: center; gap: 50px;">
+    <h3>Alterar Agendamento</h3>
+    <%= link_to 'Cancelar', attendance_path(@attendance), :confirm => 'Confirma cancelamento deste agendamento?', :method => :delete, class: "btn red"  %>
+  </div>
   <% unless flash[:alert].empty? %>
     <div class="deep-orange-text text-darken-3 deep-orange lighten-4 warning"><%= flash[:alert] %></div>
   <% end %>
