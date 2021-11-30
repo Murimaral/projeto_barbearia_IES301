@@ -3,34 +3,35 @@
 <p>
 
 <p>
-  <strong>Customer:</strong>
+  <strong>Cliente:</strong>
   <%= @customer %>
 </p>
 
 <p>
-  <strong>Employee:</strong>
+  <strong>Funcionário:</strong>
   <%= @employee %>
 </p>
 
 <p>
-  <strong>Service:</strong>
+  <strong>Serviço:</strong>
   <%= @service %>
 </p>
 
 <p>
-  <strong>Start date:</strong>
+  <strong>Data de início:</strong>
   <%= @attendance.start_date.strftime("%d/%m/%y %I:%M %P") %>
 </p>
 
 <p>
-  <strong>End date:</strong>
+  <strong>Data de término:</strong>
   <%= @attendance.end_date.strftime("%d/%m/%y %I:%M %P") %>
 </p>
 
 <p>
-<strong>Description:</strong>
+<strong>Descrição:</strong>
 <%= @attendance.description %>
 </p>
 
-<%= link_to 'Alterar', edit_attendance_path(@attendance) %> |
-<%= link_to 'Voltar', attendances_path %>
+<%= link_to 'Alterar agendamento', edit_attendance_path(@attendance) %> |
+<%= link_to 'Ver lista de agendamentos', attendances_path %> |
+<%= link_to 'Ver agenda completa', schedule_path %>
