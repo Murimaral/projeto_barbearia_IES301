@@ -9,7 +9,7 @@
 
     <div class="row customer-form__row">
       <p class="input-field">
-        <%= form.text_field :description, placeholder: "Nome do Cliente", value: Customer.find(params["customer_id"]).name %>
+        <%= form.text_field :description, placeholder: "Nome do Cliente", value: @attendance.customer.name %>
         <%= form.label :customer, "Nome do Cliente" %>
       </p>
     </div>
