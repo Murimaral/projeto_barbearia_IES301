@@ -9,15 +9,22 @@
 
     <div class="row customer-form__row">
       <p class="input-field">
-        <%= form.text_field :title, placeholder: "Título", value: @attendance.title || '' %>
-        <%= form.label :title, "Título" %>
+        <%= form.text_field :description, placeholder: "Nome do Cliente", value: Customer.find(params["customer_id"]).name %>
+        <%= form.label :customer, "Nome do Cliente" %>
       </p>
     </div>
 
     <div class="row customer-form__row">
       <p class="input-field">
-        <%= form.text_field :description, placeholder: "Descrição" %>
-        <%= form.label :description, "Descrição", value: @attendance.description || ''  %>
+        <label for="attendance_service_id">Serviço</label><br>
+        <%= collection_select(:attendance, :service_id, @services, :id, :name, {}, { class: 'input-field' }) %>
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <label for="attendance_employee_id">Funcionário</label><br>
+        <%= collection_select(:attendance, :employee_id, @employees, :id, :name, {}, { class: 'input-field' }) %>
       </p>
     </div>
 
@@ -44,15 +51,8 @@
 
     <div class="row customer-form__row">
       <p class="input-field">
-        <label for="attendance_service_id">Serviço</label><br>
-        <%= collection_select(:attendance, :service_id, @services, :id, :name, {}, { class: 'input-field' }) %>
-      </p>
-    </div>
-
-    <div class="row customer-form__row">
-      <p class="input-field">
-        <label for="attendance_employee_id">Funcionário</label><br>
-        <%= collection_select(:attendance, :employee_id, @employees, :id, :name, {}, { class: 'input-field' }) %>
+        <%= form.text_field :description, placeholder: "Descrição" %>
+        <%= form.label :description, "Descrição", value: @attendance.description || ''  %>
       </p>
     </div>
 
@@ -60,7 +60,7 @@
     <%= form.hidden_field :date, { value: params[:date] } %>
 
     <div class="center-align">
-      <%= form.submit 'Cadastrar', class: 'red lighten-1 btn-large' %>
+      <%= form.submit 'Alterar', class: 'red lighten-1 btn-large' %>
     </div>
   <% end %>
 </div>
