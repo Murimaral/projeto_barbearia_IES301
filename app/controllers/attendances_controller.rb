@@ -8,6 +8,9 @@ class AttendancesController < ApplicationController
 
   # GET /attendances/1 or /attendances/1.json
   def show
+    @employee: Employee.find(id: @attendance.employee_id).name
+    @service: Service.find(id: @attendance.service_id).name
+    @customer: Customer.find(id: @attendance.customer_id).name
   end
 
   # GET /attendances/new
@@ -107,7 +110,10 @@ class AttendancesController < ApplicationController
         id: attendance.id,
         title: attendance.title,
         start: attendance.start_date,
-        end: attendance.end_date
+        end: attendance.end_date,
+        employee: Employee.find(id: attendance.employee_id).name
+        service: Service.find(id: attendance.service_id).name
+        customer: Customer.find(id: attendance.customer_id).name
       }
     end
   end

@@ -23,9 +23,9 @@
         <td><%= attendance.description %></td>
         <td><%= attendance.start_date %></td>
         <td><%= attendance.end_date %></td>
-        <td><%= attendance.customer_id %></td>
-        <td><%= attendance.employee_id %></td>
-        <td><%= attendance.service_id %></td>
+        <td><%= Customer.find(id: attendance.customer_id).name %></td>
+        <td><%= Employee.find(id: attendance.employee_id).name %></td>
+        <td><%= Service.find(id: attendance.service_id).name %></td>
         <td><%= link_to 'Visualizar', attendance %></td>
         <td><%= link_to 'Alterar', edit_attendance_path(attendance) %></td>
         <td><%= link_to 'Apagar', attendance, method: :delete, data: { confirm: 'Você quer mesmo apagar?' } %></td>
