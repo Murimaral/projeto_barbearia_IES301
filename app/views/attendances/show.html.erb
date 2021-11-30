@@ -1,24 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @attendance.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @attendance.description %>
-</p>
-
-<p>
-  <strong>Start date:</strong>
-  <%= @attendance.start_date %>
-</p>
-
-<p>
-  <strong>End date:</strong>
-  <%= @attendance.end_date %>
-</p>
 
 <p>
   <strong>Customer:</strong>
@@ -33,6 +15,21 @@
 <p>
   <strong>Service:</strong>
   <%= @service %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @attendance.start_date.strftime("%d/%m/%y %I:%M %P") %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @attendance.end_date.strftime("%d/%m/%y %I:%M %P") %>
+</p>
+
+<p>
+<strong>Description:</strong>
+<%= @attendance.description %>
 </p>
 
 <%= link_to 'Alterar', edit_attendance_path(@attendance) %> |
