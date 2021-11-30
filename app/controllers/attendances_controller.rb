@@ -1,6 +1,6 @@
 class AttendancesController < ApplicationController
   before_action :set_attendance, only: %i[ show edit update destroy ]
-  
+
   # GET /attendances or /attendances.json
   def index
     @attendances = Attendance.all
@@ -106,14 +106,18 @@ class AttendancesController < ApplicationController
 
   def schedule
     @attendances = Attendance.all.map do |attendance|
+      employee = Employee.find_by(id: attendance.employee_id).name
+      service = Service.find_by(id: attendance.service_id).name
+      customer = Customer.find_by(id: attendance.customer_id).name
+
       {
         id: attendance.id,
-        title: attendance.title,
         start: attendance.start_date,
         end: attendance.end_date,
-        employee: Employee.find_by(id: attendance.employee_id).name,
-        service: Service.find_by(id: attendance.service_id).name,
-        customer: Customer.find_by(id: attendance.customer_id).name
+        employee: employee,
+        service: service,
+        customer: customer,
+        title: "#{customer} | #{employee} | #{service}"
       }
     end
   end

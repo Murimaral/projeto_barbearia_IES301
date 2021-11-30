@@ -5,11 +5,15 @@
   $(document).ready(function() {
     var calendarEl = document.getElementById('calendar');
 
+    const customer_id = document.location.search.split("?")[1]
+
+    const initialView = customer_id ? 'timeGridWeek' : 'timeGridDay' 
+
     new Calendar(calendarEl, {
       plugins: [ dayGridPlugin, timeGridPlugin, listPlugin, interactorPlugin ],
       locales: [brLocale],
       locale: 'pt-br',
-      initialView: 'timeGridWeek',
+      initialView,
       height: '100%',
       headerToolbar: {
         left: 'prev,next today',
@@ -17,8 +21,6 @@
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
       dateClick: e => {
-        const customer_id = document.location.search.split("?")[1]
-
         if(customer_id) window.location.href = `/attendances/new?date=${e.dateStr}&${customer_id}`
       },
       eventClick: e => {
