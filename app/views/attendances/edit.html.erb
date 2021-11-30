@@ -24,21 +24,21 @@
     <div class="row customer-form__row">
       <p class="input-field">
         <label for="day">Dia do Atendimento</label><br>
-        <input type="text" name="attendance[day]" id="day" class="datepicker" value= <%= @attendance.start_date.to_date.to_s %>>
+        <input type="text" name="attendance[day]" id="day" class="datepicker" value= <%= Date.parse(@attendance.start_date.to_date.to_s).strftime('%d/%m/%Y') %>>
       </p>
     </div>
 
     <div class="row customer-form__row">
       <p class="input-field">
       <label for="start_at">Horário de início</label><br>
-      <input type="text" name="attendance[start_at]" id="start_at" class="timepicker" value="<%= (@attendance.start_date - 3.hours).to_s(:time) %>">
+      <input type="text" name="attendance[start_at]" id="start_at" class="timepicker" value="<%= Time.parse((@attendance.start_date - 3.hours).to_s(:time)).strftime('%H:%M') %>">
       </p>
     </div>
 
     <div class="row customer-form__row">
       <p class="input-field">
         <label for="end_at">Horário de término</label><br>
-        <input type="text" name="attendance[end_at]" id="end_at" class="timepicker" value="<%= (@attendance.end_date - 3.hours).to_s(:time) %>" >
+        <input type="text" name="attendance[end_at]" id="end_at" class="timepicker" value="<%= Time.parse((@attendance.end_date - 3.hours).to_s(:time)).strftime('%H:%M') %>" >
       </p>
     </div>
 
@@ -64,14 +64,3 @@
     </div>
   <% end %>
 </div>
-
-
-<script>
-  $(document).ready(function(){
-    $('.datepicker').datepicker();
-  });
-  $(document).ready(function(){
-    $('.timepicker').timepicker({twelveHour: false});
-  });
-</script>
-

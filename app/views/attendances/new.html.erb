@@ -31,14 +31,14 @@
     <div class="row customer-form__row">
       <p class="input-field">
         <label for="day">Dia do Atendimento</label><br>
-        <input type="text" name="attendance[day]" id="day" class="datepicker" value="<%= Date.parse(@date.to_date.to_s).strftime("%d/%m/%y") %>">
+        <input type="text" name="attendance[day]" id="day" class="datepicker" value="<%= Date.parse(@date.to_date.to_s).strftime("%d/%m/%Y") %>">
       </p>
     </div>
 
     <div class="row customer-form__row">
       <p class="input-field">
       <label for="start_at">Horário de início</label><br>
-      <input type="text" name="attendance[start_at]" id="start_at" class="timepicker" value="<%= Time.parse(@date.to_s(:time)).strftime("%I:%M %P") %>">
+      <input type="text" name="attendance[start_at]" id="start_at" class="timepicker" value="<%= Time.parse(@date.to_s(:time)).strftime("%H:%M") %>">
       </p>
     </div>
 
@@ -64,13 +64,3 @@
     </div>
   <% end %>
 </div>
-
-
-<script>
-  $(document).ready(function(){
-    $('.datepicker').datepicker();
-  });
-  $(document).ready(function(){
-    $('.timepicker').timepicker({twelveHour: false});
-  });
-</script>
