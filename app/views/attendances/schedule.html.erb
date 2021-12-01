@@ -1,0 +1,38 @@
+<% unless flash[:alert].empty? %>
+  <h6 class="card-panel teal lighten-2 white-text"><%= flash[:alert] %></h6>
+<% end %>
+
+<div style='height: 850px;'>
+  <div id="calendar"></div>
+</div>
+
+
+<script>
+  $(document).ready(function() {
+    var calendarEl = document.getElementById('calendar');
+
+    const customer_id = document.location.search.split("?")[1]
+
+    const initialView = customer_id ? 'timeGridWeek' : 'timeGridDay' 
+
+    new Calendar(calendarEl, {
+      plugins: [ dayGridPlugin, timeGridPlugin, listPlugin, interactorPlugin ],
+      locales: [brLocale],
+      locale: 'pt-br',
+      initialView,
+      height: '100%',
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      dateClick: e => {
+        if(customer_id) window.location.href = `/attendances/new?date=${e.dateStr}&${customer_id}`
+      },
+      eventClick: e => {
+        window.location.href = `/attendances/${e.event._def.publicId}/edit`
+      },
+      events: <%= @attendances.to_json.html_safe  %>
+  }).render()
+  });
+</script>

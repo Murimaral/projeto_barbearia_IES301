@@ -1,0 +1,66 @@
+<div class="customer-form">
+
+  <h3>Novo Agendamento</h3>
+  <% unless flash[:alert].empty? %>
+    <div class="deep-orange-text text-darken-3 deep-orange lighten-4 warning"><%= flash[:alert] %></div>
+  <% end %>
+
+  <%= form_for @attendance, url: attendances_path(customer_id: @customer_id) do |form| %>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <%= form.text_field :description, placeholder: "Nome do Cliente", value: Customer.find(params["customer_id"]).name %>
+        <%= form.label :customer, "Nome do Cliente" %>
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <label for="attendance_service_id">Serviço</label><br>
+        <%= collection_select(:attendance, :service_id, @services, :id, :name, {}, { class: 'input-field' }) %>
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <label for="attendance_employee_id">Funcionário</label><br>
+        <%= collection_select(:attendance, :employee_id, @employees, :id, :name, {}, { class: 'input-field' }) %>
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <label for="day">Dia do Atendimento</label><br>
+        <input type="text" name="attendance[day]" id="day" class="datepicker" value="<%= Date.parse(@date.to_date.to_s).strftime("%d/%m/%Y") %>">
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+      <label for="start_at">Horário de início</label><br>
+      <input type="text" name="attendance[start_at]" id="start_at" class="timepicker" value="<%= Time.parse(@date.to_s(:time)).strftime("%H:%M") %>">
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <label for="end_at">Horário de término</label><br>
+        <input type="text" name="attendance[end_at]" id="end_at" class="timepicker" value="<%= (@date + 1.hour).to_s(:time) %>" >
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <%= form.text_field :description, placeholder: "Descrição" %>
+        <%= form.label :description, "Descrição", value: @attendance.description || ''  %>
+      </p>
+    </div>
+
+    <%= form.hidden_field :customer_id, { value: params[:customer_id] } %>
+    <%= form.hidden_field :date, { value: params[:date] } %>
+
+    <div class="center-align">
+      <%= form.submit 'Agendar', class: 'red lighten-1 btn-large' %>
+    </div>
+  <% end %>
+</div>

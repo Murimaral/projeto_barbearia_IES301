@@ -1,0 +1,403 @@
+@import "materialize";
+@import "material_icons";
+
+.d-none {
+  display: none;
+}
+
+.navbar-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.brand-logo {
+  width: 75%;
+  text-overflow: ellipsis;
+}
+
+$c_main: #303f9f;
+$c_sec: #231651;
+$c_ter: #4dccbd;
+$c_background: #f9f6f4;
+
+// Header
+$hd_bg: $c_main;
+// Footer
+$ft_bg: $c_sec;
+
+// OTHERS
+// button,
+// html [type="button"],
+// [type="reset"] {
+//   text-decoration: none;
+//   // color: #fff;
+//   // background-color: $c_main;
+//   text-align: center;
+//   letter-spacing: 0.5px;
+//   // transition: background-color 0.2s ease-out;
+//   cursor: pointer;
+//   padding: 10px 25px;
+//   border-radius: 5px;
+//   margin: 1rem 0;
+//   border: 0;
+// }
+[type="radio"]:checked + span:after,
+.with-gap[type="radio"]:checked + span:after {
+  background-color: $c_main;
+}
+[type="radio"]:checked + span:after,
+.with-gap[type="radio"]:checked + span:before,
+.with-gap[type="radio"]:checked + span:after {
+  border: 2px solid $c_main;
+}
+a {
+  color: $c_main;
+}
+h1,
+h2,
+h3 {
+  color: $c_sec;
+}
+h4 {
+  color: $c_main;
+}
+
+//HEADER
+#header {
+  background-color: $hd_bg;
+  box-shadow: none;
+}
+//HEADER END
+//FOOTER
+.page-footer {
+  background-color: $ft_bg;
+}
+//FOOTER END
+// HOME
+.card .card-content {
+  padding: 0 !important;
+  img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+  }
+  > span,
+  > p {
+    padding: 0 10px;
+    min-height: 43px;
+  }
+}
+body {
+  background-color: $c_background;
+}
+a.home_button_find {
+  width: 100%;
+  display: block;
+  height: 14rem;
+  border-radius: 25px;
+  background-color: #e2e2e2;
+  margin: 1rem 0;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    left: 0;
+    top: 0;
+  }
+  span {
+    position: absolute;
+    z-index: 2;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    height: auto;
+    bottom: 0;
+  }
+  &:before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(0deg, #000000ba 25%, rgba(0, 0, 0, 0) 100%);
+    display: block;
+    z-index: 1;
+    position: absolute;
+  }
+  &.customer {
+    span {
+      text-align: left;
+      float: left;
+    }
+  }
+  &.owner {
+    span {
+      text-align: right;
+      margin-left: auto;
+      right: 0;
+    }
+  }
+  &.search {
+    img {
+      object-position: 0 30%;
+    }
+  }
+}
+
+.container-app {
+  img {
+    max-width: 100%;
+  }
+
+  h2,
+  h3 {
+    margin-top: 0;
+  }
+}
+
+//HOME END
+// customer DETAILS
+.customer-details {
+  &__badge {
+    border-radius: 20px;
+    color: white;
+    display: inline-block;
+    font-weight: bold;
+    margin: 0.5rem;
+    padding: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  &__actions {
+    margin-top: 60px;
+    text-align: center;
+  }
+}
+// customer DETAILS END
+
+//searchpage
+
+#searchpage {
+  .filters {
+    background: white;
+    border-radius: 25px;
+    padding: 10px 20px;
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: baseline;
+      padding: 0 20px;
+    }
+  }
+  .usefiltersmsg {
+    display: block;
+    font-size: 17px;
+    opacity: 0.75;
+    padding: 5rem;
+  }
+}
+
+// AUTH
+.auth-form {
+  background-color: white;
+  border-radius: 32px;
+  margin: 0 auto;
+  max-width: 600px;
+  text-align: center;
+
+  &_container {
+    padding: 0 32px;
+  }
+
+  &_actions {
+    color: white;
+    background-color: $c_sec;
+    border-radius: 0 0 32px 32px;
+    padding: 20px 0;
+
+    li {
+      display: inline-block;
+      margin: 1rem;
+
+      a {
+        color: white;
+        font-weight: 600;
+      }
+    }
+  }
+
+  h2 {
+    background-color: $c_sec;
+    border-radius: 32px 32px 0 0;
+    color: whitesmoke;
+    line-height: 6rem;
+    margin-bottom: 60px;
+  }
+
+  .input-field {
+    margin: 32px 0;
+  }
+}
+
+// RESCUE REQUESTS
+.rescue-request {
+  &_form {
+    margin: 0 auto;
+    max-width: 800px;
+
+    img {
+      max-width: 400px;
+    }
+
+    h2,
+    h3 {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .input-field {
+      margin: 3rem 0;
+    }
+  }
+
+  &_message-item {
+    background-color: white;
+    padding: 1rem 2rem 2rem 2rem;
+    width: 100%;
+
+    p {
+      border-left: 5px solid lightgrey;
+      padding-left: 1rem;
+    }
+  }
+}
+
+span.badge {
+  padding: 20px;
+  line-height: 2px;
+  color: white;
+  font-weight: 600;
+}
+
+.customer-card {
+  &__content {
+    padding: 8px;
+    min-height: 146px;
+  }
+
+  &__badge {
+    border-radius: 20px;
+    color: white;
+    height: 30px;
+    line-height: 1.8rem;
+    margin: 0 4px 4px 0;
+    padding: 2px 6px;
+    display: inline-block;
+    overflow: hidden;
+  }
+}
+
+.customer-form {
+  margin: 0 auto;
+  max-width: 600px;
+
+  &__row {
+    margin-bottom: 40px;
+
+    &--radio {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__label {
+    &--radio {
+      margin-right: 20px;
+    }
+  }
+
+  &__search-results {
+    margin: 40px auto;
+  }
+
+  h3 {
+    margin: 40px 0;
+  }
+
+  .p0 {
+    padding: 0;
+  }
+
+  .a-right {
+    margin-left: 0;
+  }
+
+  .warning {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;
+  }
+}
+
+.user-dashboard {
+  h2,
+  h3,
+  p {
+    text-align: center;
+  }
+
+  h2,
+  h3 {
+    margin-top: 30px;
+  }
+
+  hr {
+    margin: 60px 0;
+  }
+
+  input {
+    margin-bottom: 40px;
+  }
+}
+
+.card .card-title,
+span.card-title {
+  height: 27px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.city {
+  display: inline-block;
+  height: 24px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.fc-timegrid-event-harness.fc-timegrid-event-harness-inset {
+}
+
+.fc-timegrid-col.fc-day {
+  padding-right: 20px;
+}

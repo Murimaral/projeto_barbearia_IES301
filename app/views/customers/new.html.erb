@@ -1,0 +1,49 @@
+<div class="customer-form">
+
+  <h3>Cadastrar Cliente</h3>
+  <% unless flash[:alert].empty? %>
+    <div class="deep-orange-text text-darken-3 deep-orange lighten-4 warning"><%= flash[:alert] %></div>
+  <% end %>
+
+  <%= form_for @customer do |form| %>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <%= form.text_field :name, placeholder: "Nome" %>
+        <%= form.label :name, "Nome" %>
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <%= form.text_field :phone, placeholder: "Telefone", data: {mask: '(99) 99999-9999'} %>
+        <%= form.label :phone, "Telefone" %>
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <%= form.text_field :email, placeholder: "Email" %>
+        <%= form.label :email, "Email" %>
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <div class="input-field">
+        <%= form.text_area :details, class: 'materialize-textarea', placeholder: 'Descreva aqui os detalhes que possam ajudar na identificação!' %>
+        <%= form.label :details, 'Detalhes' %>
+      </div>
+      <caption>Coloque aqui características que identifiquem o cliente, como um apelido, o parentesco com alguém etc.</caption>
+    </div>
+
+    <div class="center-align">
+      <%= form.submit 'Cadastrar', class: 'red lighten-1 btn-large' %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+</script>

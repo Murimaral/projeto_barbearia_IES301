@@ -1,0 +1,69 @@
+<div class="customer-form">
+
+  <div style="display: flex; align-items: center; gap: 50px;">
+    <h3>Alterar Agendamento</h3>
+    <%= link_to 'Excluir', attendance_path(@attendance), :confirm => 'Confirma cancelamento deste agendamento?', :method => :delete, class: "btn red"  %>
+  </div>
+  <% unless flash[:alert].empty? %>
+    <div class="deep-orange-text text-darken-3 deep-orange lighten-4 warning"><%= flash[:alert] %></div>
+  <% end %>
+
+  <%= form_for @attendance do |form| %>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <%= form.text_field :description, placeholder: "Nome do Cliente", value: @attendance.customer.name %>
+        <%= form.label :customer, "Nome do Cliente" %>
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <label for="attendance_service_id">Serviço</label><br>
+        <%= collection_select(:attendance, :service_id, @services, :id, :name, {}, { class: 'input-field' }) %>
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <label for="attendance_employee_id">Funcionário</label><br>
+        <%= collection_select(:attendance, :employee_id, @employees, :id, :name, {}, { class: 'input-field' }) %>
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <label for="day">Dia do Atendimento</label><br>
+        <input type="text" name="attendance[day]" id="day" class="datepicker" value= <%= Date.parse(@attendance.start_date.to_date.to_s).strftime('%d/%m/%Y') %>>
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+      <label for="start_at">Horário de início</label><br>
+      <input type="text" name="attendance[start_at]" id="start_at" class="timepicker" value="<%= Time.parse((@attendance.start_date - 3.hours).to_s(:time)).strftime('%H:%M') %>">
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <label for="end_at">Horário de término</label><br>
+        <input type="text" name="attendance[end_at]" id="end_at" class="timepicker" value="<%= Time.parse((@attendance.end_date - 3.hours).to_s(:time)).strftime('%H:%M') %>" >
+      </p>
+    </div>
+
+    <div class="row customer-form__row">
+      <p class="input-field">
+        <%= form.text_field :description, placeholder: "Descrição" %>
+        <%= form.label :description, "Descrição", value: @attendance.description || ''  %>
+      </p>
+    </div>
+
+    <%= form.hidden_field :customer_id, { value: @attendance.customer_id } %>
+    <%= form.hidden_field :date, { value: params[:date] } %>
+
+    <div class="center-align">
+      <%= form.submit 'Alterar', class: 'red lighten-1 btn-large' %>
+    </div>
+  <% end %>
+</div>

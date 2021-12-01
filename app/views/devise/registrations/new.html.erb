@@ -1,0 +1,42 @@
+<section class="auth-form">
+  <h2>Criar uma conta</h2>
+  <div class="auth-form_container">
+    <%= form_for(resource, as: resource_name, url: register_user_path) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="input-field">
+        <%= f.text_field :name, autofocus: true, placeholder: 'Nome que será mostrado na plataforma' %>
+        <%= f.label :name, 'Nome' %>
+      </div>
+
+      <div class="input-field">
+        <%= f.email_field :email, placeholder: 'ex.: usuario@gmail.com' %>
+        <%= f.label :email %>
+      </div>
+
+      <div class="input-field">
+        <%= f.text_field :phone, placeholder: '(12) 98765-4321' %>
+        <%= f.label :phone, 'Telefone' %>
+      </div>
+
+      <div class="input-field">
+        <%= f.password_field :password, placeholder: 'senha_de_acesso ' %>
+        <%= f.label :password, 'Senha' %>
+        <% if @minimum_password_length %>
+          <em>(mínimo de <%= @minimum_password_length %> caracteres)</em>
+        <% end %>
+      </div>
+
+      <div class="input-field">
+        <%= f.password_field :password_confirmation, placeholder: 'senha_de_acesso ' %>
+        <%= f.label :password_confirmation, 'Repita a senha' %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Cadastrar-se", class: "indigo btn-large center" %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= render "devise/shared/links" %>
+</section>

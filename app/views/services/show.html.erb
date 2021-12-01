@@ -1,0 +1,14 @@
+<div class="customer-details">
+  <div class="row">
+    <div class="col s6">
+      <h2><%= @service.name %></h2>
+
+      <div class="">
+        <% if current_user&.admin? %>
+          <%= link_to 'Alterar', edit_service_path(@service), class: "indigo lighten-1 btn-small" %>
+        <% end %>
+        <%= link_to 'Voltar', services_path %>
+      </div>
+    </div>
+  </div>
+</div>

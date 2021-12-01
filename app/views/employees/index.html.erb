@@ -1,0 +1,43 @@
+<div class="section no-pad-bot" id="index-banner">
+  <h2 class="header center indigo-text text-darken-4">Funcionários</h2>
+</div>
+
+<% if admin?(current_user) %>
+<div style="display: flex;">
+  <a href="<%= new_employee_path %>"style="margin: auto; margin-bottom: 24px;" class="red lighten-1 btn">Novo Funcionário</a>
+</div>
+<% end %>
+
+<div class="section no-pad-bot" id="index-banner">
+  <h3 class="header center indigo-text text-darken-4">Ativos</h2>
+</div>
+
+<div class="collection">
+  <% @employees.each do |employee|  %>
+    <a href="<%= edit_employee_path(employee.id) if admin?(current_user) %>" class="collection-item"><%= employee.name %></a>
+  <% end %>
+</div>
+
+<% if @vacation_employees.present? %>
+  <div class="section no-pad-bot" id="index-banner">
+    <h3 class="header center indigo-text text-darken-4">Férias</h2>
+  </div>
+
+  <div class="collection">
+    <% @vacation_employees.each do |employee|  %>
+      <a href="<%= edit_employee_path(employee.id) if admin?(current_user) %>" class="collection-item"><%= employee.name %></a>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @deactivated_employees.present? %>
+  <div class="section no-pad-bot" id="index-banner">
+    <h3 class="header center indigo-text text-darken-4">Desativados</h2>
+  </div>
+
+  <div class="collection">
+    <% @deactivated_employees.each do |employee|  %>
+      <a href="<%= edit_employee_path(employee.id) if admin?(current_user) %>" class="collection-item"><%= employee.name %></a>
+    <% end %>
+  </div>
+<% end %>

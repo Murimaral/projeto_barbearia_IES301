@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+
+<p>
+  <strong>Cliente:</strong>
+  <%= @customer %>
+</p>
+
+<p>
+  <strong>Funcionário:</strong>
+  <%= @employee %>
+</p>
+
+<p>
+  <strong>Serviço:</strong>
+  <%= @service %>
+</p>
+
+<p>
+  <strong>Data de início:</strong>
+  <%= @attendance.start_date.strftime("%d/%m/%y %I:%M %P") %>
+</p>
+
+<p>
+  <strong>Data de término:</strong>
+  <%= @attendance.end_date.strftime("%d/%m/%y %I:%M %P") %>
+</p>
+
+<p>
+<strong>Descrição:</strong>
+<%= @attendance.description %>
+</p>
+
+<%= link_to 'Alterar agendamento', edit_attendance_path(@attendance) %> |
+<%= link_to 'Ver lista de agendamentos', attendances_path %> |
+<%= link_to 'Ver agenda completa', schedule_path %>

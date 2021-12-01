@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Attendances</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>Customer</th>
+      <th>Employee</th>
+      <th>Service</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @attendances.sort_by{|x| x.start_date}.each do |attendance| %>
+      <tr>
+        <td><%= attendance.title %></td>
+        <td><%= attendance.description %></td>
+        <td><%= attendance.start_date.strftime("%d/%m/%y %I:%M %P") %></td>
+        <td><%= attendance.end_date.strftime("%d/%m/%y %I:%M %P") %></td>
+        <td><%= Customer.find_by(id: attendance.customer_id).name %></td>
+        <td><%= Employee.find_by(id: attendance.employee_id).name %></td>
+        <td><%= Service.find_by(id: attendance.service_id).name %></td>
+        <td><%= link_to 'Visualizar', attendance %></td>
+        <td><%= link_to 'Alterar', edit_attendance_path(attendance) %></td>
+        <td><%= link_to 'Apagar', attendance, method: :delete, data: { confirm: 'Você quer mesmo apagar?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Novo agendamento', new_attendance_path %>

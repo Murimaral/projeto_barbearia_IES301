@@ -1,0 +1,72 @@
+
+<form id="search-form">
+  <div class="input-field">
+    <input type="text" id="name" name="name">
+    <label for="name" class="active">Buscar Cliente</label>
+  </div>
+</form>
+
+<script>
+$(function() {
+  $('input').change(function() { search(); })
+  $('input').keyup(function() { search(); })
+})
+
+function search() {
+  const form = new FormData(document.getElementById('search-form'));
+
+  const myInit = {
+    method: 'POST',
+    body: form
+  }
+
+  fetch('/search', myInit)
+    .then(function(response) { return response.json() })
+    .then(function(data) {
+      let searchResults = ''
+      data.forEach(function(customer) {
+        searchResults = searchResults.concat(`
+        <div class="col s12 m6 xl4 customer-item">
+          <div class="card white">
+            <div class="card-content collection-item avatar">
+                    <div class="customer-card__content">
+                <span class="card-title">
+                  <a href="/customers/${customer.id}" style='font-weight: bold;'>
+                    ${customer.name}
+                  </a>
+                </span>
+                <span class="">
+                  ${customer.details}
+                </span><br />
+                <a href='https://api.whatsapp.com/send?1=pt_BR&phone=${customer.phone}' class="">
+                  ${customer.phone}
+                </a><br />
+                <span class="">
+                  ${customer.email}
+                </span><br />
+
+              <div style='display: flex; gap: 16px; margin-top: 16px;'>
+                <a style='width: 100%;' class="btn" href="/schedule?customer_id=${customer.id}">Agendar</a>
+                <a style='width: 100%;' class="btn indigo lighten-1" href="/customers/${customer.id}">Alterar</a>
+              </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        `)
+      })
+
+      console.log(searchResults)
+
+      if(searchResults) document.getElementById('customer-list').innerHTML = searchResults;
+      else document.getElementById('customer-list').innerHTML = `
+        <div style='margin: 32px;'>
+          <h6 style='margin: 32px;'>Não encontrou o cliente que procurava?</h6>
+          <a href='/customers/new' class='btn'>Clique aqui para criar um novo!</a>
+        </div>
+      `
+    })
+  event.preventDefault()
+}
+</script>
